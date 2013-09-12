@@ -1,0 +1,146 @@
+####################################################################################################
+#
+#  SparCraft Experiment File Format
+#  David Churchill - dave.churchill@gmail.com
+#  
+#  # denotes commented lines
+#
+#  Specify the players in the experiment
+#
+#  Format:
+#  
+#  PlayerNum PlayerType [Params]*
+#
+#  ,---------------------------------------------------------,
+#  | Scripted Player Syntax                                  |
+#  |---------------------------------------------------------|
+#  | Player X ScriptName                                     |
+#  '---------------------------------------------------------'
+#
+#  ,----------------------------------------------------------,
+#  | Portfolio Greedy Search Player Syntax                    |
+#  |----------------------------------------------------------|
+#  | Player X PortfolioGreedySearch Seed Iterations Responses |
+#  '----------------------------------------------------------'
+#
+#  ,---------------------------------------------------------,
+#  | Recursive Greedy Search Player Syntax                   |
+#  |---------------------------------------------------------|
+#  | Player X RecursiveGreedySearch Seed Iterations          |
+#  '---------------------------------------------------------'
+#
+#  ,---------------------------------------------------------------------------------------------------------------------------------------------,
+#  | AlphaBeta Player Syntax + Options                                        (Scripts for Playouts)                                             |
+#  |---------------------------------------------------------------------------------------------------------------------------------------------|
+#  | Player X AlphaBeta  TimeLimitMS   MaxChildren  MoveOrdering  EvalMethod  P0Script     P1Script     PlayerToMoveMethod   OpponentModelScript |
+#  |---------------------------------------------------------------------------------------------------------------------------------------------|
+#  |                     Integer       Integer      ScriptFirst   Playout     ScriptName   ScriptName   Alternate            ScriptName          |
+#  |                                   0 = NoMax    None          LTD                                   NotAlternate         None                |
+#  |                                                              LTD2                                  Random                                   |
+#  '---------------------------------------------------------------------------------------------------------------------------------------------'
+#
+#  ,--------------------------------------------------------------------------------------------------------------------------------------------------------------,
+#  | UCT Player Syntax + Options                                                        (Scripts for Playouts)                                                    |
+#  |--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+#  | Player X UCT  TimeLimitMS  CValue  MaxTraversals  MaxChildren  MoveOrdering  EvalMethod   P0Script     P1Script     PlayerToMoveMethod   OpponentModelScript |
+#  |--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+#  |               Integer      Double  Integer        Integer      ScriptFirst   Playout      ScriptName   ScriptName   Alternate            ScriptName          |
+#  |                                                                None          LTD                                    NotAlternate         None                |
+#  |                                                                              LTD2                                   Random                                   |
+#  '--------------------------------------------------------------------------------------------------------------------------------------------------------------'
+#
+####################################################################################################
+
+# Sample AlphaBeta Players
+#Player 0 AlphaBeta 40 20 ScriptFirst Playout NOKDPS NOKDPS Alternate None
+#Player 1 AlphaBeta 40 20 ScriptFirst Playout NOKDPS NOKDPS Alternate NOKDPS
+
+# Sample UCT Players
+#Player 0 UCT 40 1.6 5000 20 ScriptFirst Playout NOKDPS NOKDPS Alternate None
+#Player 0 UCT 40 1.6 5000 20 ScriptFirst Playout NOKDPS NOKDPS Alternate NOKDPS
+
+# Sample PortfolioGreedySearch Players
+#Player 0 PortfolioGreedySearch 0 NOKDPS 1 0
+
+# Sample Scripted Players
+Player 0 Assault
+Player 1 Defend
+
+####################################################
+#
+# Set player upgrade and tech levels
+#
+# Format:
+# PlayerUpgrade PlayerID UpgradeName UpgradeLevel
+# PlayerTech PlayerID TechName
+#
+####################################################
+
+#PlayerUpgrade 0 Protoss_Ground_Weapons 1
+#PlayerUpgrade 1 Protoss_Ground_Armor 3
+#PlayerUpgrade 1 Singularity_Charge 1
+#PlayerUpgrade 1 Zerg_Melee_Attacks 1
+
+##################################################
+#
+#  Map file to use for the simulation, all states will use this map.
+#  Map file is used to define walkable boundaries for the simulation
+#  Comment out line to use no map
+#  No Map - Default map size is 1280*720 pixels all tiles walkable
+#  If this map is specified, all units must be placed on walkable tiles within map boundaries or experiment will not run
+#
+##################################################
+
+MapFile building_placement_experiment/destination_map.txt 240 1776
+
+##################################################
+#
+#  Specify the states in the experiment
+#  See map file description to specify legal unit positions
+#
+#  State StateSymmetric NumStates MaxX MaxY [UnitType UnitNum]+
+#  State SeparatedState NumStates RandX RandY cx1 cy1 cx2 cy2 [UnitType UnitNum]+
+#  State StateDescriptionFile NumStates FileName 
+#
+#  For SeparatedState, NumStates / 2 mirrored copies will be created for fairness
+#
+##################################################
+
+# Sample StateDescriptionFile States
+#State StateDescriptionFile 1 building_placement_experiment/city_assault_state.txt
+#State LegalState 1 320 320 1520 1776 2 Protoss_Zealot 4 Protoss_Dragoon 6 240 1776 1 Protoss_Photon_Cannon 7
+#State StateType #Experiments Xradius Yradius Xcenter Ycenter #unitTypes type #units [...] Xcenter Ycenter #unitTypes type #units [...]
+State LegalState 1 320 320 1520 1776 3 Terran_Medic 6 Terran_Marine 16 Terran_Firebat 10 240 1776 5 Protoss_Zealot 4 Protoss_Dragoon 1 Protoss_Pylon 3 Protoss_Photon_Cannon 2 Protoss_Cybernetics_Core 1
+
+##################################################
+#
+#  File where results will be stored
+#  Boolean at the end indicates whether to append time stamp
+#  .txt will be added to the end of the file automatically
+#
+#  Format
+#  ResultsFile FILENAME BOOL
+#
+##################################################
+
+ResultsFile sample_exp false
+
+
+##################################################
+#
+#  Show visualization? Only works if libraries enabled in Common.h
+#
+#  Format
+#  Display BOOL ImageDir
+#
+#  This directory is included with SparCraft in folder SparCraft\starcraft_images\
+#  Be sure to use forward slash "\" and include the final "\" character
+#  No spaces allowed!
+#
+##################################################
+
+Display true ../sparcraft/starcraft_images/
+#Display false
+Collisions true
+#Collisions false
+
