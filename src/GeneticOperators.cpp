@@ -235,7 +235,7 @@ int GeneticOperators::Mutator(GAGenome& g, float pmut, int maxJump)
 
 	for(int i=0; i<genome.size(); i++){
 		if(GAFlipCoin(pmut)){
-			Gene* gene=genome[i];
+//			Gene* gene=genome[i];
 //			BWAPI::TilePosition offset(GARandomInt(-maxJump,maxJump),GARandomInt(-maxJump,maxJump));
 //			if(moveIfLegal(genome,i,offset)){
 //				std::cout<<"mutating"<<std::endl;
@@ -259,7 +259,7 @@ int GeneticOperators::Mutator(GAGenome& g, float pmut, int maxJump)
 }
 
 bool GeneticOperators::repair(GAListGenome<Gene>& genome, int pos) {
-	int a=0,b=0,distance=0;//start with distance 0, to check if it is currently legal
+	int distance=0;//start with distance 0, to check if it is currently legal
 	do{
 		for(int a=-distance;a<=distance;a++){
 			for(int b=-distance;b<=distance;b++){

@@ -50,7 +50,7 @@ void BuildingPlacementExperiment::runExperiment(){
 			// for each state we care about
 			for (size_t state(0); state < states.size(); ++state)
 			{
-				char buf[255];
+//				char buf[255];
 				fprintf(stderr, "%s  ", configFileSmall.c_str());
 				fprintf(stderr, "%5d %5d %5d %5d", (int)p1Player, (int)p2Player, (int)state, (int)states[state].numUnits(Players::Player_One));
 
