@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 				SparCraft::SearchExperiment exp(configArg);
 				exp.runExperiment();
 			}else if(experimentArg.compare("placement")==0){
-				SparCraft::BuildingPlacementExperiment exp(configArg);
+			    BuildingPlacement::BuildingPlacementExperiment exp(configArg);
 				exp.runExperiment();
 			}else{
 				SparCraft::System::FatalError("Error parsing arguments");

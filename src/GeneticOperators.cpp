@@ -7,8 +7,10 @@
 
 #include "GeneticOperators.h"
 #include "Gene.h"
+#include "Player_Assault.h"
+#include "Player_Defend.h"
 
-namespace SparCraft {
+namespace BuildingPlacement {
 BWAPI::TilePosition GeneticOperators::_basePos;
 std::vector<SparCraft::Unit> GeneticOperators::_fixedBuildings=std::vector<SparCraft::Unit>();
 std::vector<SparCraft::Unit> GeneticOperators::_buildings=std::vector<SparCraft::Unit>();

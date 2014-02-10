@@ -12,7 +12,7 @@
 #include "Position.hpp"
 #include "Unit.h"
 
-namespace SparCraft {
+namespace BuildingPlacement {
 
 class Gene{
 	BWAPI::UnitType     _type;

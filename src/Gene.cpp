@@ -9,7 +9,7 @@
 #include "ga/garandom.h"
 #include "GeneticOperators.h"
 
-namespace SparCraft {
+namespace BuildingPlacement {
 
 Gene::Gene(BWAPI::UnitType type, BWAPI::TilePosition pos):
 	_type(type),_pos(pos){

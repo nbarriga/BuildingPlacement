@@ -13,7 +13,7 @@
 #include "SparCraft.h"
 #include "Gene.h"
 
-namespace SparCraft {
+namespace BuildingPlacement {
 
 class GeneticOperators {
 	static bool repair(GAListGenome<Gene>& genome, int pos);

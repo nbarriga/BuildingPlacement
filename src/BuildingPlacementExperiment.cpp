@@ -4,18 +4,47 @@
 #include <ga/GAListGenome.h>
 #include "Gene.h"
 #include "GeneticOperators.h"
+#include "Common.h"
+#include "Player_Assault.h"
+#include "Player_Defend.h"
 
-namespace SparCraft {
+namespace BuildingPlacement {
 BuildingPlacementExperiment::BuildingPlacementExperiment(const std::string & configFile):
-							SearchExperiment(configFile),_display(NULL){
-	// TODO Auto-generated constructor stub
-
+            SearchExperiment(),_display(NULL){
+    init(configFile);
 }
 
 BuildingPlacementExperiment::~BuildingPlacementExperiment(){
 	// TODO Auto-generated destructor stub
 }
 
+void BuildingPlacementExperiment::addPlayer(const std::string & line){
+
+    std::istringstream iss(line);
+
+    // the first number is the playerID
+
+    std::string player;
+    int playerID;
+//    int playerModelID;
+    std::string playerModelString;
+
+    iss >> player;
+    iss >> playerID;
+    iss >> playerModelString;
+
+    if (playerModelString.compare(Player_Assault::modelString)==0)
+    {
+        playerStrings[playerID].push_back(playerModelString);
+        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Assault(playerID)));
+    }else if (playerModelString.compare(Player_Defend::modelString)==0)
+    {
+        playerStrings[playerID].push_back(playerModelString);
+        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Defend(playerID)));
+    }else{
+        SearchExperiment::addPlayer(line);
+    }
+}
 
 void BuildingPlacementExperiment::runExperiment(){
 	int popsize  = 10;
@@ -67,7 +96,7 @@ void BuildingPlacementExperiment::runExperiment(){
 				Player_AlphaBeta * p1AB = dynamic_cast<Player_AlphaBeta *>(playerOne.get());
 				if (p1AB)
 				{
-					p1AB->setTranspositionTable(TTPtr(new TranspositionTable()));
+					p1AB->setTranspositionTable(TTPtr(new SparCraft::TranspositionTable()));
 				}
 
 				// get player two
@@ -75,7 +104,7 @@ void BuildingPlacementExperiment::runExperiment(){
 				Player_AlphaBeta * p2AB = dynamic_cast<Player_AlphaBeta *>(playerTwo.get());
 				if (p2AB)
 				{
-					p2AB->setTranspositionTable(TTPtr(new TranspositionTable()));
+					p2AB->setTranspositionTable(TTPtr(new SparCraft::TranspositionTable()));
 				}
 
 				// Now create the GA and run it.  First we create a genome of the type that
