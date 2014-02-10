@@ -2,9 +2,24 @@
 #include "BuildingPlacementExperiment.h"
 #include <boost/program_options.hpp>
 
+void myterminate () {
+    static bool tried_throw = false;
+    try {
+        if (!tried_throw++) throw;
+        std::cerr << "No active exception" << std::endl;
+    }catch (const std::exception &ex) {
+        std::cerr << std::endl<<"       "<< ex.what()<< std::endl<<std::endl;
+        SparCraft::System::printStackTrace(4);
+    }catch (...) {
+        std::cerr << "Terminate handler called for an unknown exception" <<std::endl;
+    }
+    abort();  // forces abnormal termination
+}
+
 int main(int argc, char *argv[])
 {
 	SparCraft::init();
+	std::set_terminate (myterminate);
 
 	try
 	{
@@ -13,7 +28,7 @@ int main(int argc, char *argv[])
 
 			boost::program_options::options_description desc("Allowed options");
 			desc.add_options()("help,h", "prints this help message")
-            		          ("experiment,e", boost::program_options::value<std::string>(&experimentArg)->default_value("search"), "set experiment")
+            		          ("experiment,e", boost::program_options::value<std::string>(&experimentArg)->default_value("placement"), "set experiment")
             		          ("config,c", boost::program_options::value<std::string>(&configArg), "config file")
             		          ;
 			boost::program_options::positional_options_description pd;
