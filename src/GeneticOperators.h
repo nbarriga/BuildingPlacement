@@ -12,6 +12,8 @@
 #include "Common.h"
 #include "SparCraft.h"
 #include "Gene.h"
+#include "Player_Assault.h"
+#include "Player_Defend.h"
 
 namespace BuildingPlacement {
 
@@ -22,7 +24,6 @@ class GeneticOperators {
 	static bool isPowered(GAListGenome<Gene>& genome, int except, const SparCraft::Position &pos);
 	static bool isPowered(GAListGenome<Gene>& genome);
 public:
-	static BWAPI::TilePosition _basePos;
 	static std::vector<SparCraft::Unit> _fixedBuildings;
 	static std::vector<SparCraft::Unit> _buildings;
 	static std::vector<SparCraft::Unit> _defenders;
@@ -30,13 +31,17 @@ public:
 	static Map* _map;
 	static Display* _display;
 	static svv _expDesc;
-	static void configure(BWAPI::TilePosition& basePos,
+	static boost::shared_ptr<Player_Assault> _assaultPlayer;
+	static boost::shared_ptr<Player_Defend > _defendPlayer;
+	static void configure(
 			std::vector<SparCraft::Unit>& fixedBuildings,
 			 std::vector<SparCraft::Unit>& buildings,
 			 std::vector<SparCraft::Unit>& defenders,
 			 std::vector<SparCraft::Unit>& attackers,
 			 Map* map,
 			 Display* display,
+			 PlayerPtr assaultPlayer,
+			 PlayerPtr defendPlayer,
 			 svv expDesc);
 	static float Objective(GAGenome &g);
 	static void	Initializer(GAGenome& g);
@@ -45,6 +50,8 @@ public:
 	static int Crossover(const GAGenome&, const GAGenome&,
 		      GAGenome*, GAGenome*);
 	static float Comparator(const GAGenome&, const GAGenome&);
+	static ScoreType evalBuildingPlacement(const GameState& state);
+	static bool goalReached(const GameState& state);
 };
 
 } /* namespace SparCraft */

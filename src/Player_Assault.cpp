@@ -3,7 +3,7 @@
 namespace BuildingPlacement {
 const std::string Player_Assault::modelString = "Assault";
 
-Player_Assault::Player_Assault (const IDType & playerID){
+Player_Assault::Player_Assault (const IDType & playerID, const Position& goal):_goal(goal){
 	_playerID=playerID;
 
 }
@@ -108,13 +108,13 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 					}
 					else
 					{
-						dist = state.getMap().getDistanceToGoal(ourDest);//walk towards goal?
+						dist = state.getMap().getDistance(ourDest,_goal);//walk towards goal?
 					}
 				}else{//not a medic
 					const boost::optional<const Unit&> & closestBuildingOpt	=state.getClosestEnemyBuildingOpt(_playerID, u);
 					if(closestBuildingOpt.is_initialized()){
 						int distBuilding = state.getMap().getDistance(ourDest,closestBuildingOpt.get().pos());
-						int distGoal = state.getMap().getDistanceToGoal(ourDest);
+						int distGoal = state.getMap().getDistance(ourDest,_goal);
 						dist = ((distBuilding>0 && distBuilding<distGoal) ||
 								closestBuildingOpt.get().canAttackTarget(ourUnit, state.getTime()))?distBuilding:distGoal;
 					}else{//no enemy buildings alive
@@ -124,11 +124,11 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 							if(state.getMap().canWalkStraight(ourDest,closestEnemyOpt.get().pos(), ourUnit.range())){
 								dist = sqrt(closestEnemyOpt.get().getDistanceSqToPosition(ourDest, state.getTime()));
 							}else{//no direct line towards enemy, lets go to goal
-								dist = state.getMap().getDistanceToGoal(ourDest);//walk towards goal?
+								dist = state.getMap().getDistance(ourDest,_goal);//walk towards goal?
 							}
 
 						}else{//closest enemy can't hurt us, move towards goal
-							dist = state.getMap().getDistanceToGoal(ourDest);
+							dist = state.getMap().getDistance(ourDest,_goal);
 						}
 					}
 				}

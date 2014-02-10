@@ -11,13 +11,14 @@
 #include "Player_Defend.h"
 
 namespace BuildingPlacement {
-BWAPI::TilePosition GeneticOperators::_basePos;
 std::vector<SparCraft::Unit> GeneticOperators::_fixedBuildings=std::vector<SparCraft::Unit>();
 std::vector<SparCraft::Unit> GeneticOperators::_buildings=std::vector<SparCraft::Unit>();
 std::vector<SparCraft::Unit> GeneticOperators::_defenders=std::vector<SparCraft::Unit>();
 std::vector<SparCraft::Unit> GeneticOperators::_attackers=std::vector<SparCraft::Unit>();
 Map* GeneticOperators::_map=NULL;
 Display* GeneticOperators::_display=NULL;
+boost::shared_ptr<Player_Assault> GeneticOperators::_assaultPlayer;
+boost::shared_ptr<Player_Defend> GeneticOperators::_defendPlayer;
 svv GeneticOperators::_expDesc=svv();
 const int mutDistance=20;
 
@@ -59,10 +60,7 @@ std::cout<<"genome: "<<genome<<std::endl;
 	}
 
 
-
-	PlayerPtr ptr1(new Player_Assault(Players::Player_One));
-	PlayerPtr ptr2(new Player_Defend(Players::Player_Two));
-	Game game(state, ptr1, ptr2, 20000);
+	Game game(state, _assaultPlayer, _defendPlayer, 20000);
 #ifdef USING_VISUALIZATION_LIBRARIES
 	if (_display!=NULL)
 	{
@@ -74,12 +72,32 @@ std::cout<<"genome: "<<genome<<std::endl;
 
 	// play the game to the end
 	game.play();
-	int score = game.getState().evalBuildingPlacement(Players::Player_One,Players::Player_Two);
+	int score = evalBuildingPlacement(state);
 	std::cout<<"score: "<<score<<std::endl;
 	return score;
 
 }
+bool GeneticOperators::goalReached(const GameState& state){
+      for (IDType u(0); u<state.numUnits(_assaultPlayer->ID()); ++u){
+          const Unit & unit(state.getUnit(_assaultPlayer->ID(), u));
+          if(_map->getDistance(unit.pos(),_assaultPlayer->getGoal())<TILE_SIZE/2){
+              return true;
+          }
+      }
+  return false;
+}
+ScoreType GeneticOperators::evalBuildingPlacement(const GameState& state){
 
+  if(state.playerDead(_assaultPlayer->ID())){//attacker defeated, count how many we have left
+      return state.LTD(_defendPlayer->ID())+300000;
+  }else if(goalReached(state)){//enemy reached goal,
+      return /*LTD(defender)*/-state.LTD(_assaultPlayer->ID())+100000;
+  }else if(state.playerDead(_defendPlayer->ID())){//defender destroyed, count how many he has left
+      return state.LTD(_defendPlayer->ID())-state.LTD(_assaultPlayer->ID())+50000;
+  }else{//simulation time exhausted
+      return state.LTD(_defendPlayer->ID())-state.LTD(_assaultPlayer->ID())+200000;
+  }
+}
 void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 {
 	std::cout<<"calling Initializer\n";
@@ -90,7 +108,7 @@ void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 	for(std::vector<SparCraft::Unit>::const_iterator it=_buildings.begin();
 			it!=_buildings.end();it++){
 
-		BWAPI::TilePosition pos(_basePos);
+		BWAPI::TilePosition pos(_defendPlayer->getGoal().x()/TILE_SIZE,_defendPlayer->getGoal().y()/TILE_SIZE);
 		Gene gene(it->type(),pos);
 		genome.insert(gene,GAListBASE::TAIL);
 
@@ -114,21 +132,24 @@ void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 //	Mutator(genome,0.5,20);
 }
 
-void GeneticOperators::configure(BWAPI::TilePosition& basePos,
+void GeneticOperators::configure(
 		std::vector<SparCraft::Unit>& fixedBuildings,
 		std::vector<SparCraft::Unit>& buildings,
 		std::vector<SparCraft::Unit>& defenders,
 		std::vector<SparCraft::Unit>& attackers,
 		Map* map,
 		Display* display,
+        PlayerPtr assaultPlayer,
+        PlayerPtr defendPlayer,
 		 svv expDesc) {
-	_basePos=basePos;
 	_fixedBuildings=fixedBuildings;
 	_buildings=buildings;
 	_defenders=defenders;
 	_attackers=attackers;
 	_map=map;
 	_display=display;
+	_assaultPlayer=boost::dynamic_pointer_cast<Player_Assault>(assaultPlayer);
+	_defendPlayer=boost::dynamic_pointer_cast<Player_Defend>(defendPlayer);
 	_expDesc=expDesc;
 }
 

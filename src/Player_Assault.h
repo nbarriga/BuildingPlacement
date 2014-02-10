@@ -15,10 +15,12 @@ namespace BuildingPlacement {
  `----------------------------------------------------------------------*/
 class Player_Assault : public Player
 {
+    Position _goal;
 public:
     static const std::string modelString;
-	Player_Assault (const IDType & playerID);
+	Player_Assault (const IDType & playerID, const Position& goal);
 	void getMoves(const GameState & state, const MoveArray & moves, std::vector<UnitAction> & moveVec);
 	IDType getType() { return PlayerModels::Assault; }
+    const Position& getGoal() const { return _goal;};
 };
 }

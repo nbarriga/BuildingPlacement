@@ -63,8 +63,8 @@
 #Player 0 PortfolioGreedySearch 0 NOKDPS 1 0
 
 # Sample Scripted Players
-Player 0 Assault
-Player 1 Defend
+Player 0 Assault 240 1776
+Player 1 Defend  240 1776
 
 ####################################################
 #
@@ -91,7 +91,7 @@ Player 1 Defend
 #
 ##################################################
 
-MapFile building_placement_experiment/destination_map.txt 240 1776
+MapFile building_placement_experiment/destination_map.txt 
 
 ##################################################
 #

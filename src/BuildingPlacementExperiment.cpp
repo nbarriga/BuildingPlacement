@@ -35,12 +35,20 @@ void BuildingPlacementExperiment::addPlayer(const std::string & line){
 
     if (playerModelString.compare(Player_Assault::modelString)==0)
     {
+        assert(playerID==0);
         playerStrings[playerID].push_back(playerModelString);
-        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Assault(playerID)));
+        int goalX, goalY;
+        iss>>goalX;assert(goalX>=0);
+        iss>>goalY;assert(goalY>=0);
+        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Assault(playerID,SparCraft::Position(goalX,goalY))));
     }else if (playerModelString.compare(Player_Defend::modelString)==0)
     {
+        assert(playerID==1);
         playerStrings[playerID].push_back(playerModelString);
-        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Defend(playerID)));
+        int goalX, goalY;
+        iss>>goalX;assert(goalX>=0);
+        iss>>goalY;assert(goalY>=0);
+        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Defend(playerID,SparCraft::Position(goalX,goalY))));
     }else{
         SearchExperiment::addPlayer(line);
     }
@@ -111,8 +119,6 @@ void BuildingPlacementExperiment::runExperiment(){
 				// we want to use in the GA.  The ga doesn't operate on this genome in the
 				// optimization - it just uses it to clone a population of genomes.
 
-				BWAPI::TilePosition goal(map->getGoal().x()/TILE_SIZE,map->getGoal().y()/TILE_SIZE);
-
 				std::vector<Unit> fixedBuildings,buildings,attackers,defenders;
 				int units=states[state].numUnits(Players::Player_One)+states[state].numUnits(Players::Player_Two);
 				for(int i=0;i<units;i++){
@@ -142,12 +148,13 @@ void BuildingPlacementExperiment::runExperiment(){
 
 
 
-				GeneticOperators::configure(goal,
-						fixedBuildings,
+				GeneticOperators::configure(fixedBuildings,
 						buildings,
 						defenders,
 						attackers,
 						map,_display,
+						playerOne,
+						playerTwo,
 						getExpDescription(0,0,0));
 
 				GAListGenome<Gene> genome(GeneticOperators::Objective);
