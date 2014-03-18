@@ -9,7 +9,7 @@
 #define GENE_H_
 
 #include "Common.h"
-#include "Position.hpp"
+#include "Position.h"
 #include "Unit.h"
 
 namespace BuildingPlacement {

@@ -13,7 +13,7 @@ SPARCRAFT_LIB=$(SPARCRAFT_DIR)/libSparCraft.a
 
 all:BuildPlacement
 
-BuildPlacement:galib $(OBJECTS)
+BuildPlacement:galib $(OBJECTS) $(SPARCRAFT_LIB)
 	$(CC) $(OBJECTS) $(SPARCRAFT_LIB) -o $@  $(LDFLAGS) -L$(GALIB_DIR)/ga -lga
 
 .cpp.o:
@@ -23,6 +23,9 @@ BuildPlacement:galib $(OBJECTS)
 .cc.o:
 	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 	$(CC) -MM $(CPPFLAGS) $(INCLUDES) -MT $@ -o $*.d $<
+
+$(SPARCRAFT_LIB): $(SPARCRAFT_DIR)/source/*.cpp $(SPARCRAFT_DIR)/source/*.h $(SPARCRAFT_DIR)/source/*.hpp
+	make -C $(SPARCRAFT_DIR) all
 
 galib:
 	make -C $(GALIB_DIR) lib
