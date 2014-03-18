@@ -91,7 +91,7 @@ Player 1 Defend  240 1776
 #
 ##################################################
 
-MapFile building_placement_experiment/destination_map.txt 
+#MapFile building_placement_experiment/destination_map.txt 
 
 ##################################################
 #
@@ -110,7 +110,9 @@ MapFile building_placement_experiment/destination_map.txt
 #State StateDescriptionFile 1 building_placement_experiment/city_assault_state.txt
 #State LegalState 1 320 320 1520 1776 2 Protoss_Zealot 4 Protoss_Dragoon 6 240 1776 1 Protoss_Photon_Cannon 7
 #State StateType #Experiments Xradius Yradius Xcenter Ycenter #unitTypes type #units [...] Xcenter Ycenter #unitTypes type #units [...]
-State LegalState 1 320 320 1520 1776 3 Terran_Medic 6 Terran_Marine 16 Terran_Firebat 10 240 1776 5 Protoss_Zealot 4 Protoss_Dragoon 1 Protoss_Pylon 3 Protoss_Photon_Cannon 2 Protoss_Cybernetics_Core 1
+# State LegalState 1 320 320 1520 1776 3 Terran_Medic 6 Terran_Marine 16 Terran_Firebat 10 240 1776 5 Protoss_Zealot 4 Protoss_Dragoon 1 Protoss_Pylon 3 Protoss_Photon_Cannon 2 Protoss_Cybernetics_Core 1
+
+State BaseAssaultStateDescriptionFile 1 building_placement_experiment/city_assault_state.txt
 
 ##################################################
 #
