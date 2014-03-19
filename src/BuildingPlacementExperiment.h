@@ -5,8 +5,16 @@
 
 namespace BuildingPlacement {
 class BuildingPlacementExperiment:public SearchExperiment {
+    struct Comparison{
+        bool operator() (const std::pair<Unit, TimeType>& lhs, const std::pair<Unit, TimeType>&rhs) const
+        {
+            return (lhs.second>rhs.second);
+        }
+    };
+
 	Display *_display;
 	std::vector<std::vector<Unit> > _fixedBuildings,_buildings,_attackers,_defenders;
+	std::vector<std::vector<std::pair<Unit, TimeType> > > _delayedUnits;
 	void parseBaseAssaultStateDescriptionFile(const std::string & fileName);
 	void setupPlayers(size_t p1Player, size_t p2Player);
 public:

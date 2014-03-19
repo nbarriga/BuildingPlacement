@@ -102,7 +102,8 @@ void BuildingPlacementExperiment::runCross() {
                     std::cout<<"fixed buildings: "<<_fixedBuildings[state].size()<<
                             ", buildings: "<<_buildings[state].size()<<
                             ", defenders: "<<_defenders[state].size()<<
-                            ",attackers: "<<_attackers[otherState].size()<<std::endl;
+                            ",attackers: "<<_attackers[otherState].size()<<
+                            ",delayed: "<<_delayedUnits[state].size()<<std::endl;
 
 
                     GameState gameState;
@@ -197,7 +198,8 @@ void BuildingPlacementExperiment::runEvaluate() {
                 std::cout<<"fixed buildings: "<<_fixedBuildings[state].size()<<
                         ", buildings: "<<_buildings[state].size()<<
                         ", defenders: "<<_defenders[state].size()<<
-                        ",attackers: "<<_attackers[state].size()<<std::endl;
+                        ",attackers: "<<_attackers[state].size()<<
+                        ",delayed: "<<_delayedUnits[state].size()<<std::endl;
 
 
 
@@ -227,7 +229,7 @@ void BuildingPlacementExperiment::runEvaluate() {
                 }
 
 
-                Game game(gameState, playerOne, playerTwo, 2000);
+                Game game(gameState, playerOne, playerTwo, 2000,_delayedUnits[state]);
 #ifdef USING_VISUALIZATION_LIBRARIES
                 if (_display!=NULL)
                 {
@@ -309,7 +311,8 @@ void BuildingPlacementExperiment::runOptimize() {
                 std::cout<<"fixed buildings: "<<_fixedBuildings[state].size()<<
                         ", buildings: "<<_buildings[state].size()<<
                         ", defenders: "<<_defenders[state].size()<<
-                        ",attackers: "<<_attackers[state].size()<<std::endl;
+                        ",attackers: "<<_attackers[state].size()<<
+                        ",delayed: "<<_delayedUnits[state].size()<<std::endl;
 
 
                 GeneticOperators::configure(_fixedBuildings[state],
@@ -387,12 +390,12 @@ void BuildingPlacementExperiment::addState(const std::string& line) {
     }
 }
 
-
 void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         const std::string& fileName) {
     std::vector<std::string> lines = getLines(fileName);
 
     std::vector<Unit> fixedBuildings,buildings,attackers,defenders;
+    std::vector<std::pair<Unit, TimeType> > delayed;
 
     for (size_t u(0); u<lines.size(); ++u)
     {
@@ -430,24 +433,30 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         }
 
         Unit unit(type, Position(x, y), 0, playerID, hp,
-                type == BWAPI::UnitTypes::Terran_Medic ? Constants::Starting_Energy : 0, 0,0);
+                type == BWAPI::UnitTypes::Terran_Medic ? Constants::Starting_Energy : 0, time, time);
 
 
         if(playerID==0){//assault
             if(type.isBuilding()){
                 SparCraft::System::FatalError("Assault player cannot have buildings");
+            }else if(time>0){
+                delayed.push_back(std::pair<Unit, TimeType>(unit,time));
             }else{
                 attackers.push_back(unit);
             }
         }else{//defend
-            if(type.isBuilding()){
-                if(fixed){
-                    fixedBuildings.push_back(unit);
-                }else{
-                    buildings.push_back(unit);
-                }
+            if(time>0){
+                delayed.push_back(std::pair<Unit, TimeType>(unit,time));
             }else{
-                defenders.push_back(unit);
+                if(type.isBuilding()){
+                    if(fixed){
+                        fixedBuildings.push_back(unit);
+                    }else{
+                        buildings.push_back(unit);
+                    }
+                }else{
+                    defenders.push_back(unit);
+                }
             }
         }
     }
@@ -456,6 +465,8 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
     _buildings.push_back(buildings);
     _attackers.push_back(attackers);
     _defenders.push_back(defenders);
+    std::sort(delayed.begin(),delayed.end(),Comparison());
+    _delayedUnits.push_back(delayed);
 }
 
 void BuildingPlacementExperiment::setupPlayers(size_t p1Player,

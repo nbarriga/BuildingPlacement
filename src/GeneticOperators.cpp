@@ -60,7 +60,7 @@ std::cout<<"genome: "<<genome<<std::endl;
 	}
 
 
-	Game game(state, _assaultPlayer, _defendPlayer, 20000);
+	Game game(state, _assaultPlayer, _defendPlayer, 2000);
 #ifdef USING_VISUALIZATION_LIBRARIES
 	if (_display!=NULL)
 	{
