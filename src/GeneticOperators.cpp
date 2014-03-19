@@ -15,6 +15,7 @@ std::vector<SparCraft::Unit> GeneticOperators::_fixedBuildings=std::vector<SparC
 std::vector<SparCraft::Unit> GeneticOperators::_buildings=std::vector<SparCraft::Unit>();
 std::vector<SparCraft::Unit> GeneticOperators::_defenders=std::vector<SparCraft::Unit>();
 std::vector<SparCraft::Unit> GeneticOperators::_attackers=std::vector<SparCraft::Unit>();
+std::vector<std::pair<Unit, TimeType> > GeneticOperators::_delayed=std::vector<std::pair<Unit, TimeType> >();
 Map* GeneticOperators::_map=NULL;
 Display* GeneticOperators::_display=NULL;
 boost::shared_ptr<Player_Assault> GeneticOperators::_assaultPlayer;
@@ -60,7 +61,7 @@ std::cout<<"genome: "<<genome<<std::endl;
 	}
 
 
-	Game game(state, _assaultPlayer, _defendPlayer, 2000);
+	Game game(state, _assaultPlayer, _defendPlayer, 2000, _delayed);
 #ifdef USING_VISUALIZATION_LIBRARIES
 	if (_display!=NULL)
 	{
@@ -133,12 +134,13 @@ void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 }
 
 void GeneticOperators::configure(
-		std::vector<SparCraft::Unit>& fixedBuildings,
-		std::vector<SparCraft::Unit>& buildings,
-		std::vector<SparCraft::Unit>& defenders,
-		std::vector<SparCraft::Unit>& attackers,
-		Map* map,
-		Display* display,
+        const std::vector<SparCraft::Unit>& fixedBuildings,
+        const std::vector<SparCraft::Unit>& buildings,
+        const std::vector<SparCraft::Unit>& defenders,
+        const std::vector<SparCraft::Unit>& attackers,
+        const std::vector<std::pair<Unit, TimeType> > &delayed,
+        Map* map,
+        Display* display,
         PlayerPtr assaultPlayer,
         PlayerPtr defendPlayer,
 		 svv expDesc) {
@@ -146,6 +148,7 @@ void GeneticOperators::configure(
 	_buildings=buildings;
 	_defenders=defenders;
 	_attackers=attackers;
+	_delayed=delayed;
 	_map=map;
 	_display=display;
 	_assaultPlayer=boost::dynamic_pointer_cast<Player_Assault>(assaultPlayer);

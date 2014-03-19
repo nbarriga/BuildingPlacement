@@ -103,7 +103,8 @@ void BuildingPlacementExperiment::runCross() {
                             ", buildings: "<<_buildings[state].size()<<
                             ", defenders: "<<_defenders[state].size()<<
                             ",attackers: "<<_attackers[otherState].size()<<
-                            ",delayed: "<<_delayedUnits[state].size()<<std::endl;
+                            ", delayedAttackers: "<<_delayedAttackers[state].size()<<
+                            ", delayedDefenders: "<<_delayedDefenders[state].size()<<std::endl;
 
 
                     GameState gameState;
@@ -132,7 +133,13 @@ void BuildingPlacementExperiment::runCross() {
                     }
 
 
-                    Game game(gameState, playerOne, playerTwo, 2000);
+                    std::vector<std::pair<Unit, TimeType> > delayedUnits(
+                            _delayedAttackers[otherState].size()+_delayedDefenders[state].size());
+                    std::merge(_delayedAttackers[otherState].begin(),_delayedAttackers[otherState].end(),
+                            _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
+                            delayedUnits.begin(), Comparison());
+                    Game game(gameState, playerOne, playerTwo, 2000,delayedUnits);
+
 #ifdef USING_VISUALIZATION_LIBRARIES
                     if (_display!=NULL)
                     {
@@ -150,6 +157,7 @@ void BuildingPlacementExperiment::runCross() {
                             _buildings[state],
                             _defenders[state],
                             _attackers[otherState],
+                            delayedUnits,
                             map,_display,
                             playerOne,
                             playerTwo,
@@ -199,7 +207,8 @@ void BuildingPlacementExperiment::runEvaluate() {
                         ", buildings: "<<_buildings[state].size()<<
                         ", defenders: "<<_defenders[state].size()<<
                         ",attackers: "<<_attackers[state].size()<<
-                        ",delayed: "<<_delayedUnits[state].size()<<std::endl;
+                        ", delayedAttackers: "<<_delayedAttackers[state].size()<<
+                        ", delayedDefenders: "<<_delayedDefenders[state].size()<<std::endl;
 
 
 
@@ -228,8 +237,12 @@ void BuildingPlacementExperiment::runEvaluate() {
                     gameState.addUnit(*it);
                 }
 
-
-                Game game(gameState, playerOne, playerTwo, 2000,_delayedUnits[state]);
+                std::vector<std::pair<Unit, TimeType> > delayedUnits(
+                        _delayedAttackers[state].size()+_delayedDefenders[state].size());
+                std::merge(_delayedAttackers[state].begin(),_delayedAttackers[state].end(),
+                        _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
+                        delayedUnits.begin(), Comparison());
+                Game game(gameState, playerOne, playerTwo, 2000,delayedUnits);
 #ifdef USING_VISUALIZATION_LIBRARIES
                 if (_display!=NULL)
                 {
@@ -247,6 +260,7 @@ void BuildingPlacementExperiment::runEvaluate() {
                         _buildings[state],
                         _defenders[state],
                         _attackers[state],
+                        delayedUnits,
                         map,_display,
                         playerOne,
                         playerTwo,
@@ -311,14 +325,21 @@ void BuildingPlacementExperiment::runOptimize() {
                 std::cout<<"fixed buildings: "<<_fixedBuildings[state].size()<<
                         ", buildings: "<<_buildings[state].size()<<
                         ", defenders: "<<_defenders[state].size()<<
-                        ",attackers: "<<_attackers[state].size()<<
-                        ",delayed: "<<_delayedUnits[state].size()<<std::endl;
+                        ", attackers: "<<_attackers[state].size()<<
+                        ", delayedAttackers: "<<_delayedAttackers[state].size()<<
+                        ", delayedDefenders: "<<_delayedDefenders[state].size()<<std::endl;
 
+                std::vector<std::pair<Unit, TimeType> > delayedUnits(
+                        _delayedAttackers[state].size()+_delayedDefenders[state].size());
+                std::merge(_delayedAttackers[state].begin(),_delayedAttackers[state].end(),
+                        _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
+                        delayedUnits.begin(), Comparison());
 
                 GeneticOperators::configure(_fixedBuildings[state],
                         _buildings[state],
                         _defenders[state],
                         _attackers[state],
+                        delayedUnits,
                         map,_display,
                         playerOne,
                         playerTwo,
@@ -395,7 +416,7 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
     std::vector<std::string> lines = getLines(fileName);
 
     std::vector<Unit> fixedBuildings,buildings,attackers,defenders;
-    std::vector<std::pair<Unit, TimeType> > delayed;
+    std::vector<std::pair<Unit, TimeType> > delayedAttackers,delayedDefenders;
 
     for (size_t u(0); u<lines.size(); ++u)
     {
@@ -440,13 +461,16 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
             if(type.isBuilding()){
                 SparCraft::System::FatalError("Assault player cannot have buildings");
             }else if(time>0){
-                delayed.push_back(std::pair<Unit, TimeType>(unit,time));
+                delayedAttackers.push_back(std::pair<Unit, TimeType>(unit,time));
             }else{
                 attackers.push_back(unit);
             }
         }else{//defend
             if(time>0){
-                delayed.push_back(std::pair<Unit, TimeType>(unit,time));
+                if(type.isBuilding()){
+                    SparCraft::System::FatalError("Cannot have delayed buildings");
+                }
+                delayedDefenders.push_back(std::pair<Unit, TimeType>(unit,time));
             }else{
                 if(type.isBuilding()){
                     if(fixed){
@@ -465,8 +489,10 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
     _buildings.push_back(buildings);
     _attackers.push_back(attackers);
     _defenders.push_back(defenders);
-    std::sort(delayed.begin(),delayed.end(),Comparison());
-    _delayedUnits.push_back(delayed);
+    std::sort(delayedAttackers.begin(),delayedAttackers.end(),Comparison());
+    std::sort(delayedDefenders.begin(),delayedDefenders.end(),Comparison());
+    _delayedAttackers.push_back(delayedAttackers);
+    _delayedDefenders.push_back(delayedDefenders);
 }
 
 void BuildingPlacementExperiment::setupPlayers(size_t p1Player,

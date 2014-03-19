@@ -28,21 +28,23 @@ public:
 	static std::vector<SparCraft::Unit> _buildings;
 	static std::vector<SparCraft::Unit> _defenders;
 	static std::vector<SparCraft::Unit> _attackers;
+	static std::vector<std::pair<Unit, TimeType> > _delayed;
 	static Map* _map;
 	static Display* _display;
 	static svv _expDesc;
 	static boost::shared_ptr<Player_Assault> _assaultPlayer;
 	static boost::shared_ptr<Player_Defend > _defendPlayer;
 	static void configure(
-			std::vector<SparCraft::Unit>& fixedBuildings,
-			 std::vector<SparCraft::Unit>& buildings,
-			 std::vector<SparCraft::Unit>& defenders,
-			 std::vector<SparCraft::Unit>& attackers,
-			 Map* map,
-			 Display* display,
-			 PlayerPtr assaultPlayer,
-			 PlayerPtr defendPlayer,
-			 svv expDesc);
+	        const std::vector<SparCraft::Unit>& fixedBuildings,
+	        const std::vector<SparCraft::Unit>& buildings,
+	        const std::vector<SparCraft::Unit>& defenders,
+	        const std::vector<SparCraft::Unit>& attackers,
+	        const std::vector<std::pair<Unit, TimeType> > &delayed,
+	        Map* map,
+	        Display* display,
+	        PlayerPtr assaultPlayer,
+	        PlayerPtr defendPlayer,
+	        svv expDesc);
 	static float Objective(GAGenome &g);
 	static void	Initializer(GAGenome& g);
 	static int Mutator(GAGenome& g, float pmut);
