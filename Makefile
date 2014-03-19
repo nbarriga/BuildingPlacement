@@ -9,11 +9,12 @@ SPARCRAFT_DIR=../sparcraft
 INCLUDES=-I$(SPARCRAFT_DIR)/bwapidata/include -I$(SPARCRAFT_DIR)/source -I$(GALIB_DIR)
 SOURCES=$(wildcard src/*.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
+GALIB_LIB=$(GALIB_DIR)/ga/libga.a
 SPARCRAFT_LIB=$(SPARCRAFT_DIR)/libSparCraft.a
 
 all:BuildPlacement
 
-BuildPlacement:galib $(OBJECTS) $(SPARCRAFT_LIB)
+BuildPlacement:$(GALIB_LIB) $(OBJECTS) $(SPARCRAFT_LIB)
 	$(CC) $(OBJECTS) $(SPARCRAFT_LIB) -o $@  $(LDFLAGS) -L$(GALIB_DIR)/ga -lga
 
 .cpp.o:
@@ -27,7 +28,7 @@ BuildPlacement:galib $(OBJECTS) $(SPARCRAFT_LIB)
 $(SPARCRAFT_LIB): $(SPARCRAFT_DIR)/source/*.cpp $(SPARCRAFT_DIR)/source/*.h $(SPARCRAFT_DIR)/source/*.hpp
 	make -C $(SPARCRAFT_DIR) all
 
-galib:
+$(GALIB_LIB): $(GALIB_DIR)/ga/*.C $(GALIB_DIR)/ga/*.h
 	make -C $(GALIB_DIR) lib
 
 clean:
