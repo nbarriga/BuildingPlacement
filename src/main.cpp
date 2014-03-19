@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
 			boost::program_options::options_description desc("Allowed options");
 			desc.add_options()("help,h", "prints this help message")
-            		          ("experiment,e", boost::program_options::value<std::string>(&experimentArg)->default_value("placement"), "set experiment")
+            		          ("experiment,e", boost::program_options::value<std::string>(&experimentArg)->default_value("evaluate"), "set experiment")
             		          ("config,c", boost::program_options::value<std::string>(&configArg), "config file")
             		          ;
 			boost::program_options::positional_options_description pd;
@@ -44,13 +44,16 @@ int main(int argc, char *argv[])
 			if(vm.count("config")!=1){
 				SparCraft::System::FatalError("Please provide experiment file");
 			}
-			if(experimentArg.compare("search")==0){
-				SparCraft::SearchExperiment exp(configArg);
-				exp.runExperiment();
-			}else if(experimentArg.compare("placement")==0){
+			if(experimentArg.compare("evaluate")==0){
 			    BuildingPlacement::BuildingPlacementExperiment exp(configArg);
-				exp.runExperiment();
-			}else{
+				exp.runEvaluate();
+			}else if(experimentArg.compare("optimize")==0){
+			    BuildingPlacement::BuildingPlacementExperiment exp(configArg);
+				exp.runOptimize();
+			}else if(experimentArg.compare("crossevaluate")==0){
+                BuildingPlacement::BuildingPlacementExperiment exp(configArg);
+                exp.runCross();
+            }else{
 				SparCraft::System::FatalError("Error parsing arguments");
 			}
 		}
