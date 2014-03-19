@@ -18,12 +18,12 @@ BuildPlacement:$(GALIB_LIB) $(OBJECTS) $(SPARCRAFT_LIB)
 	$(CC) $(OBJECTS) $(SPARCRAFT_LIB) -o $@  $(LDFLAGS) -L$(GALIB_DIR)/ga -lga
 
 .cpp.o:
-	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@ 
 	$(CC) -MM $(CPPFLAGS) $(INCLUDES) -MT $@ -o $*.d $<
+	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@ 
 
 .cc.o:
-	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 	$(CC) -MM $(CPPFLAGS) $(INCLUDES) -MT $@ -o $*.d $<
+	$(CC) -c $(CFLAGS) $(INCLUDES) $< -o $@
 
 $(SPARCRAFT_LIB): $(SPARCRAFT_DIR)/source/*.cpp $(SPARCRAFT_DIR)/source/*.h $(SPARCRAFT_DIR)/source/*.hpp
 	make -C $(SPARCRAFT_DIR) all
