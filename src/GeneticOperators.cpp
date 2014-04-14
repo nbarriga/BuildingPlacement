@@ -22,6 +22,7 @@ boost::shared_ptr<Player_Assault> GeneticOperators::_assaultPlayer;
 boost::shared_ptr<Player_Defend> GeneticOperators::_defendPlayer;
 svv GeneticOperators::_expDesc=svv();
 const int mutDistance=20;
+const int placementRetries=50;
 
 float GeneticOperators::Objective(GAGenome &g) {
 	std::cout<<"calling Objective\n";
@@ -61,7 +62,7 @@ std::cout<<"genome: "<<genome<<std::endl;
 	}
 
 
-	Game game(state, _assaultPlayer, _defendPlayer, 2000, _delayed);
+	Game game(state, _assaultPlayer, _defendPlayer, 20000, _delayed);
 #ifdef USING_VISUALIZATION_LIBRARIES
 	if (_display!=NULL)
 	{
@@ -73,11 +74,12 @@ std::cout<<"genome: "<<genome<<std::endl;
 
 	// play the game to the end
 	game.play();
-	int score = evalBuildingPlacement(state);
+	int score = evalBuildingPlacement(game.getState());
 	std::cout<<"score: "<<score<<std::endl;
 	return score;
 
 }
+
 bool GeneticOperators::goalReached(const GameState& state){
       for (IDType u(0); u<state.numUnits(_assaultPlayer->ID()); ++u){
           const Unit & unit(state.getUnit(_assaultPlayer->ID(), u));
@@ -89,6 +91,7 @@ bool GeneticOperators::goalReached(const GameState& state){
 }
 ScoreType GeneticOperators::evalBuildingPlacement(const GameState& state){
 
+//    state.print();
   if(state.playerDead(_assaultPlayer->ID())){//attacker defeated, count how many we have left
       return state.LTD(_defendPlayer->ID())+300000;
   }else if(goalReached(state)){//enemy reached goal,
@@ -105,27 +108,37 @@ void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 	GAListGenome<Gene>& genome = (GAListGenome<Gene>&)g;
 	while(genome.head()) genome.destroy(); // destroy any pre-existing list
 
-	bool repair=false;
+	bool needsRepair=false;
 	for(std::vector<SparCraft::Unit>::const_iterator it=_buildings.begin();
 			it!=_buildings.end();it++){
 
-		BWAPI::TilePosition pos(_defendPlayer->getGoal().x()/TILE_SIZE,_defendPlayer->getGoal().y()/TILE_SIZE);
-		Gene gene(it->type(),pos);
-		genome.insert(gene,GAListBASE::TAIL);
+	    BWAPI::TilePosition pos(_defendPlayer->getGoal().x()/TILE_SIZE,_defendPlayer->getGoal().y()/TILE_SIZE);
+	    Gene gene(it->type(),pos);
+	    BWAPI::TilePosition offset(0,0);
+	    int n=placementRetries;
+	    do{
+	        do{
+	            gene.undo(offset);
+	            offset=BWAPI::TilePosition(GARandomInt(-mutDistance,mutDistance),GARandomInt(-mutDistance,mutDistance));
+	            gene.move(offset);
+	        }while(!_map->canBuildHere(gene.getType(),gene.getCenterPos()));
 
-		BWAPI::TilePosition offset;
-		int n=50;
-		do{
-			offset=BWAPI::TilePosition(GARandomInt(-mutDistance,mutDistance),GARandomInt(-mutDistance,mutDistance));
-			n--;
-		}while(n>0&&!moveIfLegal(genome,genome.size()-1,offset, true));
-		if(n==0){
-			repair=true;
+	        if(isLegal(genome,gene)){
+	            if(!gene.getType().requiresPsi()||isPowered(genome,gene)){
+	                genome.insert(gene,GAListBASE::TAIL);
+	                break;
+	            }
+	        }
+	        n--;
+	    }while(n>0);
+	    if(n==0){//if we reached the max amount of tries, add it anyway and try to repair later
+	        genome.insert(gene,GAListBASE::TAIL);
+	        needsRepair=true;
 			std::cout<<"Max amount of retries for initial location failed, will try to repair\n";
 		}
-
+//		std::cout<<"building added"<<std::endl;
 	}
-	if(repair){
+	if(needsRepair){
 		if(!GeneticOperators::repair(genome)){
 			System::FatalError("Couldn't repair at initializer");
 		}
@@ -154,6 +167,9 @@ void GeneticOperators::configure(
 	_assaultPlayer=boost::dynamic_pointer_cast<Player_Assault>(assaultPlayer);
 	_defendPlayer=boost::dynamic_pointer_cast<Player_Defend>(defendPlayer);
 	_expDesc=expDesc;
+
+
+    //todo: sort stuff so that pylons come first
 }
 
 int GeneticOperators::Mutator(GAGenome& g, float pmut){
@@ -165,23 +181,22 @@ bool GeneticOperators::moveIfLegal(GAListGenome<Gene>& genome, int pos,
 
 
 	BWAPI::TilePosition newTilePos=genome[pos]->getTilePos()+offset;
-//	if((newTilePos.x()<0)
-//			|| (newTilePos.x()>=_map->getBuildTileWidth())
-//			|| (newTilePos.y()<0)
-//			|| (newTilePos.y()>=_map->getBuildTileHeight())){
-//		return false;
-//	}
+
 	BWAPI::UnitType type=genome[pos]->getType();
 	float x=newTilePos.x()+type.tileWidth()/2.0f;
 	float y=newTilePos.y()+type.tileHeight()/2.0f;
 	SparCraft::Position newPos(x*TILE_SIZE,y*TILE_SIZE);
+
 	if(_map->canBuildHere(genome[pos]->getType(),newPos)){
+
 		genome[pos]->move(offset);
 		bool legal=true;
 		for(int j=0; j<genome.size(); j++){
 			if(pos!=j){
 				if(genome[pos]->collides(*genome[j])){
 					legal=false;
+//					   std::cout<<"Trying new pos: "<<newPos<<std::endl;
+//					std::cout<<"collides with "<<*genome[j]<<std::endl;
 					break;
 				}
 			}
@@ -190,13 +205,17 @@ bool GeneticOperators::moveIfLegal(GAListGenome<Gene>& genome, int pos,
 				it!=_fixedBuildings.end() && legal;it++){
 			if(genome[pos]->collides(*it)){
 				legal=false;
+//				   std::cout<<"Trying new pos: "<<newPos<<std::endl;
+//				std::cout<<"collides with "<<it->debugString()<<std::endl;
 				break;
 			}
 		}
 		if(checkPowered && legal){
-			if(type.requiresPsi()&&!isPowered(genome,pos,newPos)){
+			if(type.requiresPsi()&&!isPowered(genome,newPos)){
+//			    std::cout<<"is not powered"<<std::endl;
 				legal=false;
 			}else if((type==BWAPI::UnitTypes::Protoss_Pylon)&&!isPowered(genome)){
+//			    std::cout<<"is pylon and rest not powered"<<std::endl;
 				legal=false;
 			}
 		}
@@ -207,45 +226,6 @@ bool GeneticOperators::moveIfLegal(GAListGenome<Gene>& genome, int pos,
 	}else{
 		return false;
 	}
-}
-
-bool GeneticOperators::isPowered(GAListGenome<Gene>& genome, int except, const SparCraft::Position &pos){
-	for(int i=0;i<genome.size();i++){
-		if(i!=except){
-			Gene *gene=genome[i];
-			BWAPI::UnitType type=gene->getType();
-			BWAPI::TilePosition tilePos=gene->getTilePos();
-			float x=tilePos.x()+type.tileWidth()/2.0f;
-			float y=tilePos.y()+type.tileHeight()/2.0f;
-			SparCraft::Position genePos(x*TILE_SIZE,y*TILE_SIZE);
-			if(type==BWAPI::UnitTypes::Protoss_Pylon){
-//				std::cout<<pos.getString()<<" "<<genePos.getString()<<" "<<genePos.getDistance(pos)<<" "<<
-//						type.sightRange()<<std::endl;
-				if(genePos.getDistance(pos)<type.sightRange()){
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-}
-
-//for each building that requires PSI, check that it has it
-bool GeneticOperators::isPowered(GAListGenome<Gene>& genome){
-	for(int i=0;i<genome.size();i++){
-		Gene *gene=genome[i];
-		BWAPI::UnitType type=gene->getType();
-		BWAPI::TilePosition tilePos=gene->getTilePos();
-		float x=tilePos.x()+type.tileWidth()/2.0f;
-		float y=tilePos.y()+type.tileHeight()/2.0f;
-		SparCraft::Position genePos(x*TILE_SIZE,y*TILE_SIZE);
-		if(type.requiresPsi()){
-			if(!isPowered(genome,i,genePos)){
-				return false;
-			}
-		}
-	}
-	return true;
 }
 
 int GeneticOperators::Mutator(GAGenome& g, float pmut, int maxJump)
@@ -301,17 +281,24 @@ bool GeneticOperators::repair(GAListGenome<Gene>& genome, int pos) {
 			}
 		}
 		distance++;
-	}while(distance<mutDistance);
+//		std::cout<<"dist: "<<distance<<std::endl;
+	}while(distance<mutDistance*3);
 	std::cerr<<"repair failed (non fatal): "<<genome[pos]->getType().getName()<<std::endl;
 	return false;
 }
 
 bool GeneticOperators::repair(GAListGenome<Gene>& genome) {
-	bool repaired=true;
-	for(int i=0; i<genome.size(); i++){
-		repaired=repaired&&(repair(genome,i)||genome[i]->getType()==BWAPI::UnitTypes::Protoss_Pylon);
-	}
-	return repaired;
+    bool legal=true;
+    for(int i=0; i<genome.size(); i++){
+//        std::cout<<"repairing building: "<<i<<" "<<*genome[i]<<std::endl;
+        legal&=repair(genome,i);
+    }
+
+    if(legal){
+        return true;
+    }else{//if some failed, could still at the end be legal(moving pylon gets stuff unpowered, but then we fix those)
+        return isLegal(genome)&&isPowered(genome);
+    }
 }
 
 int GeneticOperators::Crossover(const GAGenome& parent1, const GAGenome& parent2,
@@ -367,5 +354,92 @@ GeneticOperators::Comparator(const GAGenome& g1, const GAGenome& g2) {
 		}
 	}
   return diffs/(float)a.size();
+}
+
+
+bool GeneticOperators::isLegal(GAListGenome<Gene>& genome) {
+    for(int i=0;i<genome.size();i++){
+        if(_map->canBuildHere(genome[i]->getType(),genome[i]->getCenterPos())){
+            for(int j=0; j<genome.size(); j++){
+                if(i!=j && genome[i]->collides(*genome[j])){
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
+        for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings.begin();
+                it!=_fixedBuildings.end();it++){
+            if(genome[i]->collides(*it)){
+                return false;
+            }
+        }
+    }
+    return true;
+
+}
+
+
+bool GeneticOperators::isLegal(GAListGenome<Gene>& genome,
+        const Gene& newGene) {
+
+    if(_map->canBuildHere(newGene.getType(),newGene.getCenterPos())){
+        for(int j=0; j<genome.size(); j++){
+            if(newGene.collides(*genome[j])){
+                return false;
+            }
+        }
+    }else{
+        return false;
+    }
+    for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings.begin();
+            it!=_fixedBuildings.end();it++){
+        if(newGene.collides(*it)){
+            return false;
+        }
+    }
+    return true;
+}
+
+bool GeneticOperators::isPowered(GAListGenome<Gene>& genome,
+        const Gene& gene) {
+//    std::cout<<"ispowered? "<<gene<<"w:"<<gene.getType().tileWidth()<<" h:"<<gene.getType().tileHeight()<<std::endl;
+    for(int x=gene.getTilePos().x();x<gene.getTilePos().x()+gene.getType().tileWidth();x++){
+        for(int y=gene.getTilePos().y();y<gene.getTilePos().y()+gene.getType().tileHeight();y++){
+//            std::cout<<x<<"-"<<y<<std::endl;
+//            if(y>200){
+//                System::FatalError("sdfgadsfg");
+//            }
+//            std::cout<<x*TILE_SIZE+TILE_SIZE/2<<"---"<<y*TILE_SIZE+TILE_SIZE/2<<std::endl;
+            if(isPowered(genome,Position(x*TILE_SIZE+TILE_SIZE/2,y*TILE_SIZE+TILE_SIZE/2))){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+bool GeneticOperators::isPowered(GAListGenome<Gene>& genome, const SparCraft::Position &pos){
+//    std::cout<<"inner ispowered? "<<pos<<std::endl;
+    for(int i=0;i<genome.size();i++){
+        if(genome[i]->getType()==BWAPI::UnitTypes::Protoss_Pylon){
+            if(genome[i]->getCenterPos().getDistance(pos)<genome[i]->getType().sightRange()){
+//                std::cout<<genome[i]->getCenterPos()<<" "<<pos<<std::endl;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+//for each building that requires PSI, check that it has it
+bool GeneticOperators::isPowered(GAListGenome<Gene>& genome){
+    for(int i=0;i<genome.size();i++){
+        if(genome[i]->getType().requiresPsi()){
+            if(!isPowered(genome,*genome[i])){
+                return false;
+            }
+        }
+    }
+    return true;
 }
 }

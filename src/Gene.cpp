@@ -35,8 +35,7 @@ void Gene::move(BWAPI::TilePosition offset){
 
 std::ostream& operator<< (std::ostream& stream, const Gene& building){
 	stream<<"Type: "<<building._type.getName()<<", "<<
-			building._pos.x() << ", " << building._pos.y() << ")"<<
-			std::endl;
+			building._pos.x() << ", " << building._pos.y() << ")";
 	return stream;
 }
 
@@ -99,11 +98,11 @@ bool operator== (Gene &b1, Gene &b2){
 	return b1.getType()==b2.getType() && b1.getTilePos()==b2.getTilePos();
 }
 
-const BWAPI::UnitType Gene::getType() const {
+const BWAPI::UnitType& Gene::getType() const {
 	return _type;
 }
 
-const BWAPI::TilePosition Gene::getTilePos() const {
+const BWAPI::TilePosition& Gene::getTilePos() const {
 	return _pos;
 }
 
@@ -115,4 +114,11 @@ bool operator!= (Gene &b1, Gene &b2){
 	return !(b1==b2);
 }
 
-} /* namespace SparCraft */
+
+Position Gene::getCenterPos() const {
+    float x=getTilePos().x()+getType().tileWidth()/2.0f;
+    float y=getTilePos().y()+getType().tileHeight()/2.0f;
+    return Position(x*TILE_SIZE,y*TILE_SIZE);
+}
+
+}

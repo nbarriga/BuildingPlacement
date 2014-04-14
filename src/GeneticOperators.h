@@ -21,8 +21,18 @@ class GeneticOperators {
 	static bool repair(GAListGenome<Gene>& genome, int pos);
 	static bool repair(GAListGenome<Gene>& genome);
 	static bool moveIfLegal(GAListGenome<Gene>& genome, int pos, BWAPI::TilePosition& offset, bool checkPowered);
-	static bool isPowered(GAListGenome<Gene>& genome, int except, const SparCraft::Position &pos);
+
+	//check all pylons to see if one powers this position.
+	static bool isPowered(GAListGenome<Gene>& genome, const SparCraft::Position &pos);
+	//is newGene legal(doesn't collide with map, fixed buildings or genome)
+	static bool isLegal(GAListGenome<Gene>& genome, const Gene& newGene);
+	//is building in newGene powered?
+	static bool isPowered(GAListGenome<Gene>& genome, const Gene& newGene);
+	//check if genome is fully legal
+    static bool isLegal(GAListGenome<Gene>& genome);
+    //check if all buildings in genome are powered
 	static bool isPowered(GAListGenome<Gene>& genome);
+
 public:
 	static std::vector<SparCraft::Unit> _fixedBuildings;
 	static std::vector<SparCraft::Unit> _buildings;

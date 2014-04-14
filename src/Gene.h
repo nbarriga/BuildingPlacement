@@ -18,9 +18,9 @@ class Gene{
 	BWAPI::UnitType     _type;
 	BWAPI::TilePosition            _pos;
 public:
-	const BWAPI::UnitType     getType() const;
-	const BWAPI::TilePosition getTilePos() const;
-
+	const BWAPI::UnitType&     getType() const;
+	const BWAPI::TilePosition& getTilePos() const;
+	Position getCenterPos() const;
 //	Gene(SparCraft::Unit building);
 	Gene(BWAPI::UnitType type,	BWAPI::TilePosition pos);
 	//	Gene();
