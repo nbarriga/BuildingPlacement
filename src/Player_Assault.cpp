@@ -3,8 +3,7 @@
 namespace BuildingPlacement {
 const std::string Player_Assault::modelString = "Assault";
 
-Player_Assault::Player_Assault (const IDType & playerID, const Position& goal):_goal(goal){
-	_playerID=playerID;
+Player_Assault::Player_Assault (const IDType & playerID, const Position& goal):Player_Goal(playerID,goal){
 
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common.h"
-#include "Player.h"
+#include "Player_Goal.h"
 
 namespace BuildingPlacement {
 /*----------------------------------------------------------------------
@@ -13,14 +13,12 @@ namespace BuildingPlacement {
  |    a) If it is in range to attack an enemy, WAIT until attack
  |    b) If it is not in range of enemy, MOVE towards closest
  `----------------------------------------------------------------------*/
-class Player_Assault : public Player
+class Player_Assault : public Player_Goal
 {
-    Position _goal;
 public:
     static const std::string modelString;
 	Player_Assault (const IDType & playerID, const Position& goal);
 	void getMoves(const GameState & state, const MoveArray & moves, std::vector<UnitAction> & moveVec);
 	IDType getType() { return PlayerModels::Assault; }
-    const Position& getGoal() const { return _goal;};
 };
 }

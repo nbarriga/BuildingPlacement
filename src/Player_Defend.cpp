@@ -4,8 +4,7 @@ namespace BuildingPlacement {
 
 const std::string Player_Defend::modelString = "Defend";
 
-Player_Defend::Player_Defend (const IDType & playerID, const Position& goal):_goal(goal){
-	_playerID=playerID;
+Player_Defend::Player_Defend (const IDType & playerID, const Position& goal):Player_Goal(playerID,goal){
 }
 
 void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, std::vector<UnitAction> & moveVec)

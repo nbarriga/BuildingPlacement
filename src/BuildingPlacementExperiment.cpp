@@ -63,6 +63,17 @@ bool goalReached(const GameState& state, boost::shared_ptr<Player_Assault> playe
     return false;
 }
 
+const Position& BuildingPlacementExperiment::getGoal(
+        const std::vector<Unit>& fixedBuildings) const {
+
+    BOOST_FOREACH(const Unit& u,fixedBuildings){
+        if(u.type()==BWAPI::UnitTypes::Protoss_Nexus||
+                u.type()==BWAPI::UnitTypes::Terran_Command_Center){
+            return u.pos();
+        }
+    }
+    System::FatalError("Didn't find a Nexus or Command Center in fixed buildings to use as a goal for player scripts");
+}
 
 void BuildingPlacementExperiment::runCross() {
     if(!map){
@@ -97,7 +108,7 @@ void BuildingPlacementExperiment::runCross() {
                     PlayerPtr playerOne(players[0][p1Player]);
                     PlayerPtr playerTwo(players[1][p2Player]);
 
-                    setupPlayers(p1Player, p2Player);
+                    setupPlayers(p1Player, p2Player, getGoal(_fixedBuildings[state]));
 
                     std::cout<<"fixed buildings: "<<_fixedBuildings[state].size()<<
                             ", buildings: "<<_buildings[state].size()<<
@@ -201,7 +212,7 @@ void BuildingPlacementExperiment::runEvaluate() {
                 PlayerPtr playerOne(players[0][p1Player]);
                 PlayerPtr playerTwo(players[1][p2Player]);
 
-                setupPlayers(p1Player, p2Player);
+                setupPlayers(p1Player, p2Player, getGoal(_fixedBuildings[state]));
 
                 std::cout<<"fixed buildings: "<<_fixedBuildings[state].size()<<
                         ", buildings: "<<_buildings[state].size()<<
@@ -316,7 +327,7 @@ void BuildingPlacementExperiment::runOptimize() {
                 PlayerPtr playerOne(players[0][p1Player]);
                 PlayerPtr playerTwo(players[1][p2Player]);
 
-                setupPlayers(p1Player, p2Player);
+                setupPlayers(p1Player, p2Player, getGoal(_fixedBuildings[state]));
 
                 // Now create the GA and run it.  First we create a genome of the type that
                 // we want to use in the GA.  The ga doesn't operate on this genome in the
@@ -485,6 +496,8 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         }
     }
 
+
+
     _fixedBuildings.push_back(fixedBuildings);
     _buildings.push_back(buildings);
     _attackers.push_back(attackers);
@@ -496,7 +509,7 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
 }
 
 void BuildingPlacementExperiment::setupPlayers(size_t p1Player,
-        size_t p2Player) {
+        size_t p2Player, const Position& goal) {
 
     // get player one
     PlayerPtr playerOne(players[0][p1Player]);
@@ -506,6 +519,12 @@ void BuildingPlacementExperiment::setupPlayers(size_t p1Player,
     if (p1AB)
     {
         p1AB->setTranspositionTable(TTPtr(new SparCraft::TranspositionTable()));
+    }else{
+        Player_Goal * p1goal = dynamic_cast<Player_Goal *>(playerOne.get());
+        if (p1goal)
+        {
+            p1goal->setGoal(goal);
+        }
     }
 
     // get player two
@@ -514,6 +533,12 @@ void BuildingPlacementExperiment::setupPlayers(size_t p1Player,
     if (p2AB)
     {
         p2AB->setTranspositionTable(TTPtr(new SparCraft::TranspositionTable()));
+    }else{
+        Player_Goal * p2goal = dynamic_cast<Player_Goal *>(playerTwo.get());
+        if (p2goal)
+        {
+            p2goal->setGoal(goal);
+        }
     }
 }
 

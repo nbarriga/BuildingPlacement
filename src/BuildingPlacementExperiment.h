@@ -16,7 +16,8 @@ class BuildingPlacementExperiment:public SearchExperiment {
 	std::vector<std::vector<Unit> > _fixedBuildings,_buildings,_attackers,_defenders;
 	std::vector<std::vector<std::pair<Unit, TimeType> > > _delayedAttackers, _delayedDefenders;
 	void parseBaseAssaultStateDescriptionFile(const std::string & fileName);
-	void setupPlayers(size_t p1Player, size_t p2Player);
+	void setupPlayers(size_t p1Player, size_t p2Player, const Position& goal);
+	const Position& getGoal(const std::vector<Unit> &fixedBuildings) const;
 public:
 	BuildingPlacementExperiment(const std::string & configFile);
 	virtual ~BuildingPlacementExperiment();
