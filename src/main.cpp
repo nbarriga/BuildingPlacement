@@ -24,15 +24,21 @@ int main(int argc, char *argv[])
 	try
 	{
 		if(argc>=2){
-			std::string experimentArg, configArg;
+			std::string experimentArg, configArg, stateArg, baseArg, mapArg;
 
 			boost::program_options::options_description desc("Allowed options");
 			desc.add_options()("help,h", "prints this help message")
             		          ("experiment,e", boost::program_options::value<std::string>(&experimentArg)->default_value("evaluate"), "set experiment")
             		          ("config,c", boost::program_options::value<std::string>(&configArg), "config file")
+            		          ("state,s", boost::program_options::value<std::string>(&stateArg), "state description file")
+            		          ("base,b", boost::program_options::value<std::string>(&baseArg), "base assault state description file")
+            		          ("map,m", boost::program_options::value<std::string>(&mapArg), "map file (replaces the one in config file)")
             		          ;
 			boost::program_options::positional_options_description pd;
 			pd.add("config", 1);
+			pd.add("state", 1);
+			pd.add("base", 1);
+            pd.add("map", 1);
 			boost::program_options::variables_map vm;
 			boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).positional(pd).run(), vm);
 			boost::program_options::notify(vm);
@@ -42,17 +48,31 @@ int main(int argc, char *argv[])
 				return 1;
 			}
 			if(vm.count("config")!=1){
-				SparCraft::System::FatalError("Please provide experiment file");
+			    SparCraft::System::FatalError("Please provide experiment file");
 			}
+			BuildingPlacement::BuildingPlacementExperiment exp(configArg);
+			if(vm.count("state")>0){
+			    std::stringstream ss;
+			    ss<<"State StateDescriptionFile 1 "<<stateArg;
+			    exp.addState(ss.str());
+			}
+			if(vm.count("base")>0){
+			    std::stringstream ss;
+			    ss<<"State BaseAssaultStateDescriptionFile 1 "<<baseArg;
+			    exp.addState(ss.str());
+			}
+            if(vm.count("map")>0){
+                std::stringstream ss;
+                SparCraft::Map *map = new SparCraft::Map();
+                map->load(mapArg);
+                exp.setMap(map);
+            }
 			if(experimentArg.compare("evaluate")==0){
-			    BuildingPlacement::BuildingPlacementExperiment exp(configArg);
-				exp.runEvaluate();
+			    exp.runEvaluate();
 			}else if(experimentArg.compare("optimize")==0){
-			    BuildingPlacement::BuildingPlacementExperiment exp(configArg);
-				exp.runOptimize();
+			    exp.runOptimize();
 			}else if(experimentArg.compare("crossevaluate")==0){
-                BuildingPlacement::BuildingPlacementExperiment exp(configArg);
-                exp.runCross();
+			    exp.runCross();
             }else{
 				SparCraft::System::FatalError("Error parsing arguments");
 			}
