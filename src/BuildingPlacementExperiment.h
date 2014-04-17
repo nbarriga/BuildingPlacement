@@ -27,6 +27,7 @@ public:
 	void runEvaluate();
 	void runOptimize();
 	void runCross();
+	void runDisplay();
 };
 
 }

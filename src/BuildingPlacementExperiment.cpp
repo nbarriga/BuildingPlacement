@@ -544,5 +544,95 @@ void BuildingPlacementExperiment::setupPlayers(size_t p1Player,
     }
 }
 
+void BuildingPlacementExperiment::runDisplay() {
+    if(!map){
+        System::FatalError("Need to set either MapFile or Map");
+    }
+
+#ifdef USING_VISUALIZATION_LIBRARIES
+    _display = NULL;
+    if (showDisplay)
+    {
+        _display = new Display(map ? map->getBuildTileWidth() : 40, map ? map->getBuildTileHeight() : 22);
+        _display->SetImageDir(imageDir);
+        _display->OnStart();
+        _display->LoadMapTexture(map, 19);
+    }
+#endif
+    // for each player one player
+    for (size_t p1Player(0); p1Player < players[0].size(); p1Player++)
+    {
+        // for each player two player
+        for (size_t p2Player(0); p2Player < players[1].size(); p2Player++)
+        {
+            // for each state we care about
+            for (size_t state(0); state < _fixedBuildings.size(); ++state)
+            {
+
+                PlayerPtr playerOne(players[0][p1Player]);
+                PlayerPtr playerTwo(players[1][p2Player]);
+
+                setupPlayers(p1Player, p2Player, getGoal(_fixedBuildings[state]));
+
+                std::cout<<"fixed buildings: "<<_fixedBuildings[state].size()<<
+                        ", buildings: "<<_buildings[state].size()<<
+                        ", defenders: "<<_defenders[state].size()<<
+                        ",attackers: "<<_attackers[state].size()<<
+                        ", delayedAttackers: "<<_delayedAttackers[state].size()<<
+                        ", delayedDefenders: "<<_delayedDefenders[state].size()<<std::endl;
+
+
+
+                GameState gameState;
+                gameState.checkCollisions=true;
+                gameState.setMap(*map);
+                for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings[state].begin();
+                        it!=_fixedBuildings[state].end();it++){
+                    assert(it->player()==Players::Player_Two);
+                    gameState.addUnit(*it);
+                }
+                for(std::vector<SparCraft::Unit>::const_iterator it=_buildings[state].begin();
+                        it!=_buildings[state].end();it++){
+                    assert(it->player()==Players::Player_Two);
+                    gameState.addUnit(*it);
+                }
+
+                for(std::vector<SparCraft::Unit>::const_iterator it=_defenders[state].begin();
+                        it!=_defenders[state].end();it++){
+                    assert(it->player()==Players::Player_Two);
+                    gameState.addUnit(*it);
+                }
+                for(std::vector<SparCraft::Unit>::const_iterator it=_attackers[state].begin();
+                        it!=_attackers[state].end();it++){
+                    assert(it->player()==Players::Player_One);
+                    gameState.addUnit(*it);
+                }
+
+                std::vector<std::pair<Unit, TimeType> > delayedUnits(
+                        _delayedAttackers[state].size()+_delayedDefenders[state].size());
+                std::merge(_delayedAttackers[state].begin(),_delayedAttackers[state].end(),
+                        _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
+                        delayedUnits.begin(), Comparison());
+#ifdef USING_VISUALIZATION_LIBRARIES
+                if (_display!=NULL)
+                {
+                    _display->SetExpDesc(getExpDescription(p1Player,p2Player,state));
+
+                }
+#endif
+
+                _display->SetState(gameState);
+
+                while(1){
+                    _display->OnFrame();
+                }
+
+
+
+            }
+        }
+    }
+
+}
 
 }

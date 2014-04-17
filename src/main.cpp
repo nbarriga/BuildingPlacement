@@ -73,6 +73,8 @@ int main(int argc, char *argv[])
 			    exp.runOptimize();
 			}else if(experimentArg.compare("crossevaluate")==0){
 			    exp.runCross();
+            }else if(experimentArg.compare("display")==0){
+                exp.runDisplay();
             }else{
 				SparCraft::System::FatalError("Error parsing arguments");
 			}
