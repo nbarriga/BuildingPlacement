@@ -390,6 +390,7 @@ void BuildingPlacementExperiment::runOptimize() {
 
                 //TODO: save optimized positions to use in cross evaluation later
 
+                saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".optimized",stats.bestIndividual());
             }
         }
     }
@@ -415,6 +416,7 @@ void BuildingPlacementExperiment::addState(const std::string& line) {
 
         for (int i(0); i<numStates; ++i)
         {
+            stateFileNames.push_back(filename);
             parseBaseAssaultStateDescriptionFile(filename);
         }
     }
@@ -510,6 +512,51 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
     _delayedDefenders.push_back(delayedDefenders);
 }
 
+void BuildingPlacementExperiment::unitToString(std::stringstream &ss, const Unit &unit, bool fixed){
+    std::string name=unit.type().getName();
+    std::replace( name.begin(), name.end(), ' ', '_');
+    ss<<name<<" "<<unit.player()<<" "<<unit.x()<<" "<<unit.y()<<" ";
+    ss<<unit.currentHP()<<" "<<std::min(unit.nextMoveActionTime(),unit.nextAttackActionTime())<<" ";
+    ss<<fixed<<" "<<0<<std::endl;
+}
+
+void BuildingPlacementExperiment::unitsToString(std::stringstream &ss, const std::vector<Unit> &units, bool fixed){
+    BOOST_FOREACH(const SparCraft::Unit &unit, units){
+        unitToString(ss,unit,fixed);
+    }
+
+}
+
+void BuildingPlacementExperiment::saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName, const GAGenome &genome){
+
+    std::stringstream ss;
+    unitsToString(ss,_fixedBuildings[state],true);
+    unitsToString(ss,_attackers[state]);
+    unitsToString(ss,_defenders[state]);
+
+    for(std::vector<std::pair<Unit, TimeType> >::const_iterator it=_delayedAttackers[state].begin();
+                    it!=_delayedAttackers[state].end();it++){
+        unitToString(ss,it->first);
+    }
+    for(std::vector<std::pair<Unit, TimeType> >::const_iterator it=_delayedDefenders[state].begin();
+            it!=_delayedDefenders[state].end();it++){
+        unitToString(ss,it->first);
+    }
+
+
+    GAListGenome<Gene>& g=(GAListGenome<Gene>&)genome;
+    for(int i=0;i<g.size();i++){
+        Unit u=_buildings[state][i];
+        Unit unit(u.type(), g[i]->getCenterPos(), 0, u.player(), u.currentHP(),
+                u.currentEnergy(), u.nextMoveActionTime(), u.nextAttackActionTime());
+        unitToString(ss,unit);
+    }
+
+    std::ofstream file(fileName.c_str(), std::ofstream::out);
+    file<<ss.str();
+    file.close();
+
+}
 void BuildingPlacementExperiment::setupPlayers(size_t p1Player,
         size_t p2Player, const Position& goal) {
 

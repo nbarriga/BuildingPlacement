@@ -2,6 +2,7 @@
 
 #include "SearchExperiment.h"
 #include "Common.h"
+#include <ga/GAListGenome.h>
 
 namespace BuildingPlacement {
 class BuildingPlacementExperiment:public SearchExperiment {
@@ -15,7 +16,13 @@ class BuildingPlacementExperiment:public SearchExperiment {
 	Display *_display;
 	std::vector<std::vector<Unit> > _fixedBuildings,_buildings,_attackers,_defenders;
 	std::vector<std::vector<std::pair<Unit, TimeType> > > _delayedAttackers, _delayedDefenders;
+
+	std::vector<std::string> stateFileNames;
+
 	void parseBaseAssaultStateDescriptionFile(const std::string & fileName);
+	void saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName, const GAGenome &genome);
+	void unitsToString(std::stringstream &ss, const std::vector<Unit> &units, bool fixed=false);
+	void unitToString(std::stringstream &ss, const Unit &unit, bool fixed=false);
 	void setupPlayers(size_t p1Player, size_t p2Player, const Position& goal);
 	const Position& getGoal(const std::vector<Unit> &fixedBuildings) const;
 public:
