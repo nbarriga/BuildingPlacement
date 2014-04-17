@@ -41,12 +41,9 @@ std::cout<<"genome: "<<genome<<std::endl;
 	}
 	for(int i=0;i<genome.size();i++){
 		Gene *gene=genome[i];
-		BWAPI::TilePosition pos=gene->getTilePos();
-		BWAPI::UnitType type=gene->getType();
-		float x=pos.x()+type.tileWidth()/2.0f;
-		float y=pos.y()+type.tileHeight()/2.0f;
-//		std::cout<<"building unit: "<<gene->getType().getName()<<std::endl;
-		state.addUnit(type,Players::Player_Two,SparCraft::Position(x*TILE_SIZE,y*TILE_SIZE));
+//		std::cout<<"building unit: "<<gene->getType().getName()<<" "<<gene->getType().dimensionLeft()<<" "
+//		        <<gene->getType().dimensionRight()<<" "<<gene->getType().dimensionUp()<<" "<<gene->getType().dimensionDown()<<std::endl;
+		state.addUnit(gene->getType(),Players::Player_Two,gene->getCenterPos());
 	}
 	for(std::vector<SparCraft::Unit>::const_iterator it=_defenders.begin();
 			it!=_defenders.end();it++){
@@ -60,7 +57,7 @@ std::cout<<"genome: "<<genome<<std::endl;
 //		std::cout<<"attacker unit: "<<it->type().getName()<<std::endl;
 		state.addUnit(*it);
 	}
-
+//todo: check that defenders and attackers are placed in legal locations, otherwise move them
 
 	Game game(state, _assaultPlayer, _defendPlayer, 20000, _delayed);
 #ifdef USING_VISUALIZATION_LIBRARIES
@@ -89,60 +86,104 @@ bool GeneticOperators::goalReached(const GameState& state){
       }
   return false;
 }
+ScoreType GeneticOperators::unitScore(const GameState& state,
+        const std::vector<IDType> &units,
+        IDType player){
+
+    ScoreType score=0;
+    BOOST_FOREACH(const IDType &id,units){
+        const Unit &u=state.getUnitByID(player,id);
+        ScoreType hpPercent=(u.type().maxHitPoints()-u.currentHP())*100/u.type().maxHitPoints();
+        ScoreType cost=u.type().mineralPrice()+u.type().gasPrice();
+        ScoreType val=cost*hpPercent;
+        if(u.type().isWorker()){
+            val*=3;
+        }else if(u.type()==BWAPI::UnitTypes::Protoss_Pylon){
+            val*=3;
+        }
+        score+=val;
+    }
+    return score;
+}
 ScoreType GeneticOperators::evalBuildingPlacement(const GameState& state){
 
-//    state.print();
+    const std::vector<IDType> &attackers=state.getAliveUnitIDs(_assaultPlayer->ID());
+    const std::vector<IDType> &defenders=state.getAliveUnitIDs(_defendPlayer->ID());
+
+    ScoreType attValue=unitScore(state,attackers,_assaultPlayer->ID());
+    ScoreType defValue=unitScore(state,defenders,_defendPlayer->ID());
+
+
   if(state.playerDead(_assaultPlayer->ID())){//attacker defeated, count how many we have left
-      return state.LTD(_defendPlayer->ID())+300000;
+      return defValue+3000000;
   }else if(goalReached(state)){//enemy reached goal,
-      return /*LTD(defender)*/-state.LTD(_assaultPlayer->ID())+100000;
+      return /*defValue*/-attValue+1000000;
   }else if(state.playerDead(_defendPlayer->ID())){//defender destroyed, count how many he has left
-      return state.LTD(_defendPlayer->ID())-state.LTD(_assaultPlayer->ID())+50000;
+      return defValue-attValue+500000;
   }else{//simulation time exhausted
-      return state.LTD(_defendPlayer->ID())-state.LTD(_assaultPlayer->ID())+200000;
+      System::FatalError("Simulation timeout");
+      return defValue-attValue+2000000;
   }
 }
 void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 {
+    static int firstTime=true;
 	std::cout<<"calling Initializer\n";
 	GAListGenome<Gene>& genome = (GAListGenome<Gene>&)g;
 	while(genome.head()) genome.destroy(); // destroy any pre-existing list
 
-	bool needsRepair=false;
-	for(std::vector<SparCraft::Unit>::const_iterator it=_buildings.begin();
-			it!=_buildings.end();it++){
-
-	    BWAPI::TilePosition pos(_defendPlayer->getGoal().x()/TILE_SIZE,_defendPlayer->getGoal().y()/TILE_SIZE);
-	    Gene gene(it->type(),pos);
-	    BWAPI::TilePosition offset(0,0);
-	    int n=placementRetries;
-	    do{
-	        do{
-	            gene.undo(offset);
-	            offset=BWAPI::TilePosition(GARandomInt(-mutDistance,mutDistance),GARandomInt(-mutDistance,mutDistance));
-	            gene.move(offset);
-	        }while(!_map->canBuildHere(gene.getType(),gene.getCenterPos()));
-
-	        if(isLegal(genome,gene)){
-	            if(!gene.getType().requiresPsi()||isPowered(genome,gene)){
-	                genome.insert(gene,GAListBASE::TAIL);
-	                break;
-	            }
-	        }
-	        n--;
-	    }while(n>0);
-	    if(n==0){//if we reached the max amount of tries, add it anyway and try to repair later
+	if(firstTime){
+	    for(std::vector<SparCraft::Unit>::const_iterator it=_buildings.begin();
+	                   it!=_buildings.end();it++){
+	        Gene gene(it->type(),BWAPI::TilePosition((it->pos().x()-it->type().dimensionLeft())/TILE_SIZE,(it->pos().y()-it->type().dimensionUp())/TILE_SIZE));
 	        genome.insert(gene,GAListBASE::TAIL);
-	        needsRepair=true;
-			std::cout<<"Max amount of retries for initial location failed, will try to repair\n";
-		}
-//		std::cout<<"building added"<<std::endl;
-	}
-	if(needsRepair){
-		if(!GeneticOperators::repair(genome)){
+	    }
+	    if(!isLegal(genome)||!isPowered(genome)){
+	        std::cout<<"Repairing setup from file"<<std::endl;
+	        if(!GeneticOperators::repair(genome)){
+	            System::FatalError("Couldn't repair at initializer");
+	        }
+	    }
+	    firstTime=false;
+	}else{
+	    bool needsRepair=false;
+	    for(std::vector<SparCraft::Unit>::const_iterator it=_buildings.begin();
+	            it!=_buildings.end();it++){
+
+
+	        BWAPI::TilePosition pos(_defendPlayer->getGoal().x()/TILE_SIZE,_defendPlayer->getGoal().y()/TILE_SIZE);
+	        Gene gene(it->type(),pos);
+	        BWAPI::TilePosition offset(0,0);
+	        int n=placementRetries;
+	        do{
+	            do{
+	                gene.undo(offset);
+	                offset=BWAPI::TilePosition(GARandomInt(-mutDistance,mutDistance),GARandomInt(-mutDistance,mutDistance));
+	                gene.move(offset);
+	            }while(!_map->canBuildHere(gene.getType(),gene.getCenterPos()));
+
+	            if(isLegal(genome,gene)){
+	                if(!gene.getType().requiresPsi()||isPowered(genome,gene)){
+	                    genome.insert(gene,GAListBASE::TAIL);
+	                    break;
+	                }
+	            }
+	            n--;
+	        }while(n>0);
+	        if(n==0){//if we reached the max amount of tries, add it anyway and try to repair later
+	            genome.insert(gene,GAListBASE::TAIL);
+	            needsRepair=true;
+	            std::cout<<"Max amount of retries for initial location failed, will try to repair\n";
+	        }
+
+	        //		std::cout<<"building added"<<std::endl;
+	    }
+	    if(needsRepair){
+	        if(!GeneticOperators::repair(genome)){
 			System::FatalError("Couldn't repair at initializer");
 		}
 	}
+	        }
 //	Mutator(genome,0.5,20);
 }
 

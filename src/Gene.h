@@ -25,6 +25,7 @@ public:
 	Gene(BWAPI::UnitType type,	BWAPI::TilePosition pos);
 	//	Gene();
 	void move(BWAPI::TilePosition offset);
+	void setPosition(const BWAPI::TilePosition &pos);
 	void undo(BWAPI::TilePosition offset);
 	bool collides(const Gene &other) const;
 	bool collides(const SparCraft::Unit &other) const;

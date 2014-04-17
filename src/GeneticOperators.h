@@ -32,7 +32,9 @@ class GeneticOperators {
     static bool isLegal(GAListGenome<Gene>& genome);
     //check if all buildings in genome are powered
 	static bool isPowered(GAListGenome<Gene>& genome);
-
+	static ScoreType unitScore(const GameState& state,
+	        const std::vector<IDType> &units,
+	        IDType player);
 public:
 	static std::vector<SparCraft::Unit> _fixedBuildings;
 	static std::vector<SparCraft::Unit> _buildings;

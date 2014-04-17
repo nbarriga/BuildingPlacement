@@ -121,4 +121,9 @@ Position Gene::getCenterPos() const {
     return Position(x*TILE_SIZE,y*TILE_SIZE);
 }
 
+
+void Gene::setPosition(const BWAPI::TilePosition& pos) {
+    _pos=pos;
+}
+
 }
