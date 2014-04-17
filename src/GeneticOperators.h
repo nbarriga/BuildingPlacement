@@ -61,8 +61,10 @@ public:
 	static void	Initializer(GAGenome& g);
 	static int Mutator(GAGenome& g, float pmut);
 	static int Mutator(GAGenome& g, float pmut, int maxJump);
-	static int Crossover(const GAGenome&, const GAGenome&,
+	static int UniformCrossover(const GAGenome&, const GAGenome&,
 		      GAGenome*, GAGenome*);
+	static int AverageCrossover(const GAGenome&, const GAGenome&,
+	              GAGenome*, GAGenome*);
 	static float Comparator(const GAGenome&, const GAGenome&);
 	static ScoreType evalBuildingPlacement(const GameState& state);
 	static bool goalReached(const GameState& state);

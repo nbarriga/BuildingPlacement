@@ -342,7 +342,7 @@ bool GeneticOperators::repair(GAListGenome<Gene>& genome) {
     }
 }
 
-int GeneticOperators::Crossover(const GAGenome& parent1, const GAGenome& parent2,
+int GeneticOperators::UniformCrossover(const GAGenome& parent1, const GAGenome& parent2,
 		GAGenome* child1, GAGenome* child2) {
 	std::cout<<"calling Crossover\n";
 	int children=0;
@@ -379,6 +379,51 @@ int GeneticOperators::Crossover(const GAGenome& parent1, const GAGenome& parent2
 		}while(!repaired);
 	}
 	return children;
+}
+
+int GeneticOperators::AverageCrossover(const GAGenome& parent1, const GAGenome& parent2,
+        GAGenome* child1, GAGenome* child2) {
+    std::cout<<"calling Crossover\n";
+    int children=0;
+    if(child1!=NULL){
+        child1->copy(parent1);
+        children++;
+    }
+    if(child2!=NULL){
+        child2->copy(parent2);
+        children++;
+    }
+    if(children==2){
+        bool repaired;
+        do{
+            GAListGenome<Gene>& c1 = *(GAListGenome<Gene>*)child1;
+            GAListGenome<Gene>& c2 = *(GAListGenome<Gene>*)child2;
+            for(int i=0; i<c1.size(); i++){
+                if(GAFlipCoin(0.5)){
+                    Gene* temp1=c1[i];
+                    Gene* temp2=c2[i];
+                    BWAPI::TilePosition pos1=temp1->getTilePos();
+                    BWAPI::TilePosition pos2=temp2->getTilePos();
+                    PositionType x1=(pos1.x()*2+pos2.x())/3;
+                    PositionType y1=(pos1.y()*2+pos2.y())/3;
+                    PositionType x2=(pos1.x()+pos2.x()*2)/3;
+                    PositionType y2=(pos1.y()+pos2.y()*2)/3;
+                    temp1->setPosition(BWAPI::TilePosition(x1,y1));
+                    temp2->setPosition(BWAPI::TilePosition(x2,y2));
+                    std::cout<<"averaging\n";
+                }
+            }
+            if(!(repair(c1)&&repair(c2))){
+                repaired=false;
+                std::cerr<<"couldn't repair after crossover (not fatal)\n";
+            }else{
+                repaired=true;
+                c1.swap(0,0);//_evaluated = gaFalse;
+                c2.swap(0,0);//_evaluated = gaFalse;
+            }
+        }while(!repaired);
+    }
+    return children;
 }
 
 // The comparator returns a number in the interval [0,1] where 0 means that

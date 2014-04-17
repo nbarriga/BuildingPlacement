@@ -294,11 +294,11 @@ svv BuildingPlacementExperiment::getExpDescription(const size_t& p1,
 }
 
 void BuildingPlacementExperiment::runOptimize() {
-    int popsize  = 10;
-    int ngen     = 10;
-    float pmut   = 0.025;
+    int popsize  = 5;
+    int ngen     = 8;
+    float pmut   = 0.05;
     float pcross = 0.9;
-    gaDefDivFlag=gaTrue;
+//    gaDefDivFlag=gaTrue;
     GARandomSeed(time(NULL));
 
     if(!map){
@@ -363,7 +363,8 @@ void BuildingPlacementExperiment::runOptimize() {
                 // probability.  And finally we tell it to evolve itself.
                 genome.initializer(GeneticOperators::Initializer);
                 genome.mutator(GeneticOperators::Mutator);
-                genome.crossover(GeneticOperators::Crossover);
+//                genome.crossover(GeneticOperators::AverageCrossover);
+                genome.crossover(GeneticOperators::UniformCrossover);
                 genome.comparator(GeneticOperators::Comparator);
 
 
@@ -373,6 +374,7 @@ void BuildingPlacementExperiment::runOptimize() {
                 ga.nGenerations(ngen);
                 ga.pMutation(pmut);
                 ga.pCrossover(pcross);
+                ga.recordDiversity(gaTrue);
                 //				GATournamentSelector sel;
                 //				ga.selector(sel);
                 //				ga.elitist(gaTrue);
