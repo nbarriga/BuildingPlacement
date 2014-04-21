@@ -54,8 +54,8 @@ public:
 	        const std::vector<std::pair<Unit, TimeType> > &delayed,
 	        Map* map,
 	        Display* display,
-	        PlayerPtr assaultPlayer,
-	        PlayerPtr defendPlayer,
+	        PlayerPtr p1,
+	        PlayerPtr p2,
 	        svv expDesc);
 	static float Objective(GAGenome &g);
 	static void	Initializer(GAGenome& g);

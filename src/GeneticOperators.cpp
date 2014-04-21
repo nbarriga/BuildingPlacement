@@ -35,7 +35,7 @@ std::cout<<"genome: "<<genome<<std::endl;
 	state.setMap(*_map);
 	for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings.begin();
 				it!=_fixedBuildings.end();it++){
-			assert(it->player()==Players::Player_Two);
+			assert(it->player()==_defendPlayer->ID());
 	//		std::cout<<"defender unit: "<<it->type().getName()<<std::endl;
 			state.addUnit(*it);
 	}
@@ -43,23 +43,33 @@ std::cout<<"genome: "<<genome<<std::endl;
 		Gene *gene=genome[i];
 //		std::cout<<"building unit: "<<gene->getType().getName()<<" "<<gene->getType().dimensionLeft()<<" "
 //		        <<gene->getType().dimensionRight()<<" "<<gene->getType().dimensionUp()<<" "<<gene->getType().dimensionDown()<<std::endl;
-		state.addUnit(gene->getType(),Players::Player_Two,gene->getCenterPos());
+		state.addUnit(gene->getType(),_defendPlayer->ID(),gene->getCenterPos());
 	}
 	for(std::vector<SparCraft::Unit>::const_iterator it=_defenders.begin();
 			it!=_defenders.end();it++){
-		assert(it->player()==Players::Player_Two);
+		assert(it->player()==_defendPlayer->ID());
 //		std::cout<<"defender unit: "<<it->type().getName()<<std::endl;
 		state.addUnit(*it);
 	}
 	for(std::vector<SparCraft::Unit>::const_iterator it=_attackers.begin();
 			it!=_attackers.end();it++){
-		assert(it->player()==Players::Player_One);
+		assert(it->player()==_assaultPlayer->ID());
 //		std::cout<<"attacker unit: "<<it->type().getName()<<std::endl;
 		state.addUnit(*it);
 	}
 //todo: check that defenders and attackers are placed in legal locations, otherwise move them
 
-	Game game(state, _assaultPlayer, _defendPlayer, 20000, _delayed);
+	boost::shared_ptr<Player> p1,p2;
+	if(_assaultPlayer->ID()==0){
+		p1=_assaultPlayer;
+		p2=_defendPlayer;
+	}else{
+		p2=_assaultPlayer;
+		p1=_defendPlayer;
+	}
+
+	Game game(state, p1, p2, 20000, _delayed);
+
 #ifdef USING_VISUALIZATION_LIBRARIES
 	if (_display!=NULL)
 	{
@@ -121,7 +131,8 @@ ScoreType GeneticOperators::evalBuildingPlacement(const GameState& state){
   }else if(state.playerDead(_defendPlayer->ID())){//defender destroyed, count how many he has left
       return defValue-attValue+500000;
   }else{//simulation time exhausted
-      System::FatalError("Simulation timeout");
+	  std::cerr<<"Simulation timeout, something wrong!!!!"<<std::endl;
+//      System::FatalError("Simulation timeout");
       return defValue-attValue+2000000;
   }
 }
@@ -195,8 +206,8 @@ void GeneticOperators::configure(
         const std::vector<std::pair<Unit, TimeType> > &delayed,
         Map* map,
         Display* display,
-        PlayerPtr assaultPlayer,
-        PlayerPtr defendPlayer,
+        PlayerPtr p1,
+        PlayerPtr p2,
 		 svv expDesc) {
 	_fixedBuildings=fixedBuildings;
 	_buildings=buildings;
@@ -205,8 +216,13 @@ void GeneticOperators::configure(
 	_delayed=delayed;
 	_map=map;
 	_display=display;
-	_assaultPlayer=boost::dynamic_pointer_cast<Player_Assault>(assaultPlayer);
-	_defendPlayer=boost::dynamic_pointer_cast<Player_Defend>(defendPlayer);
+	if(p1->getType()==PlayerModels::Assault){
+		_assaultPlayer=boost::dynamic_pointer_cast<Player_Assault>(p1);
+		_defendPlayer=boost::dynamic_pointer_cast<Player_Defend>(p2);
+	}else{
+		_assaultPlayer=boost::dynamic_pointer_cast<Player_Assault>(p2);
+		_defendPlayer=boost::dynamic_pointer_cast<Player_Defend>(p1);
+	}
 	_expDesc=expDesc;
 
 

@@ -25,6 +25,8 @@ class BuildingPlacementExperiment:public SearchExperiment {
 	void unitToString(std::stringstream &ss, const Unit &unit, bool fixed=false);
 	void setupPlayers(size_t p1Player, size_t p2Player, const Position& goal);
 	const Position& getGoal(const std::vector<Unit> &fixedBuildings) const;
+
+	IDType _assaultPlayer,_defendPlayer;
 public:
 	BuildingPlacementExperiment(const std::string & configFile);
 	virtual ~BuildingPlacementExperiment();

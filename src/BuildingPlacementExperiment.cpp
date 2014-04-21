@@ -10,7 +10,10 @@
 
 namespace BuildingPlacement {
 BuildingPlacementExperiment::BuildingPlacementExperiment(const std::string & configFile):
-                    SearchExperiment(),_display(NULL){
+                    SearchExperiment(),
+                    _display(NULL),
+                    _assaultPlayer(std::numeric_limits<IDType>::max()),
+                    _defendPlayer(std::numeric_limits<IDType>::max()){
     init(configFile);
 }
 
@@ -35,20 +38,28 @@ void BuildingPlacementExperiment::addPlayer(const std::string & line){
 
     if (playerModelString.compare(Player_Assault::modelString)==0)
     {
-        assert(playerID==0);
+//        assert(playerID==0);
         playerStrings[playerID].push_back(playerModelString);
-        int goalX, goalY;
-        iss>>goalX;assert(goalX>=0);
-        iss>>goalY;assert(goalY>=0);
-        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Assault(playerID,SparCraft::Position(goalX,goalY))));
+        if(_assaultPlayer!=std::numeric_limits<IDType>::max()){
+        	System::FatalError("Please specify exactly one Assault and one Defend player");
+        }
+        _assaultPlayer=playerID;
+//        int goalX, goalY;
+//        iss>>goalX;assert(goalX>=0);
+//        iss>>goalY;assert(goalY>=0);
+        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Assault(playerID,SparCraft::Position())));
     }else if (playerModelString.compare(Player_Defend::modelString)==0)
     {
-        assert(playerID==1);
+//        assert(playerID==1);
         playerStrings[playerID].push_back(playerModelString);
-        int goalX, goalY;
-        iss>>goalX;assert(goalX>=0);
-        iss>>goalY;assert(goalY>=0);
-        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Defend(playerID,SparCraft::Position(goalX,goalY))));
+        if(_defendPlayer!=std::numeric_limits<IDType>::max()){
+        	System::FatalError("Please specify exactly one Assault and one Defend player");
+        }
+        _defendPlayer=playerID;
+//        int goalX, goalY;
+//        iss>>goalX;assert(goalX>=0);
+//        iss>>goalY;assert(goalY>=0);
+        players[playerID].push_back(SparCraft::PlayerPtr(new Player_Defend(playerID,SparCraft::Position())));
     }else{
         SearchExperiment::addPlayer(line);
     }
@@ -123,23 +134,23 @@ void BuildingPlacementExperiment::runCross() {
                     gameState.setMap(*map);
                     for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings[state].begin();
                             it!=_fixedBuildings[state].end();it++){
-                        assert(it->player()==Players::Player_Two);
+                        assert(it->player()==_defendPlayer);
                         gameState.addUnit(*it);
                     }
                     for(std::vector<SparCraft::Unit>::const_iterator it=_buildings[state].begin();
                             it!=_buildings[state].end();it++){
-                        assert(it->player()==Players::Player_Two);
+                        assert(it->player()==_defendPlayer);
                         gameState.addUnit(*it);
                     }
 
                     for(std::vector<SparCraft::Unit>::const_iterator it=_defenders[state].begin();
                             it!=_defenders[state].end();it++){
-                        assert(it->player()==Players::Player_Two);
+                        assert(it->player()==_defendPlayer);
                         gameState.addUnit(*it);
                     }
                     for(std::vector<SparCraft::Unit>::const_iterator it=_attackers[otherState].begin();
                             it!=_attackers[otherState].end();it++){
-                        assert(it->player()==Players::Player_One);
+                        assert(it->player()==_assaultPlayer);
                         gameState.addUnit(*it);
                     }
 
@@ -173,7 +184,7 @@ void BuildingPlacementExperiment::runCross() {
                             playerOne,
                             playerTwo,
                             getExpDescription(p1Player,p2Player,state));
-                    int score = GeneticOperators::evalBuildingPlacement(gameState);
+                    int score = GeneticOperators::evalBuildingPlacement(game.getState());
                     std::cout<<"score: "<<score<<std::endl;
 
                 }
@@ -228,23 +239,23 @@ void BuildingPlacementExperiment::runEvaluate() {
                 gameState.setMap(*map);
                 for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings[state].begin();
                         it!=_fixedBuildings[state].end();it++){
-                    assert(it->player()==Players::Player_Two);
+                    assert(it->player()==_defendPlayer);
                     gameState.addUnit(*it);
                 }
                 for(std::vector<SparCraft::Unit>::const_iterator it=_buildings[state].begin();
                         it!=_buildings[state].end();it++){
-                    assert(it->player()==Players::Player_Two);
+                    assert(it->player()==_defendPlayer);
                     gameState.addUnit(*it);
                 }
 
                 for(std::vector<SparCraft::Unit>::const_iterator it=_defenders[state].begin();
                         it!=_defenders[state].end();it++){
-                    assert(it->player()==Players::Player_Two);
+                    assert(it->player()==_defendPlayer);
                     gameState.addUnit(*it);
                 }
                 for(std::vector<SparCraft::Unit>::const_iterator it=_attackers[state].begin();
                         it!=_attackers[state].end();it++){
-                    assert(it->player()==Players::Player_One);
+                    assert(it->player()==_assaultPlayer);
                     gameState.addUnit(*it);
                 }
 
@@ -276,7 +287,7 @@ void BuildingPlacementExperiment::runEvaluate() {
                         playerOne,
                         playerTwo,
                         getExpDescription(p1Player,p2Player,state));
-                int score = GeneticOperators::evalBuildingPlacement(gameState);
+                int score = GeneticOperators::evalBuildingPlacement(game.getState());
                 std::cout<<"score: "<<score<<std::endl;
 
 
@@ -433,6 +444,7 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
     std::vector<Unit> fixedBuildings,buildings,attackers,defenders;
     std::vector<std::pair<Unit, TimeType> > delayedAttackers,delayedDefenders;
 
+
     for (size_t u(0); u<lines.size(); ++u)
     {
         std::stringstream iss(lines[u]);
@@ -472,7 +484,7 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
                 type == BWAPI::UnitTypes::Terran_Medic ? Constants::Starting_Energy : 0, time, time);
 
 
-        if(playerID==0){//assault
+        if(playerID==_assaultPlayer){//assault
             if(type.isBuilding()){
                 SparCraft::System::FatalError("Assault player cannot have buildings");
             }else if(time>0){
@@ -635,23 +647,23 @@ void BuildingPlacementExperiment::runDisplay() {
                 gameState.setMap(*map);
                 for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings[state].begin();
                         it!=_fixedBuildings[state].end();it++){
-                    assert(it->player()==Players::Player_Two);
+                    assert(it->player()==_defendPlayer);
                     gameState.addUnit(*it);
                 }
                 for(std::vector<SparCraft::Unit>::const_iterator it=_buildings[state].begin();
                         it!=_buildings[state].end();it++){
-                    assert(it->player()==Players::Player_Two);
+                    assert(it->player()==_defendPlayer);
                     gameState.addUnit(*it);
                 }
 
                 for(std::vector<SparCraft::Unit>::const_iterator it=_defenders[state].begin();
                         it!=_defenders[state].end();it++){
-                    assert(it->player()==Players::Player_Two);
+                    assert(it->player()==_defendPlayer);
                     gameState.addUnit(*it);
                 }
                 for(std::vector<SparCraft::Unit>::const_iterator it=_attackers[state].begin();
                         it!=_attackers[state].end();it++){
-                    assert(it->player()==Players::Player_One);
+                    assert(it->player()==_assaultPlayer);
                     gameState.addUnit(*it);
                 }
 
