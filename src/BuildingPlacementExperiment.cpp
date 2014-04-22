@@ -399,9 +399,8 @@ void BuildingPlacementExperiment::runOptimize() {
                         stats.bestIndividual() << "\n";
                 stats.write(std::cout);
 
-                //TODO: save optimized positions to use in cross evaluation later
 
-                saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".optimized",stats.bestIndividual());
+                saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".optimized",stats);
             }
         }
     }
@@ -539,7 +538,7 @@ void BuildingPlacementExperiment::unitsToString(std::stringstream &ss, const std
 
 }
 
-void BuildingPlacementExperiment::saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName, const GAGenome &genome){
+void BuildingPlacementExperiment::saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName, const GAStatistics &stats){
 
     std::stringstream ss;
     unitsToString(ss,_fixedBuildings[state],true);
@@ -556,7 +555,7 @@ void BuildingPlacementExperiment::saveBaseAssaultStateDescriptionFile(int state,
     }
 
 
-    GAListGenome<Gene>& g=(GAListGenome<Gene>&)genome;
+    GAListGenome<Gene>& g=(GAListGenome<Gene>&)stats.bestIndividual();
     for(int i=0;i<g.size();i++){
         Unit u=_buildings[state][i];
         Unit unit(u.type(), g[i]->getCenterPos(), 0, u.player(), u.currentHP(),
@@ -564,8 +563,19 @@ void BuildingPlacementExperiment::saveBaseAssaultStateDescriptionFile(int state,
         unitToString(ss,unit);
     }
 
+
     std::ofstream file(fileName.c_str(), std::ofstream::out);
     file<<ss.str();
+
+    std::stringstream statsStream;
+    stats.write(statsStream);
+
+    char buff[80];
+    while(!statsStream.eof()){
+        statsStream.getline(buff,80);
+        file<<"#"<<buff<<std::endl;
+    }
+
     file.close();
 
 }
