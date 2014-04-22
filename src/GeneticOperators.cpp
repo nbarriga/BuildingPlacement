@@ -43,7 +43,18 @@ std::cout<<"genome: "<<genome<<std::endl;
 		Gene *gene=genome[i];
 //		std::cout<<"building unit: "<<gene->getType().getName()<<" "<<gene->getType().dimensionLeft()<<" "
 //		        <<gene->getType().dimensionRight()<<" "<<gene->getType().dimensionUp()<<" "<<gene->getType().dimensionDown()<<std::endl;
-		state.addUnit(gene->getType(),_defendPlayer->ID(),gene->getCenterPos());
+
+
+		 Unit unit(gene->getType(),
+		         gene->getCenterPos(),
+		         0,
+		         _defendPlayer->ID(),
+		         _buildings[i].currentHP(),
+		         gene->getType() == BWAPI::UnitTypes::Terran_Medic ? Constants::Starting_Energy : 0,
+		                 _buildings[i].nextMoveActionTime(),
+		                 _buildings[i].nextAttackActionTime());
+		 state.addUnit(unit);
+//		state.addUnit(gene->getType(),_defendPlayer->ID(),gene->getCenterPos());
 	}
 	for(std::vector<SparCraft::Unit>::const_iterator it=_defenders.begin();
 			it!=_defenders.end();it++){
