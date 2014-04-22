@@ -494,9 +494,12 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         }else{//defend
             if(time>0){
                 if(type.isBuilding()){
-                    SparCraft::System::FatalError("Cannot have delayed buildings");
+                    std::cerr<<"Cannot have delayed buildings, adding at beginning "<<type.getName()<<std::endl;
+                    buildings.push_back(unit);
+//                    SparCraft::System::FatalError("Cannot have delayed buildings");
+                }else{
+                    delayedDefenders.push_back(std::pair<Unit, TimeType>(unit,time));
                 }
-                delayedDefenders.push_back(std::pair<Unit, TimeType>(unit,time));
             }else{
                 if(type.isBuilding()){
                     if(fixed){
