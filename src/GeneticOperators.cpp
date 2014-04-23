@@ -246,53 +246,18 @@ int GeneticOperators::Mutator(GAGenome& g, float pmut){
 bool GeneticOperators::moveIfLegal(GAListGenome<Gene>& genome, int pos,
 		BWAPI::TilePosition& offset, bool checkPowered) {
 
-
-	BWAPI::TilePosition newTilePos=genome[pos]->getTilePos()+offset;
-
-	BWAPI::UnitType type=genome[pos]->getType();
-	float x=newTilePos.x()+type.tileWidth()/2.0f;
-	float y=newTilePos.y()+type.tileHeight()/2.0f;
-	SparCraft::Position newPos(x*TILE_SIZE,y*TILE_SIZE);
-
-	if(_map->canBuildHere(genome[pos]->getType(),newPos)){
-
-		genome[pos]->move(offset);
-		bool legal=true;
-		for(int j=0; j<genome.size(); j++){
-			if(pos!=j){
-				if(genome[pos]->collides(*genome[j])){
-					legal=false;
-//					   std::cout<<"Trying new pos: "<<newPos<<std::endl;
-//					std::cout<<"collides with "<<*genome[j]<<std::endl;
-					break;
-				}
-			}
-		}
-		for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings.begin();
-				it!=_fixedBuildings.end() && legal;it++){
-			if(genome[pos]->collides(*it)){
-				legal=false;
-//				   std::cout<<"Trying new pos: "<<newPos<<std::endl;
-//				std::cout<<"collides with "<<it->debugString()<<std::endl;
-				break;
-			}
-		}
-		if(checkPowered && legal){
-			if(type.requiresPsi()&&!isPowered(genome,newPos)){
-//			    std::cout<<"is not powered"<<std::endl;
-				legal=false;
-			}else if((type==BWAPI::UnitTypes::Protoss_Pylon)&&!isPowered(genome)){
-//			    std::cout<<"is pylon and rest not powered"<<std::endl;
-				legal=false;
-			}
-		}
-		if(!legal){//undo
-			genome[pos]->undo(offset);
-		}
-		return legal;
-	}else{
-		return false;
-	}
+    genome[pos]->move(offset);
+    if(isLegal(genome)){
+        if(checkPowered&&isPowered(genome)){
+            return true;
+        }else{
+            genome[pos]->undo(offset);
+            return false;
+        }
+    }else{
+        genome[pos]->undo(offset);
+        return false;
+    }
 }
 
 int GeneticOperators::Mutator(GAGenome& g, float pmut, int maxJump)
@@ -326,6 +291,7 @@ int GeneticOperators::Mutator(GAGenome& g, float pmut, int maxJump)
 			}
 		}
 	}
+	assert(isLegal(genome));
 	if(nMut!=0) genome.swap(0,0);//_evaluated = gaFalse;
 	return nMut;
 
