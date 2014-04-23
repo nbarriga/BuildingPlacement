@@ -9,6 +9,7 @@
 #include "Gene.h"
 #include "Player_Assault.h"
 #include "Player_Defend.h"
+#include "Spiral.h"
 
 namespace BuildingPlacement {
 std::vector<SparCraft::Unit> GeneticOperators::_fixedBuildings=std::vector<SparCraft::Unit>();
@@ -333,26 +334,24 @@ int GeneticOperators::Mutator(GAGenome& g, float pmut, int maxJump)
 }
 
 bool GeneticOperators::repair(GAListGenome<Gene>& genome, int pos) {
-	int distance=0;//start with distance 0, to check if it is currently legal
-	do{
-		for(int a=-distance;a<=distance;a++){
-			for(int b=-distance;b<=distance;b++){
-				if(std::max(std::abs(a),std::abs(b))==distance){
-					BWAPI::TilePosition offset(a,b);
-					if(moveIfLegal(genome,pos,offset,genome[pos]->getType()!=BWAPI::UnitTypes::Protoss_Pylon)){
-						if(distance>0){
-							std::cout<<"repaired\n";
-						}
-						return true;
-					}
-				}
-			}
-		}
-		distance++;
-//		std::cout<<"dist: "<<distance<<std::endl;
-	}while(distance<mutDistance*3);
-	std::cerr<<"repair failed (non fatal): "<<genome[pos]->getType().getName()<<std::endl;
-	return false;
+
+    Spiral sp(0,0,TILE_SIZE);
+    BWAPI::TilePosition offset;
+    int iters=0,maxIters=mutDistance*mutDistance*4;
+    do{
+        iters++;
+        offset=BWAPI::TilePosition(sp.getNext());
+    }while(!moveIfLegal(genome,pos,offset,genome[pos]->getType()!=BWAPI::UnitTypes::Protoss_Pylon)&&iters<maxIters);
+
+    if(iters==maxIters){
+        std::cerr<<"repair failed (non fatal): "<<genome[pos]->getType().getName()<<std::endl;
+        return false;
+    }else{
+        if(iters>1){
+            std::cout<<"repaired\n";
+        }
+        return true;
+    }
 }
 
 bool GeneticOperators::repair(GAListGenome<Gene>& genome) {
