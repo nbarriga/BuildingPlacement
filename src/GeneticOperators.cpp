@@ -60,13 +60,13 @@ std::cout<<"genome: "<<genome<<std::endl;
 			it!=_defenders.end();it++){
 		assert(it->player()==_defendPlayer->ID());
 //		std::cout<<"defender unit: "<<it->type().getName()<<std::endl;
-		state.addUnit(*it);
+		state.addUnitClosestLegalPos(*it);
 	}
 	for(std::vector<SparCraft::Unit>::const_iterator it=_attackers.begin();
 			it!=_attackers.end();it++){
 		assert(it->player()==_assaultPlayer->ID());
 //		std::cout<<"attacker unit: "<<it->type().getName()<<std::endl;
-		state.addUnit(*it);
+		state.addUnitClosestLegalPos(*it);
 	}
 //todo: check that defenders and attackers are placed in legal locations, otherwise move them
 
