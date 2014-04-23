@@ -13,6 +13,28 @@ class BuildingPlacementExperiment:public SearchExperiment {
         }
     };
 
+    struct PylonsFirst{
+        bool isPylon(const Unit &u) const{
+            return u.type()==BWAPI::UnitTypes::Protoss_Pylon;
+        }
+        bool operator() (const Unit &lhs, const Unit &rhs) const
+        {
+            if(isPylon(lhs)){
+                return true;
+            }else if(isPylon(rhs)){
+                return false;
+            }else{
+                if(lhs.type().requiresPsi()){
+                    return true;
+                }else if(rhs.type().requiresPsi()){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        }
+    };
+
 	Display *_display;
 	std::vector<std::vector<Unit> > _fixedBuildings,_buildings,_attackers,_defenders;
 	std::vector<std::vector<std::pair<Unit, TimeType> > > _delayedAttackers, _delayedDefenders;

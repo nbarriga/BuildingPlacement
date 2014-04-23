@@ -515,14 +515,18 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
     }
 
 
-
     _fixedBuildings.push_back(fixedBuildings);
+
+    std::sort(buildings.begin(),buildings.end(),PylonsFirst());
     _buildings.push_back(buildings);
+
     _attackers.push_back(attackers);
     _defenders.push_back(defenders);
+
     std::sort(delayedAttackers.begin(),delayedAttackers.end(),Comparison());
-    std::sort(delayedDefenders.begin(),delayedDefenders.end(),Comparison());
     _delayedAttackers.push_back(delayedAttackers);
+
+    std::sort(delayedDefenders.begin(),delayedDefenders.end(),Comparison());
     _delayedDefenders.push_back(delayedDefenders);
 }
 

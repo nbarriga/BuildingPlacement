@@ -237,8 +237,6 @@ void GeneticOperators::configure(
 	}
 	_expDesc=expDesc;
 
-
-    //todo: sort stuff so that pylons come first
 }
 
 int GeneticOperators::Mutator(GAGenome& g, float pmut){
