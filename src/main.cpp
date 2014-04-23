@@ -1,6 +1,7 @@
 #include "SparCraft.h"
 #include "BuildingPlacementExperiment.h"
 #include <boost/program_options.hpp>
+#include "Gene.h"
 
 void myterminate () {
     static bool tried_throw = false;
@@ -16,6 +17,12 @@ void myterminate () {
     abort();  // forces abnormal termination
 }
 
+void test(){
+    BuildingPlacement::Gene a(BWAPI::UnitTypes::Protoss_Photon_Cannon,BWAPI::TilePosition(115,44));
+    BuildingPlacement::Gene b(BWAPI::UnitTypes::Protoss_Gateway,BWAPI::TilePosition(114,48));
+    assert(a.collides(b));
+}
+
 int main(int argc, char *argv[])
 {
 	SparCraft::init();
@@ -28,6 +35,7 @@ int main(int argc, char *argv[])
 
 			boost::program_options::options_description desc("Allowed options");
 			desc.add_options()("help,h", "prints this help message")
+                              ("test,t", "runs test function")
             		          ("experiment,e", boost::program_options::value<std::string>(&experimentArg)->default_value("evaluate"), "set experiment")
             		          ("config,c", boost::program_options::value<std::string>(&configArg), "config file")
             		          ("state,s", boost::program_options::value<std::string>(&stateArg), "state description file")
@@ -46,6 +54,10 @@ int main(int argc, char *argv[])
 			if (vm.count("help")) {
 				std::cout << desc << std::endl;
 				return 1;
+			}
+			if (vm.count("test")) {
+			    test();
+			    return 1;
 			}
 			if(vm.count("config")!=1){
 			    SparCraft::System::FatalError("Please provide experiment file");
