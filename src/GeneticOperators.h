@@ -46,6 +46,7 @@ public:
 	static svv _expDesc;
 	static boost::shared_ptr<Player_Assault> _assaultPlayer;
 	static boost::shared_ptr<Player_Defend > _defendPlayer;
+	static int _baseLeft, _baseRight, _baseTop, _baseBottom;
 	static void configure(
 	        const std::vector<SparCraft::Unit>& fixedBuildings,
 	        const std::vector<SparCraft::Unit>& buildings,

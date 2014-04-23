@@ -22,8 +22,13 @@ Display* GeneticOperators::_display=NULL;
 boost::shared_ptr<Player_Assault> GeneticOperators::_assaultPlayer;
 boost::shared_ptr<Player_Defend> GeneticOperators::_defendPlayer;
 svv GeneticOperators::_expDesc=svv();
-const int mutDistance=20;
+
+int GeneticOperators::_baseLeft, GeneticOperators::_baseRight, GeneticOperators::_baseTop, GeneticOperators::_baseBottom;
+
+const int mutDistance=5;
 const int placementRetries=50;
+const int minBaseSize=20;
+const int repairRadius=5;
 
 float GeneticOperators::Objective(GAGenome &g) {
 	std::cout<<"calling Objective\n";
@@ -176,13 +181,17 @@ void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 
 	        BWAPI::TilePosition pos(_defendPlayer->getGoal().x()/TILE_SIZE,_defendPlayer->getGoal().y()/TILE_SIZE);
 	        Gene gene(it->type(),pos);
-	        BWAPI::TilePosition offset(0,0);
+//	        BWAPI::TilePosition offset(0,0);
 	        int n=placementRetries;
 	        do{
 	            do{
-	                gene.undo(offset);
-	                offset=BWAPI::TilePosition(GARandomInt(-mutDistance,mutDistance),GARandomInt(-mutDistance,mutDistance));
-	                gene.move(offset);
+//	                gene.undo(offset);
+//	                offset=BWAPI::TilePosition(GARandomInt(-mutDistance,mutDistance),GARandomInt(-mutDistance,mutDistance));
+//	                gene.move(offset);
+	                gene.setPosition(BWAPI::TilePosition(
+	                        GARandomInt(_baseLeft,_baseRight),
+	                        GARandomInt(_baseTop,_baseBottom)));
+
 	            }while(!_map->canBuildHere(gene.getType(),gene.getCenterPos()));
 
 	            if(isLegal(genome,gene)){
@@ -203,11 +212,12 @@ void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 	    }
 	    if(needsRepair){
 	        if(!GeneticOperators::repair(genome)){
-			System::FatalError("Couldn't repair at initializer");
-		}
-	}
+	            System::FatalError("Couldn't repair at initializer");
 	        }
-//	Mutator(genome,0.5,20);
+	    }
+	    assert(isLegal(genome));//at this point genome should be legal
+	}
+	//	Mutator(genome,0.5,20);
 }
 
 void GeneticOperators::configure(
@@ -237,6 +247,49 @@ void GeneticOperators::configure(
 	}
 	_expDesc=expDesc;
 
+//	Position average;
+//	BOOST_FOREACH(const Unit &u,_fixedBuildings){
+//	    average+=u.pos();
+//	}
+//	BOOST_FOREACH(const Unit &u,_buildings){
+//	    average+=u.pos();
+//	}
+//	average.scale(1.0f/(_fixedBuildings.size()+_buildings.size()));
+//
+	_baseLeft=std::numeric_limits<int>::max();
+	_baseRight=std::numeric_limits<int>::min();
+    _baseTop=std::numeric_limits<int>::max();
+    _baseBottom=std::numeric_limits<int>::min();
+    BOOST_FOREACH(const Unit &u,_fixedBuildings){
+        _baseLeft=std::min(_baseLeft,Map::floorDiv((u.x()-u.type().dimensionLeft()),TILE_SIZE));
+        _baseRight=std::max(_baseRight,Map::ceilDiv((u.x()+u.type().dimensionRight()),TILE_SIZE));
+        _baseTop=std::min(_baseTop,Map::floorDiv((u.y()-u.type().dimensionUp()),TILE_SIZE));
+        _baseBottom=std::max(_baseBottom,Map::ceilDiv((u.y()+u.type().dimensionDown()),TILE_SIZE));
+    }
+    BOOST_FOREACH(const Unit &u,_buildings){
+        _baseLeft=std::min(_baseLeft,Map::floorDiv((u.x()-u.type().dimensionLeft()),TILE_SIZE));
+        _baseRight=std::max(_baseRight,Map::ceilDiv((u.x()+u.type().dimensionRight()),TILE_SIZE));
+        _baseTop=std::min(_baseTop,Map::floorDiv((u.y()-u.type().dimensionUp()),TILE_SIZE));
+        _baseBottom=std::max(_baseBottom,Map::ceilDiv((u.y()+u.type().dimensionDown()),TILE_SIZE));
+    }
+
+    int width=_baseRight-_baseLeft;
+    int height=_baseBottom-_baseTop;
+    std::cout<<"Original base size: "<<width<<"X"<<height<<std::endl;
+
+    if(width<minBaseSize){
+        int diff=minBaseSize-width;
+        _baseLeft-=Map::floorDiv(diff,2);
+        _baseRight+=Map::ceilDiv(diff,2);
+    }
+    if(height<minBaseSize){
+        int diff=minBaseSize-height;
+        _baseTop-=Map::floorDiv(diff,2);
+        _baseBottom+=Map::ceilDiv(diff,2);
+    }
+//    width=_baseRight-_baseLeft;
+//    height=_baseBottom-_baseTop;
+//    std::cout<<"Base size: "<<width<<"X"<<height<<std::endl;
 }
 
 int GeneticOperators::Mutator(GAGenome& g, float pmut){
@@ -301,7 +354,7 @@ bool GeneticOperators::repair(GAListGenome<Gene>& genome, int pos) {
 
     Spiral sp(0,0,TILE_SIZE);
     BWAPI::TilePosition offset;
-    int iters=0,maxIters=mutDistance*mutDistance*4;
+    int iters=0,maxIters=repairRadius*repairRadius*4;
     do{
         iters++;
         offset=BWAPI::TilePosition(sp.getNext());
