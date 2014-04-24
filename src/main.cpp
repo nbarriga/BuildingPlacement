@@ -31,22 +31,19 @@ int main(int argc, char *argv[])
 	try
 	{
 		if(argc>=2){
-			std::string experimentArg, configArg, stateArg, baseArg, mapArg;
-
+			std::string experimentArg, configArg, mapArg;
+			std::vector<std::string> baseArg, stateArg;
 			boost::program_options::options_description desc("Allowed options");
 			desc.add_options()("help,h", "prints this help message")
                               ("test,t", "runs test function")
             		          ("experiment,e", boost::program_options::value<std::string>(&experimentArg)->default_value("evaluate"), "set experiment")
             		          ("config,c", boost::program_options::value<std::string>(&configArg), "config file")
-            		          ("state,s", boost::program_options::value<std::string>(&stateArg), "state description file")
-            		          ("base,b", boost::program_options::value<std::string>(&baseArg), "base assault state description file")
+            		          ("state,s", boost::program_options::value<std::vector<std::string> >(&stateArg), "state description file")
+            		          ("base,b", boost::program_options::value<std::vector<std::string> >(&baseArg), "base assault state description file")
             		          ("map,m", boost::program_options::value<std::string>(&mapArg), "map file (replaces the one in config file)")
             		          ;
 			boost::program_options::positional_options_description pd;
 			pd.add("config", 1);
-			pd.add("state", 1);
-			pd.add("base", 1);
-            pd.add("map", 1);
 			boost::program_options::variables_map vm;
 			boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).positional(pd).run(), vm);
 			boost::program_options::notify(vm);
@@ -64,14 +61,20 @@ int main(int argc, char *argv[])
 			}
 			BuildingPlacement::BuildingPlacementExperiment exp(configArg);
 			if(vm.count("state")>0){
-			    std::stringstream ss;
-			    ss<<"State StateDescriptionFile 1 "<<stateArg;
-			    exp.addState(ss.str());
+			    BOOST_FOREACH(const std::string &state,stateArg){
+			        std::stringstream ss;
+			        ss<<"State StateDescriptionFile 1 "<<state;
+			        std::cout<<"Adding state file: "<<ss.str()<<std::endl;
+			        exp.addState(ss.str());
+			    }
 			}
 			if(vm.count("base")>0){
-			    std::stringstream ss;
-			    ss<<"State BaseAssaultStateDescriptionFile 1 "<<baseArg;
-			    exp.addState(ss.str());
+			    BOOST_FOREACH(const std::string &base,baseArg){
+			        std::stringstream ss;
+			        ss<<"State BaseAssaultStateDescriptionFile 1 "<<base;
+                    std::cout<<"Adding state file: "<<ss.str()<<std::endl;
+			        exp.addState(ss.str());
+			    }
 			}
             if(vm.count("map")>0){
                 std::stringstream ss;
