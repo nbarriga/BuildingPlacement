@@ -17,6 +17,13 @@ BuildingPlacementExperiment::BuildingPlacementExperiment(const std::string & con
     init(configFile);
 }
 
+BuildingPlacementExperiment::BuildingPlacementExperiment():
+                    SearchExperiment(),
+                    _display(NULL),
+                    _assaultPlayer(std::numeric_limits<IDType>::max()),
+                    _defendPlayer(std::numeric_limits<IDType>::max()){
+}
+
 BuildingPlacementExperiment::~BuildingPlacementExperiment(){
     // TODO Auto-generated destructor stub
 }
@@ -618,6 +625,16 @@ void BuildingPlacementExperiment::setupPlayers(size_t p1Player,
             p2goal->setGoal(goal);
         }
     }
+}
+
+void BuildingPlacementExperiment::setDisplay(bool showDisplay,
+        std::string dir) {
+    imageDir=dir;
+    this->showDisplay=showDisplay;
+}
+
+void BuildingPlacementExperiment::checkCol(bool check) {
+    checkCollisions=check;
 }
 
 void BuildingPlacementExperiment::runDisplay() {

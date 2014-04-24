@@ -31,8 +31,9 @@ int main(int argc, char *argv[])
 	try
 	{
 		if(argc>=2){
-			std::string experimentArg, configArg, mapArg;
+			std::string experimentArg, configArg, mapArg, imageDir;
 			std::vector<std::string> baseArg, stateArg;
+			int assault,defend;
 			boost::program_options::options_description desc("Allowed options");
 			desc.add_options()("help,h", "prints this help message")
                               ("test,t", "runs test function")
@@ -41,6 +42,11 @@ int main(int argc, char *argv[])
             		          ("state,s", boost::program_options::value<std::vector<std::string> >(&stateArg), "state description file")
             		          ("base,b", boost::program_options::value<std::vector<std::string> >(&baseArg), "base assault state description file")
             		          ("map,m", boost::program_options::value<std::string>(&mapArg), "map file (replaces the one in config file)")
+            		          ("nocollisions,n", "disable check for collision")
+            		          ("display,d", "enable display")
+            		          ("images,i", boost::program_options::value<std::string>(&imageDir)->default_value("../sparcraft/starcraft_images/"), "starcraft images directory")
+            		          ("assault,a", boost::program_options::value<int>(&assault)->default_value(0), "assault player id(default 0)")
+            		          ("defend,f", boost::program_options::value<int>(&defend)->default_value(1), "defend player id(default 1)")
             		          ;
 			boost::program_options::positional_options_description pd;
 			pd.add("config", 1);
@@ -56,10 +62,32 @@ int main(int argc, char *argv[])
 			    test();
 			    return 1;
 			}
-			if(vm.count("config")!=1){
-			    SparCraft::System::FatalError("Please provide experiment file");
+			BuildingPlacement::BuildingPlacementExperiment exp;
+			if(vm.count("config")!=1){//if no config file is passed, we need at least some options
+			    assert(vm.count("base")>0);
+			    assert(vm.count("map")>0);
+//			    SparCraft::System::FatalError("Please provide experiment file");
+			}else{
+			    exp.init(configArg);
 			}
-			BuildingPlacement::BuildingPlacementExperiment exp(configArg);
+
+			std::stringstream ss;
+			ss<<"Player "<<assault<<" Assault";
+			exp.addPlayer(ss.str());
+			ss.str("");
+			ss<<"Player "<<defend<<" Defend";
+			exp.addPlayer(ss.str());
+			if(vm.count("nocollisions")>0){
+			    exp.checkCol(false);
+			}
+			if(vm.count("display")>0){
+			    if(vm.count("images")>0){
+			        exp.setDisplay(true,imageDir);
+			    }else{
+			        SparCraft::System::FatalError("Images directory needed");
+			    }
+			}
+
 			if(vm.count("state")>0){
 			    BOOST_FOREACH(const std::string &state,stateArg){
 			        std::stringstream ss;

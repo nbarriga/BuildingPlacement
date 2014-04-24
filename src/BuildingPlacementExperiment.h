@@ -50,7 +50,10 @@ class BuildingPlacementExperiment:public SearchExperiment {
 
 	IDType _assaultPlayer,_defendPlayer;
 public:
+	void setDisplay(bool showDisplay, std::string dir);
+	void checkCol(bool check);
 	BuildingPlacementExperiment(const std::string & configFile);
+	BuildingPlacementExperiment();
 	virtual ~BuildingPlacementExperiment();
 	virtual void addPlayer(const std::string & line);//override
 	virtual void addState(const std::string & line);//override
