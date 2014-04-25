@@ -433,7 +433,6 @@ void BuildingPlacementExperiment::addState(const std::string& line) {
 
         for (int i(0); i<numStates; ++i)
         {
-            stateFileNames.push_back(filename);
             parseBaseAssaultStateDescriptionFile(filename);
         }
     }
@@ -445,11 +444,14 @@ void BuildingPlacementExperiment::addState(const std::string& line) {
 
 void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         const std::string& fileName) {
+
+
     std::vector<std::string> lines = getLines(fileName);
 
     std::vector<Unit> fixedBuildings,buildings,attackers,defenders;
     std::vector<std::pair<Unit, TimeType> > delayedAttackers,delayedDefenders;
 
+    int skippedBuildings=0;
 
     for (size_t u(0); u<lines.size(); ++u)
     {
@@ -620,12 +622,20 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         }else{//defend
             if(time>0){
                 if(type.isBuilding()){
-//                    std::cerr<<"Cannot have delayed buildings, adding at beginning "<<type.getName()<<std::endl;
-//                    buildings.push_back(unit);
+                    if(time>1000){
+                        skippedBuildings++;
+                        std::cerr<<"Cannot have delayed buildings by "<<time<<"[s], skipping "<<type.getName()<<std::endl;
+                    }else{
+                        std::cerr<<"Cannot have delayed buildings, but only "<<time<<"[s], so adding at beginning "<<type.getName()<<std::endl;
+                        Unit unit(type, Position(x, y), 0, playerID, hp,
+                                       type == BWAPI::UnitTypes::Terran_Medic ? Constants::Starting_Energy : 0, 0, 0);
+                        buildings.push_back(unit);
+                    }
+                    //                    std::cerr<<"Cannot have delayed buildings, adding at beginning "<<type.getName()<<std::endl;
+                    //                    buildings.push_back(unit);
 
-                    std::cerr<<"Cannot have delayed buildings, skipping "<<type.getName()<<std::endl;
 
-//                    SparCraft::System::FatalError("Cannot have delayed buildings, aborting");
+                    //                    SparCraft::System::FatalError("Cannot have delayed buildings, aborting");
                 }else{
                     delayedDefenders.push_back(std::pair<Unit, TimeType>(unit,time));
                 }
@@ -643,6 +653,10 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         }
     }
 
+    if(skippedBuildings>2){
+        std::cerr<<"Skipped too many buildings, skipping battle"<<std::endl;
+        return;
+    }
 
     _fixedBuildings.push_back(fixedBuildings);
 
@@ -657,6 +671,9 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
 
     std::sort(delayedDefenders.begin(),delayedDefenders.end(),Comparison());
     _delayedDefenders.push_back(delayedDefenders);
+
+
+    stateFileNames.push_back(fileName);
 }
 
 void BuildingPlacementExperiment::unitToString(std::stringstream &ss, const Unit &unit, bool fixed){
