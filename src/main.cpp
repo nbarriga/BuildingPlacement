@@ -114,7 +114,9 @@ int main(int argc, char *argv[])
 			    exp.runEvaluate();
 			}else if(experimentArg.compare("optimize")==0){
 			    exp.runOptimize();
-			}else if(experimentArg.compare("crossevaluate")==0){
+			}else if(experimentArg.compare("crossoptimize")==0){
+                exp.runOptimize(true);
+            }else if(experimentArg.compare("crossevaluate")==0){
 			    exp.runCross();
             }else if(experimentArg.compare("display")==0){
                 exp.runDisplay();

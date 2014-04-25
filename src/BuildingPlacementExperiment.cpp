@@ -153,12 +153,12 @@ void BuildingPlacementExperiment::runCross() {
                     for(std::vector<SparCraft::Unit>::const_iterator it=_defenders[state].begin();
                             it!=_defenders[state].end();it++){
                         assert(it->player()==_defendPlayer);
-                        gameState.addUnit(*it);
+                        gameState.addUnitClosestLegalPos(*it);
                     }
                     for(std::vector<SparCraft::Unit>::const_iterator it=_attackers[otherState].begin();
                             it!=_attackers[otherState].end();it++){
                         assert(it->player()==_assaultPlayer);
-                        gameState.addUnit(*it);
+                        gameState.addUnitClosestLegalPos(*it);
                     }
 
 
@@ -167,7 +167,7 @@ void BuildingPlacementExperiment::runCross() {
                     std::merge(_delayedAttackers[otherState].begin(),_delayedAttackers[otherState].end(),
                             _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
                             delayedUnits.begin(), Comparison());
-                    Game game(gameState, playerOne, playerTwo, 2000,delayedUnits);
+                    Game game(gameState, playerOne, playerTwo, 8000,delayedUnits);
 
 #ifdef USING_VISUALIZATION_LIBRARIES
                     if (_display!=NULL)
@@ -186,7 +186,8 @@ void BuildingPlacementExperiment::runCross() {
                             _buildings[state],
                             _defenders[state],
                             _attackers[otherState],
-                            delayedUnits,
+                            _delayedDefenders[state],
+                            _delayedAttackers[otherState],
                             map,_display,
                             playerOne,
                             playerTwo,
@@ -258,12 +259,12 @@ void BuildingPlacementExperiment::runEvaluate() {
                 for(std::vector<SparCraft::Unit>::const_iterator it=_defenders[state].begin();
                         it!=_defenders[state].end();it++){
                     assert(it->player()==_defendPlayer);
-                    gameState.addUnit(*it);
+                    gameState.addUnitClosestLegalPos(*it);
                 }
                 for(std::vector<SparCraft::Unit>::const_iterator it=_attackers[state].begin();
                         it!=_attackers[state].end();it++){
                     assert(it->player()==_assaultPlayer);
-                    gameState.addUnit(*it);
+                    gameState.addUnitClosestLegalPos(*it);
                 }
 
                 std::vector<std::pair<Unit, TimeType> > delayedUnits(
@@ -271,7 +272,7 @@ void BuildingPlacementExperiment::runEvaluate() {
                 std::merge(_delayedAttackers[state].begin(),_delayedAttackers[state].end(),
                         _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
                         delayedUnits.begin(), Comparison());
-                Game game(gameState, playerOne, playerTwo, 2000,delayedUnits);
+                Game game(gameState, playerOne, playerTwo, 8000,delayedUnits);
 #ifdef USING_VISUALIZATION_LIBRARIES
                 if (_display!=NULL)
                 {
@@ -289,7 +290,8 @@ void BuildingPlacementExperiment::runEvaluate() {
                         _buildings[state],
                         _defenders[state],
                         _attackers[state],
-                        delayedUnits,
+                        _delayedDefenders[state],
+                        _delayedAttackers[state],
                         map,_display,
                         playerOne,
                         playerTwo,
@@ -311,9 +313,9 @@ svv BuildingPlacementExperiment::getExpDescription(const size_t& p1,
     return expDesc;
 }
 
-void BuildingPlacementExperiment::runOptimize() {
-    int popsize  = 5;
-    int ngen     = 8;
+void BuildingPlacementExperiment::runOptimize(bool cross) {
+    int popsize  = 4;
+    int ngen     = 2;
     float pmut   = 0.05;
     float pcross = 0.9;
 //    gaDefDivFlag=gaTrue;
@@ -350,30 +352,52 @@ void BuildingPlacementExperiment::runOptimize() {
                 // Now create the GA and run it.  First we create a genome of the type that
                 // we want to use in the GA.  The ga doesn't operate on this genome in the
                 // optimization - it just uses it to clone a population of genomes.
+                if(!cross){
+                    std::cout<<"fixed buildings: "<<_fixedBuildings[state].size()<<
+                            ", buildings: "<<_buildings[state].size()<<
+                            ", defenders: "<<_defenders[state].size()<<
+                            ", attackers: "<<_attackers[state].size()<<
+                            ", delayedAttackers: "<<_delayedAttackers[state].size()<<
+                            ", delayedDefenders: "<<_delayedDefenders[state].size()<<std::endl;
 
-                std::cout<<"fixed buildings: "<<_fixedBuildings[state].size()<<
-                        ", buildings: "<<_buildings[state].size()<<
-                        ", defenders: "<<_defenders[state].size()<<
-                        ", attackers: "<<_attackers[state].size()<<
-                        ", delayedAttackers: "<<_delayedAttackers[state].size()<<
-                        ", delayedDefenders: "<<_delayedDefenders[state].size()<<std::endl;
 
-                std::vector<std::pair<Unit, TimeType> > delayedUnits(
-                        _delayedAttackers[state].size()+_delayedDefenders[state].size());
-                std::merge(_delayedAttackers[state].begin(),_delayedAttackers[state].end(),
-                        _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
-                        delayedUnits.begin(), Comparison());
+                    GeneticOperators::configure(_fixedBuildings[state],
+                            _buildings[state],
+                            _defenders[state],
+                            _attackers[state],
+                            _delayedDefenders[state],
+                            _delayedAttackers[state],
+                            map,_display,
+                            playerOne,
+                            playerTwo,
+                            getExpDescription(p1Player,p2Player,state));
+                }else{//cross
 
-                GeneticOperators::configure(_fixedBuildings[state],
-                        _buildings[state],
-                        _defenders[state],
-                        _attackers[state],
-                        delayedUnits,
-                        map,_display,
-                        playerOne,
-                        playerTwo,
-                        getExpDescription(p1Player,p2Player,state));
+                    std::vector<std::vector<Unit> > attackers;
+                    for(int i=0;i<_attackers.size();i++){
+                        if(i!=state){
+                            attackers.push_back(_attackers[i]);
+                        }
+                    }
+                    std::vector<std::vector<std::pair<Unit, TimeType> > > delayedAttackers;
+                    for(int i=0;i<_delayedAttackers.size();i++){
+                        if(i!=state){
+                            delayedAttackers.push_back(_delayedAttackers[i]);
+                        }
+                    }
 
+                    GeneticOperators::configure(_fixedBuildings[state],
+                                                _buildings[state],
+                                                _defenders[state],
+                                                attackers,
+                                                _delayedDefenders[state],
+                                                delayedAttackers,
+                                                map,_display,
+                                                playerOne,
+                                                playerTwo,
+                                                getExpDescription(p1Player,p2Player,state));
+
+                }
                 GAListGenome<Gene> genome(GeneticOperators::Objective);
 
                 // Now that we have the genome, we create the genetic algorithm and set

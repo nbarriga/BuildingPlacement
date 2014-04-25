@@ -39,8 +39,9 @@ public:
 	static std::vector<SparCraft::Unit> _fixedBuildings;
 	static std::vector<SparCraft::Unit> _buildings;
 	static std::vector<SparCraft::Unit> _defenders;
-	static std::vector<SparCraft::Unit> _attackers;
-	static std::vector<std::pair<Unit, TimeType> > _delayed;
+	static std::vector<std::vector<SparCraft::Unit> > _attackers;
+	static std::vector<std::vector<std::pair<Unit, TimeType> > > _delayedAttackers;
+	static std::vector<std::pair<Unit, TimeType> > _delayedDefenders;
 	static Map* _map;
 	static Display* _display;
 	static svv _expDesc;
@@ -51,13 +52,26 @@ public:
 	        const std::vector<SparCraft::Unit>& fixedBuildings,
 	        const std::vector<SparCraft::Unit>& buildings,
 	        const std::vector<SparCraft::Unit>& defenders,
-	        const std::vector<SparCraft::Unit>& attackers,
-	        const std::vector<std::pair<Unit, TimeType> > &delayed,
+	        const std::vector<std::vector<SparCraft::Unit> > attackers,
+            const std::vector<std::pair<Unit, TimeType> > delayedDefenders,
+	        const std::vector<std::vector<std::pair<Unit, TimeType> > > delayedAttackers,
 	        Map* map,
 	        Display* display,
 	        PlayerPtr p1,
 	        PlayerPtr p2,
 	        svv expDesc);
+	static void configure(
+	            const std::vector<SparCraft::Unit>& fixedBuildings,
+	            const std::vector<SparCraft::Unit>& buildings,
+	            const std::vector<SparCraft::Unit>& defenders,
+	            const std::vector<SparCraft::Unit> attackers,
+	            const std::vector<std::pair<Unit, TimeType> > delayedDefenders,
+	            const std::vector<std::pair<Unit, TimeType> > delayedAttackers,
+	            Map* map,
+	            Display* display,
+	            PlayerPtr p1,
+	            PlayerPtr p2,
+	            svv expDesc);
 	static float Objective(GAGenome &g);
 	static void	Initializer(GAGenome& g);
 	static int Mutator(GAGenome& g, float pmut);

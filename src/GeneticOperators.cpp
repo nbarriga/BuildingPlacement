@@ -10,13 +10,15 @@
 #include "Player_Assault.h"
 #include "Player_Defend.h"
 #include "Spiral.h"
+#include "BuildingPlacementExperiment.h"
 
 namespace BuildingPlacement {
 std::vector<SparCraft::Unit> GeneticOperators::_fixedBuildings=std::vector<SparCraft::Unit>();
 std::vector<SparCraft::Unit> GeneticOperators::_buildings=std::vector<SparCraft::Unit>();
 std::vector<SparCraft::Unit> GeneticOperators::_defenders=std::vector<SparCraft::Unit>();
-std::vector<SparCraft::Unit> GeneticOperators::_attackers=std::vector<SparCraft::Unit>();
-std::vector<std::pair<Unit, TimeType> > GeneticOperators::_delayed=std::vector<std::pair<Unit, TimeType> >();
+std::vector<std::vector<SparCraft::Unit> > GeneticOperators::_attackers=std::vector<std::vector<SparCraft::Unit> >();
+std::vector<std::pair<Unit, TimeType> > GeneticOperators::_delayedDefenders=std::vector<std::pair<Unit, TimeType> >();
+std::vector<std::vector<std::pair<Unit, TimeType> > > GeneticOperators::_delayedAttackers=std::vector<std::vector<std::pair<Unit, TimeType> > >();
 Map* GeneticOperators::_map=NULL;
 Display* GeneticOperators::_display=NULL;
 boost::shared_ptr<Player_Assault> GeneticOperators::_assaultPlayer;
@@ -35,72 +37,83 @@ float GeneticOperators::Objective(GAGenome &g) {
 
 
 	GAListGenome<Gene>& genome=(GAListGenome<Gene>&)g;
-std::cout<<"genome: "<<genome<<std::endl;
-	GameState state;
-	state.checkCollisions=true;
-	state.setMap(*_map);
-	for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings.begin();
-				it!=_fixedBuildings.end();it++){
-			assert(it->player()==_defendPlayer->ID());
-	//		std::cout<<"defender unit: "<<it->type().getName()<<std::endl;
-			state.addUnit(*it);
-	}
-	for(int i=0;i<genome.size();i++){
-		Gene *gene=genome[i];
-//		std::cout<<"building unit: "<<gene->getType().getName()<<" "<<gene->getType().dimensionLeft()<<" "
-//		        <<gene->getType().dimensionRight()<<" "<<gene->getType().dimensionUp()<<" "<<gene->getType().dimensionDown()<<std::endl;
+	std::cout<<"genome: "<<genome<<std::endl;
+	int total_score=0;
+	for(int wave=0;wave<_attackers.size();wave++){
+	    GameState state;
+	    state.checkCollisions=true;
+	    state.setMap(*_map);
+	    for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings.begin();
+	            it!=_fixedBuildings.end();it++){
+	        assert(it->player()==_defendPlayer->ID());
+	        //		std::cout<<"defender unit: "<<it->type().getName()<<std::endl;
+	        state.addUnit(*it);
+	    }
+	    for(int i=0;i<genome.size();i++){
+	        Gene *gene=genome[i];
+	        //		std::cout<<"building unit: "<<gene->getType().getName()<<" "<<gene->getType().dimensionLeft()<<" "
+	        //		        <<gene->getType().dimensionRight()<<" "<<gene->getType().dimensionUp()<<" "<<gene->getType().dimensionDown()<<std::endl;
 
 
-		 Unit unit(gene->getType(),
-		         gene->getCenterPos(),
-		         0,
-		         _defendPlayer->ID(),
-		         _buildings[i].currentHP(),
-		         gene->getType() == BWAPI::UnitTypes::Terran_Medic ? Constants::Starting_Energy : 0,
-		                 _buildings[i].nextMoveActionTime(),
-		                 _buildings[i].nextAttackActionTime());
-		 state.addUnit(unit);
-//		state.addUnit(gene->getType(),_defendPlayer->ID(),gene->getCenterPos());
-	}
-	for(std::vector<SparCraft::Unit>::const_iterator it=_defenders.begin();
-			it!=_defenders.end();it++){
-		assert(it->player()==_defendPlayer->ID());
-//		std::cout<<"defender unit: "<<it->type().getName()<<std::endl;
-		state.addUnitClosestLegalPos(*it);
-	}
-	for(std::vector<SparCraft::Unit>::const_iterator it=_attackers.begin();
-			it!=_attackers.end();it++){
-		assert(it->player()==_assaultPlayer->ID());
-//		std::cout<<"attacker unit: "<<it->type().getName()<<std::endl;
-		state.addUnitClosestLegalPos(*it);
-	}
-//todo: check that defenders and attackers are placed in legal locations, otherwise move them
+	        Unit unit(gene->getType(),
+	                gene->getCenterPos(),
+	                0,
+	                _defendPlayer->ID(),
+	                _buildings[i].currentHP(),
+	                gene->getType() == BWAPI::UnitTypes::Terran_Medic ? Constants::Starting_Energy : 0,
+	                        _buildings[i].nextMoveActionTime(),
+	                        _buildings[i].nextAttackActionTime());
+	        state.addUnit(unit);
+	        //		state.addUnit(gene->getType(),_defendPlayer->ID(),gene->getCenterPos());
+	    }
+	    for(std::vector<SparCraft::Unit>::const_iterator it=_defenders.begin();
+	            it!=_defenders.end();it++){
+	        assert(it->player()==_defendPlayer->ID());
+	        //		std::cout<<"defender unit: "<<it->type().getName()<<std::endl;
+	        state.addUnitClosestLegalPos(*it);
+	    }
+	    for(std::vector<SparCraft::Unit>::const_iterator it=_attackers[wave].begin();
+	            it!=_attackers[wave].end();it++){
+	        assert(it->player()==_assaultPlayer->ID());
+	        //		std::cout<<"attacker unit: "<<it->type().getName()<<std::endl;
+	        state.addUnitClosestLegalPos(*it);
+	    }
+	    //todo: check that defenders and attackers are placed in legal locations, otherwise move them
 
-	boost::shared_ptr<Player> p1,p2;
-	if(_assaultPlayer->ID()==0){
-		p1=_assaultPlayer;
-		p2=_defendPlayer;
-	}else{
-		p2=_assaultPlayer;
-		p1=_defendPlayer;
-	}
+	    boost::shared_ptr<Player> p1,p2;
+	    if(_assaultPlayer->ID()==0){
+	        p1=_assaultPlayer;
+	        p2=_defendPlayer;
+	    }else{
+	        p2=_assaultPlayer;
+	        p1=_defendPlayer;
+	    }
 
-	Game game(state, p1, p2, 20000, _delayed);
+	    std::vector<std::pair<Unit, TimeType> > delayedUnits(
+	            _delayedAttackers[wave].size()+_delayedDefenders.size());
+	    std::merge(_delayedAttackers[wave].begin(),_delayedAttackers[wave].end(),
+	            _delayedDefenders.begin(),_delayedDefenders.end(),
+	            delayedUnits.begin(), BuildingPlacementExperiment::Comparison());
+
+	    Game game(state, p1, p2, 8000, delayedUnits);
 
 #ifdef USING_VISUALIZATION_LIBRARIES
-	if (_display!=NULL)
-	{
-		game.disp = _display;
-		_display->SetExpDesc(_expDesc);
+	    if (_display!=NULL)
+	    {
+	        game.disp = _display;
+	        _display->SetExpDesc(_expDesc);
 
-	}
+	    }
 #endif
 
-	// play the game to the end
-	game.play();
-	int score = evalBuildingPlacement(game.getState());
-	std::cout<<"score: "<<score<<std::endl;
-	return score;
+	    // play the game to the end
+	    game.play();
+	    int score = evalBuildingPlacement(game.getState());
+	    std::cout<<"score: "<<score<<std::endl;
+	    total_score+=score;
+	}
+	std::cout<<"total score: "<<total_score<<std::endl;
+	return total_score/_attackers.size();
 
 }
 
@@ -224,18 +237,21 @@ void GeneticOperators::configure(
         const std::vector<SparCraft::Unit>& fixedBuildings,
         const std::vector<SparCraft::Unit>& buildings,
         const std::vector<SparCraft::Unit>& defenders,
-        const std::vector<SparCraft::Unit>& attackers,
-        const std::vector<std::pair<Unit, TimeType> > &delayed,
+        const std::vector<std::vector<SparCraft::Unit> > attackers,
+        const std::vector<std::pair<Unit, TimeType> > delayedDefenders,
+        const std::vector<std::vector<std::pair<Unit, TimeType> > > delayedAttackers,
         Map* map,
         Display* display,
         PlayerPtr p1,
         PlayerPtr p2,
 		 svv expDesc) {
+    assert(attackers.size()==delayedAttackers.size());//same amount of attack waves
 	_fixedBuildings=fixedBuildings;
 	_buildings=buildings;
 	_defenders=defenders;
 	_attackers=attackers;
-	_delayed=delayed;
+	_delayedAttackers=delayedAttackers;
+	_delayedDefenders=delayedDefenders;
 	_map=map;
 	_display=display;
 	if(p1->getType()==PlayerModels::Assault){
@@ -291,7 +307,37 @@ void GeneticOperators::configure(
 //    height=_baseBottom-_baseTop;
 //    std::cout<<"Base size: "<<width<<"X"<<height<<std::endl;
 }
+void GeneticOperators::configure(
+            const std::vector<SparCraft::Unit>& fixedBuildings,
+            const std::vector<SparCraft::Unit>& buildings,
+            const std::vector<SparCraft::Unit>& defenders,
+            const std::vector<SparCraft::Unit> attackers,
+            const std::vector<std::pair<Unit, TimeType> > delayedDefenders,
+            const std::vector<std::pair<Unit, TimeType> > delayedAttackers,
+            Map* map,
+            Display* display,
+            PlayerPtr p1,
+            PlayerPtr p2,
+            svv expDesc){
+    std::vector<std::vector<SparCraft::Unit> > m_attackers;
+    m_attackers.push_back(attackers);
+            std::vector<std::vector<std::pair<Unit, TimeType> > > m_delayedAttackers;
+            m_delayedAttackers.push_back(delayedAttackers);
 
+            configure(
+                    fixedBuildings,
+                    buildings,
+                    defenders,
+                    m_attackers,
+                    delayedDefenders,
+                    m_delayedAttackers,
+                    map,
+                    display,
+                    p1,
+                    p2,
+                    expDesc);
+
+}
 int GeneticOperators::Mutator(GAGenome& g, float pmut){
 	return Mutator(g,pmut,mutDistance);
 }

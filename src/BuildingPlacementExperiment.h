@@ -6,12 +6,7 @@
 
 namespace BuildingPlacement {
 class BuildingPlacementExperiment:public SearchExperiment {
-    struct Comparison{
-        bool operator() (const std::pair<Unit, TimeType>& lhs, const std::pair<Unit, TimeType>&rhs) const
-        {
-            return (lhs.second>rhs.second);
-        }
-    };
+
 
     struct PylonsFirst{
         bool isPylon(const Unit &u) const{
@@ -50,6 +45,12 @@ class BuildingPlacementExperiment:public SearchExperiment {
 
 	IDType _assaultPlayer,_defendPlayer;
 public:
+	struct Comparison{
+	    bool operator() (const std::pair<Unit, TimeType>& lhs, const std::pair<Unit, TimeType>&rhs) const
+	    {
+	        return (lhs.second>rhs.second);
+	    }
+	};
 	void setDisplay(bool showDisplay, std::string dir);
 	void checkCol(bool check);
 	BuildingPlacementExperiment(const std::string & configFile);
@@ -59,7 +60,7 @@ public:
 	virtual void addState(const std::string & line);//override
 	virtual svv getExpDescription(const size_t & p1, const size_t & p2, const size_t & state);
 	void runEvaluate();
-	void runOptimize();
+	void runOptimize(bool cross=false);
 	void runCross();
 	void runDisplay();
 };
