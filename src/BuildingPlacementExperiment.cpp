@@ -467,14 +467,132 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         iss >> fixed;
         iss >> hpFinal;
 
-        BWAPI::UnitType type(getUnitType(unitType));
+
+        if(replace(unitType,'_',' ').compare(BWAPI::UnitTypes::Protoss_Dark_Templar.getName())==0){
+            //2 zealots
+            std::stringstream extra;
+            extra<<replace(BWAPI::UnitTypes::Protoss_Zealot.getName(),' ','_')<<" ";
+            extra<<playerID<<" ";
+            extra<<x<<" ";
+            extra<<y<<" ";
+            float hpRatio=(BWAPI::UnitTypes::Protoss_Zealot.maxHitPoints()+
+                    BWAPI::UnitTypes::Protoss_Zealot.maxShields())/
+                            (float)(BWAPI::UnitTypes::Protoss_Dark_Templar.maxHitPoints()+
+                                    BWAPI::UnitTypes::Protoss_Dark_Templar.maxShields());
+            extra<<hp*hpRatio<<" ";
+            extra<<time<<" ";
+            extra<<fixed<<" ";
+            extra<<hpFinal*hpRatio<<" ";
+            lines.push_back(extra.str());
+            lines.push_back(extra.str());
+            std::cout<<"Unsupported unit "<<unitType<<", replacing with 2 "<<BWAPI::UnitTypes::Protoss_Zealot.getName()<<std::endl;
+            continue;
+        }else if(replace(unitType,'_',' ').compare(BWAPI::UnitTypes::Protoss_Reaver.getName())==0){
+            //2 dragoons
+            std::stringstream extra;
+            extra<<replace(BWAPI::UnitTypes::Protoss_Dragoon.getName(),' ','_')<<" ";
+            extra<<playerID<<" ";
+            extra<<x<<" ";
+            extra<<y<<" ";
+            float hpRatio=(BWAPI::UnitTypes::Protoss_Dragoon.maxHitPoints()+
+                    BWAPI::UnitTypes::Protoss_Dragoon.maxShields())/
+                            (float)(BWAPI::UnitTypes::Protoss_Reaver.maxHitPoints()+
+                                    BWAPI::UnitTypes::Protoss_Reaver.maxShields());
+            extra<<hp*hpRatio<<" ";
+            extra<<time<<" ";
+            extra<<fixed<<" ";
+            extra<<hpFinal*hpRatio<<" ";
+            lines.push_back(extra.str());
+            lines.push_back(extra.str());
+            std::cout<<"Unsupported unit "<<unitType<<", replacing with 2 "<<BWAPI::UnitTypes::Protoss_Dragoon.getName()<<std::endl;
+            continue;
+        }else if(replace(unitType,'_',' ').compare(BWAPI::UnitTypes::Protoss_High_Templar.getName())==0){
+            //1 dragoon
+            std::stringstream extra;
+            extra<<replace(BWAPI::UnitTypes::Protoss_Dragoon.getName(),' ','_')<<" ";
+            extra<<playerID<<" ";
+            extra<<x<<" ";
+            extra<<y<<" ";
+            float hpRatio=(BWAPI::UnitTypes::Protoss_Dragoon.maxHitPoints()+
+                    BWAPI::UnitTypes::Protoss_Dragoon.maxShields())/
+                            (float)(BWAPI::UnitTypes::Protoss_High_Templar.maxHitPoints()+
+                                    BWAPI::UnitTypes::Protoss_High_Templar.maxShields());
+            extra<<hp*hpRatio<<" ";
+            extra<<time<<" ";
+            extra<<fixed<<" ";
+            extra<<hpFinal*hpRatio<<" ";
+            lines.push_back(extra.str());
+            std::cout<<"Unsupported unit "<<unitType<<", replacing with 1 "<<BWAPI::UnitTypes::Protoss_Zealot.getName()<<std::endl;
+            continue;
+        }else if(replace(unitType,'_',' ').compare(BWAPI::UnitTypes::Protoss_Archon.getName())==0){
+            //1 dragoon
+            std::stringstream extra;
+            extra<<replace(BWAPI::UnitTypes::Protoss_Dragoon.getName(),' ','_')<<" ";
+            extra<<playerID<<" ";
+            extra<<x<<" ";
+            extra<<y<<" ";
+            float hpRatio=(BWAPI::UnitTypes::Protoss_Dragoon.maxHitPoints()+
+                    BWAPI::UnitTypes::Protoss_Dragoon.maxShields())/
+                            (float)(BWAPI::UnitTypes::Protoss_Archon.maxHitPoints()+
+                                    BWAPI::UnitTypes::Protoss_Archon.maxShields());
+            extra<<hp*hpRatio<<" ";
+            extra<<time<<" ";
+            extra<<fixed<<" ";
+            extra<<hpFinal*hpRatio<<" ";
+            lines.push_back(extra.str());
+            //1 zealots
+            extra.str("");
+            extra<<replace(BWAPI::UnitTypes::Protoss_Zealot.getName(),' ','_')<<" ";
+            extra<<playerID<<" ";
+            extra<<x<<" ";
+            extra<<y<<" ";
+            hpRatio=(BWAPI::UnitTypes::Protoss_Zealot.maxHitPoints()+
+                    BWAPI::UnitTypes::Protoss_Zealot.maxShields())/
+                            (float)(BWAPI::UnitTypes::Protoss_Archon.maxHitPoints()+
+                                    BWAPI::UnitTypes::Protoss_Archon.maxShields());
+            extra<<hp*hpRatio<<" ";
+            extra<<time<<" ";
+            extra<<fixed<<" ";
+            extra<<hpFinal*hpRatio<<" ";
+            lines.push_back(extra.str());
+
+            std::cout<<"Unsupported unit "<<unitType<<", replacing with 1 "<<
+                    BWAPI::UnitTypes::Protoss_Zealot.getName()<<" and 1 "<<
+                    BWAPI::UnitTypes::Protoss_Zealot.getName()<<std::endl;
+            continue;
+        }
+
+        BWAPI::UnitType type;
+
+        std::streambuf* oldCoutStreamBuf = std::cerr.rdbuf();
+        std::ofstream filestr;
+        filestr.open ("/dev/null");
+        std::cerr.rdbuf( filestr.rdbuf() );
+        try{
+            type=getUnitType(unitType);
+
+            // Restore old cout.
+            std::cerr.rdbuf( oldCoutStreamBuf );
+            filestr.close();
+        }catch(int i){
+            // Restore old cout.
+            std::cerr.rdbuf( oldCoutStreamBuf );
+            filestr.close();
+            if(replace(unitType,'_',' ').compare(BWAPI::UnitTypes::Protoss_Shield_Battery.getName())==0){
+                std::cerr<<"Unsupported unit type, skipping "<<unitType<<std::endl;
+                continue;
+            }else{
+                std::stringstream ss;
+                ss<<"Unsupported unit type "<<unitType<<", aborting";
+                SparCraft::System::FatalError(ss.str());
+            }
+
+        }
+
         if(!type.isBuilding()&&fixed){
             SparCraft::System::FatalError("A non building unit cannot be fixed");
         }
 
-        if(type==BWAPI::UnitTypes::Terran_Refinery){
-            SparCraft::System::FatalError("Refinery not supported");
-        }
 
         if(type.isBuilding()){
             int xoffset=(x-(type.tileWidth()*TILE_SIZE/2))%TILE_SIZE;
@@ -492,7 +610,8 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
 
         if(playerID==_assaultPlayer){//assault
             if(type.isBuilding()){
-                SparCraft::System::FatalError("Assault player cannot have buildings");
+                std::cerr<<"Assault player cannot have buildings, skipping "<<unitType<<std::endl;
+//                SparCraft::System::FatalError("Assault player cannot have buildings");
             }else if(time>0){
                 delayedAttackers.push_back(std::pair<Unit, TimeType>(unit,time));
             }else{
@@ -501,9 +620,12 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         }else{//defend
             if(time>0){
                 if(type.isBuilding()){
-                    std::cerr<<"Cannot have delayed buildings, adding at beginning "<<type.getName()<<std::endl;
-                    buildings.push_back(unit);
-//                    SparCraft::System::FatalError("Cannot have delayed buildings");
+//                    std::cerr<<"Cannot have delayed buildings, adding at beginning "<<type.getName()<<std::endl;
+//                    buildings.push_back(unit);
+
+                    std::cerr<<"Cannot have delayed buildings, skipping "<<type.getName()<<std::endl;
+
+//                    SparCraft::System::FatalError("Cannot have delayed buildings, aborting");
                 }else{
                     delayedDefenders.push_back(std::pair<Unit, TimeType>(unit,time));
                 }

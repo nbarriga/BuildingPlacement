@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
             		          ("defend,f", boost::program_options::value<int>(&defend)->default_value(1), "defend player id(default 1)")
             		          ;
 			boost::program_options::positional_options_description pd;
-			pd.add("config", 1);
+			pd.add("base", -1);
 			boost::program_options::variables_map vm;
 			boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).positional(pd).run(), vm);
 			boost::program_options::notify(vm);
