@@ -740,6 +740,12 @@ void BuildingPlacementExperiment::saveBaseAssaultStateDescriptionFile(int state,
         unitToString(ss,unit);
     }
 
+    ss<<"#Optimized against attackers from"<<std::endl;
+    for(int i=0;i<_buildings.size();i++){
+        if(i!=state){
+            ss<<"#"<<stateFileNames[i]<<std::endl;
+        }
+    }
 
     std::ofstream file(fileName.c_str(), std::ofstream::out);
     file<<ss.str();
