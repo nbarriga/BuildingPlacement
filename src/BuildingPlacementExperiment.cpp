@@ -607,6 +607,9 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
             if(replace(unitType,'_',' ').compare(BWAPI::UnitTypes::Protoss_Shield_Battery.getName())==0){
                 std::cerr<<"Unsupported unit type, skipping "<<unitType<<std::endl;
                 continue;
+            }else if(replace(unitType,'_',' ').compare(BWAPI::UnitTypes::Protoss_Scarab.getName())==0){
+                std::cerr<<"Unsupported unit type, skipping "<<unitType<<std::endl;
+                continue;
             }else{
                 std::stringstream ss;
                 ss<<"Unsupported unit type "<<unitType<<", aborting";
@@ -632,7 +635,6 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
 
         Unit unit(type, Position(x, y), 0, playerID, hp,
                 type == BWAPI::UnitTypes::Terran_Medic ? Constants::Starting_Energy : 0, time, time);
-
 
         if(playerID==_assaultPlayer){//assault
             if(type.isBuilding()){

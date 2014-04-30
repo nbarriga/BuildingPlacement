@@ -15,16 +15,24 @@ class BuildingPlacementExperiment:public SearchExperiment {
         bool operator() (const Unit &lhs, const Unit &rhs) const
         {
             if(isPylon(lhs)){
-                return true;
+                if(isPylon(rhs)){
+                    return false;
+                }else{
+                    return true;
+                }
             }else if(isPylon(rhs)){
                 return false;
             }else{
                 if(lhs.type().requiresPsi()){
-                    return true;
+                    if(rhs.type().requiresPsi()){
+                        return false;
+                    }else{
+                        return true;
+                    }
                 }else if(rhs.type().requiresPsi()){
                     return false;
                 }else{
-                    return true;
+                    return false;
                 }
             }
         }
