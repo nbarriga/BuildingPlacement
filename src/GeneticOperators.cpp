@@ -133,7 +133,7 @@ ScoreType GeneticOperators::unitScore(const GameState& state,
     ScoreType score=0;
     BOOST_FOREACH(const IDType &id,units){
         const Unit &u=state.getUnitByID(player,id);
-        ScoreType hpPercent=(u.type().maxHitPoints()+u.type().maxShields()-u.currentHP())*100/(u.type().maxHitPoints()+u.type().maxShields());
+        ScoreType hpPercent=(u.maxHP()-u.currentHP())*100/(u.maxHP());
         ScoreType cost=u.type().mineralPrice()+u.type().gasPrice();
         ScoreType val=cost*hpPercent;
         if(u.type().isWorker()){
