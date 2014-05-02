@@ -26,6 +26,7 @@ boost::shared_ptr<Player_Defend> GeneticOperators::_defendPlayer;
 svv GeneticOperators::_expDesc=svv();
 
 int GeneticOperators::_baseLeft, GeneticOperators::_baseRight, GeneticOperators::_baseTop, GeneticOperators::_baseBottom;
+bool GeneticOperators::_seedOriginalPosition;
 
 const int mutDistance=5;
 const int placementRetries=50;
@@ -171,12 +172,11 @@ ScoreType GeneticOperators::evalBuildingPlacement(const GameState& state){
 }
 void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 {
-    static int firstTime=true;
 	std::cout<<"calling Initializer\n";
 	GAListGenome<Gene>& genome = (GAListGenome<Gene>&)g;
 
 
-	if(firstTime){
+	if(_seedOriginalPosition){
 	    while(genome.head()) genome.destroy(); // destroy any pre-existing list
 	    for(std::vector<SparCraft::Unit>::const_iterator it=_buildings.begin();
 	                   it!=_buildings.end();it++){
@@ -189,7 +189,7 @@ void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 	            System::FatalError("Couldn't repair at initializer");
 	        }
 	    }
-	    firstTime=false;
+	    _seedOriginalPosition=false;
 	}else{
 	    do{
 	        while(genome.head()) genome.destroy(); // destroy any pre-existing list
@@ -312,6 +312,8 @@ void GeneticOperators::configure(
 //    width=_baseRight-_baseLeft;
 //    height=_baseBottom-_baseTop;
 //    std::cout<<"Base size: "<<width<<"X"<<height<<std::endl;
+
+    _seedOriginalPosition=true;
 }
 void GeneticOperators::configure(
             const std::vector<SparCraft::Unit>& fixedBuildings,

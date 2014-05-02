@@ -35,19 +35,21 @@ class GeneticOperators {
 	static ScoreType unitScore(const GameState& state,
 	        const std::vector<IDType> &units,
 	        IDType player);
+    static std::vector<SparCraft::Unit> _fixedBuildings;
+    static std::vector<SparCraft::Unit> _buildings;
+    static std::vector<SparCraft::Unit> _defenders;
+    static std::vector<std::vector<SparCraft::Unit> > _attackers;
+    static std::vector<std::vector<std::pair<Unit, TimeType> > > _delayedAttackers;
+    static std::vector<std::pair<Unit, TimeType> > _delayedDefenders;
+    static Map* _map;
+    static Display* _display;
+    static svv _expDesc;
+    static boost::shared_ptr<Player_Assault> _assaultPlayer;
+    static boost::shared_ptr<Player_Defend > _defendPlayer;
+    static int _baseLeft, _baseRight, _baseTop, _baseBottom;
+    static bool _seedOriginalPosition;
 public:
-	static std::vector<SparCraft::Unit> _fixedBuildings;
-	static std::vector<SparCraft::Unit> _buildings;
-	static std::vector<SparCraft::Unit> _defenders;
-	static std::vector<std::vector<SparCraft::Unit> > _attackers;
-	static std::vector<std::vector<std::pair<Unit, TimeType> > > _delayedAttackers;
-	static std::vector<std::pair<Unit, TimeType> > _delayedDefenders;
-	static Map* _map;
-	static Display* _display;
-	static svv _expDesc;
-	static boost::shared_ptr<Player_Assault> _assaultPlayer;
-	static boost::shared_ptr<Player_Defend > _defendPlayer;
-	static int _baseLeft, _baseRight, _baseTop, _baseBottom;
+
 	static void configure(
 	        const std::vector<SparCraft::Unit>& fixedBuildings,
 	        const std::vector<SparCraft::Unit>& buildings,
