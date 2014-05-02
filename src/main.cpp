@@ -112,7 +112,9 @@ int main(int argc, char *argv[])
             }
 			if(experimentArg.compare("evaluate")==0){
 			    exp.runEvaluate();
-			}else if(experimentArg.compare("optimize")==0){
+			}else if(experimentArg.compare("balance")==0){
+                exp.runBalance();
+            }else if(experimentArg.compare("optimize")==0){
 			    exp.runOptimize();
 			}else if(experimentArg.compare("crossoptimize")==0){
                 exp.runOptimize(true);

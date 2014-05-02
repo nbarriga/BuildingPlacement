@@ -45,7 +45,7 @@ class BuildingPlacementExperiment:public SearchExperiment {
 	std::vector<std::string> stateFileNames;
 
 	void parseBaseAssaultStateDescriptionFile(const std::string & fileName);
-	void saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName, const GAStatistics &stats);
+	void saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName, const boost::optional<const GAStatistics &> stats);
 	void unitsToString(std::stringstream &ss, const std::vector<Unit> &units, bool fixed=false);
 	void unitToString(std::stringstream &ss, const Unit &unit, bool fixed=false);
 	void setupPlayers(size_t p1Player, size_t p2Player, const Position& goal);
@@ -68,6 +68,7 @@ public:
 	virtual void addState(const std::string & line);//override
 	virtual svv getExpDescription(const size_t & p1, const size_t & p2, const size_t & state);
 	void runEvaluate();
+	void runBalance();
 	void runOptimize(bool cross=false);
 	void runCross();
 	void runDisplay();

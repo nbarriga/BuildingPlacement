@@ -96,7 +96,7 @@ float GeneticOperators::Objective(GAGenome &g) {
 	            _delayedDefenders.begin(),_delayedDefenders.end(),
 	            delayedUnits.begin(), BuildingPlacementExperiment::Comparison());
 
-	    Game game(state, p1, p2, 8000, delayedUnits);
+	    Game game(state, p1, p2, 20000, delayedUnits);
 
 #ifdef USING_VISUALIZATION_LIBRARIES
 	    if (_display!=NULL)
@@ -121,7 +121,7 @@ float GeneticOperators::Objective(GAGenome &g) {
 bool GeneticOperators::goalReached(const GameState& state){
       for (IDType u(0); u<state.numUnits(_assaultPlayer->ID()); ++u){
           const Unit & unit(state.getUnit(_assaultPlayer->ID(), u));
-          if(_map->getDistance(unit.pos(),_assaultPlayer->getGoal())<TILE_SIZE/2){
+          if(_map->getDistance(unit.pos(),_assaultPlayer->getGoal())<TILE_SIZE/4){
               return true;
           }
       }
@@ -135,10 +135,10 @@ ScoreType GeneticOperators::unitScore(const GameState& state,
     BOOST_FOREACH(const IDType &id,units){
         const Unit &u=state.getUnitByID(player,id);
         ScoreType hpPercent=(u.maxHP()-u.currentHP())*100/(u.maxHP());
-        ScoreType cost=u.type().mineralPrice()+u.type().gasPrice();
+        ScoreType cost=u.type().mineralPrice()+1.5f*u.type().gasPrice();
         ScoreType val=cost*hpPercent;
         if(u.type().isWorker()){
-            val*=3;
+            val*=2;
         }else if(u.type()==BWAPI::UnitTypes::Protoss_Pylon){
             val*=3;
         }
@@ -169,6 +169,17 @@ ScoreType GeneticOperators::evalBuildingPlacement(const GameState& state){
 //      System::FatalError("Simulation timeout");
       return defValue-attValue+2000000;
   }
+}
+bool GeneticOperators::defenderWon(const GameState& state){
+    if(state.playerDead(_assaultPlayer->ID())){
+        return true;
+    }else if(goalReached(state)){
+        return false;
+    }else if(state.playerDead(_defendPlayer->ID())){
+        return false;
+    }else{//simulation time exhausted
+        System::FatalError("Simulation timeout");
+    }
 }
 void GeneticOperators::Initializer(GAGenome& g)//todo: better initializer
 {

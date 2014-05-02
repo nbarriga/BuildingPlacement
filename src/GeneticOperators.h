@@ -85,6 +85,7 @@ public:
 	static float Comparator(const GAGenome&, const GAGenome&);
 	static ScoreType evalBuildingPlacement(const GameState& state);
 	static bool goalReached(const GameState& state);
+	static bool defenderWon(const GameState& state);
 };
 
 } /* namespace SparCraft */
