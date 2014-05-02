@@ -133,7 +133,7 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 			                }
 			            }
 //			            std::cout<<min<<" "<<max<<" "<<ourDist<<std::endl;
-			            if((max-min)> 8 && (ourDist-min)< 8){
+			            if((max-min)> 16 && (ourDist-min)< 4){
 			                dist=std::numeric_limits<int>::max();
 			            }else{
 			                const boost::optional<const Unit&> & closestEnemyOpt=state.getClosestEnemyUnitOpt(_playerID, u);

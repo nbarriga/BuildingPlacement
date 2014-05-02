@@ -112,14 +112,8 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 
 			        if (closestEnemyOpt.is_initialized()&&
 			                closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE&&
-			                closestEnemyOpt->previousAction().type()!=UnitActionTypes::PASS){
-//			                closestEnemyOpt.get().canAttackTarget(ourUnit, state.getTime())){
-//			            if(state.getMap().canWalkStraight(ourDest,closestEnemyOpt.get().pos(), ourUnit.range())){
-//			                dist = sqrt(closestEnemyOpt.get().getDistanceSqToPosition(ourDest, state.getTime()));
-//			            }else{
-//			            std::cout<<"hi?";
+			                !state.getAliveUnitsInCircleIDs(_playerID,closestEnemyOpt->currentPosition(state.getTime()),closestEnemyOpt->range()).empty()){
 			                dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
-//			            }
 			        }else{
 			            const boost::optional<const Unit&> & closestDamagedBuildingOpt=state.getClosestOurDamagedBuildingOpt(_playerID, u);
 			            if(closestDamagedBuildingOpt.is_initialized()){
