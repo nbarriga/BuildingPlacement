@@ -22,6 +22,7 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 	for (IDType u(0); u<moves.numUnits(); ++u)
 	{
 		bool foundUnitAction						(false);
+		bool foundUnitMove                        (false);
 		size_t actionMoveIndex					(0);
 		double actionHighestDPS					(0);
 		size_t closestMoveIndex					(0);
@@ -132,7 +133,7 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 			                }
 			            }
 //			            std::cout<<min<<" "<<max<<" "<<ourDist<<std::endl;
-			            if((max-min)> 4 && abs(ourDist-min)< 4){
+			            if((max-min)> 8 && (ourDist-min)< 8){
 			                dist=std::numeric_limits<int>::max();
 			            }else{
 			                const boost::optional<const Unit&> & closestEnemyOpt=state.getClosestEnemyUnitOpt(_playerID, u);
@@ -141,7 +142,7 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 			                    //			                if(state.getMap().canWalkStraight(ourDest,closestEnemyOpt->pos(), ourUnit.range())){
 			                    //			                    dist = sqrt(closestEnemyOpt.get().getDistanceSqToPosition(ourDest, state.getTime()));
 			                    //			                }else{
-			                    dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));//walk towards goal?
+			                    dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
 
 			                    //			                }
 
@@ -159,19 +160,24 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 				{
 					closestMoveDist = dist;
 					closestMoveIndex = m;
+					foundUnitMove = true;
 				}
 			}
 		}
 
-		size_t bestMoveIndex(foundUnitAction ? actionMoveIndex : closestMoveIndex);
+		if(foundUnitAction){
+		    UnitAction theMove(moves.getMove(u, actionMoveIndex));
+		    if (theMove.type() == UnitActionTypes::ATTACK)
+		    {
+		        hpRemaining[theMove.index()] -= state.getUnit(_playerID, theMove.unit()).damage();
+		    }
 
-		UnitAction theMove(moves.getMove(u, actionMoveIndex));
-		if (theMove.type() == UnitActionTypes::ATTACK)
-		{
-			hpRemaining[theMove.index()] -= state.getUnit(_playerID, theMove.unit()).damage();
+		    moveVec.push_back(moves.getMove(u, actionMoveIndex));
+		}else if(foundUnitMove){
+		    moveVec.push_back(moves.getMove(u, closestMoveIndex));
+		}else{//pass
+		    moveVec.push_back(UnitAction(u,_playerID,UnitActionTypes::PASS,0));
 		}
-			
-		moveVec.push_back(moves.getMove(u, bestMoveIndex));
 	}
 }
 }

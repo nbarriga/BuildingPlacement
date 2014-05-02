@@ -82,37 +82,6 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 			}
 			else if (move.type() == UnitActionTypes::MOVE)
 			{
-//				Position ourDest=move.pos();
-//				size_t dist=INT_MAX;
-//				const boost::optional<const Unit&> & closestUnitOpt = state.getClosestEnemyUnitOpt(_playerID, u);
-//
-//				if (closestUnitOpt.is_initialized()&&
-//						closestUnitOpt.get().previousAction().type()!=UnitActionTypes::MOVE)
-//				{
-//					//this slows down things considerably
-//					dist = state.getMap().getDistance(ourDest,closestUnitOpt.get().pos());
-//				}
-//				else if (closestUnitOpt.is_initialized()&&
-//						state.getMap().canWalkStraight(ourDest,closestUnitOpt.get().pos(), ourUnit.range()))
-//				{
-//					dist = sqrt(closestUnitOpt.get().getDistanceSqToPosition(ourDest, state.getTime()));
-//				}
-//				else
-//				{
-//					const boost::optional<const Unit&> & closestDamagedBuildingOpt=state.getClosestOurDamagedBuildingOpt(_playerID, u);
-//					if(closestDamagedBuildingOpt.is_initialized()){
-//						dist = state.getMap().getDistance(ourDest,closestDamagedBuildingOpt.get().pos());
-//					}else{
-//						const boost::optional<const Unit&> & closestOurBuildingOpt	= state.getClosestOurBuildingOpt(_playerID, u);
-//						if(closestOurBuildingOpt.is_initialized()){
-//							dist = state.getMap().getDistance(ourDest,closestOurBuildingOpt.get().pos());
-//							if(dist<1){//no path to nearest building?
-//								//stay put
-//								std::cerr<<"eh?";
-//							}
-//						}
-//					}
-//				}
 			    Position ourDest=move.pos();
 			    size_t dist=INT_MAX;
 			    if(ourUnit.canHeal()){//medic
@@ -141,7 +110,9 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 			    }else{//not a medic
 			        const boost::optional<const Unit&> & closestEnemyOpt = state.getClosestEnemyUnitOpt(_playerID, u);
 
-			        if (closestEnemyOpt.is_initialized()&&closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE){
+			        if (closestEnemyOpt.is_initialized()&&
+			                closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE&&
+			                closestEnemyOpt->previousAction().type()!=UnitActionTypes::PASS){
 //			                closestEnemyOpt.get().canAttackTarget(ourUnit, state.getTime())){
 //			            if(state.getMap().canWalkStraight(ourDest,closestEnemyOpt.get().pos(), ourUnit.range())){
 //			                dist = sqrt(closestEnemyOpt.get().getDistanceSqToPosition(ourDest, state.getTime()));
