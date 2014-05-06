@@ -1,0 +1,71 @@
+#Fixed buildings
+Protoss_Nexus 1 2016 240 1500 0 1 0
+#Attackers
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+Protoss_Zealot 0 3776 1232 160 0 0 0
+#Defenders
+Protoss_Probe 1 1867 125 40 0 0 0
+Protoss_Probe 1 2003 189 40 0 0 0
+Protoss_Zealot 1 2808 753 133 0 0 0
+Protoss_Zealot 1 2826 725 109 0 0 0
+Protoss_Dragoon 1 2639 508 142 0 0 0
+Protoss_Dragoon 1 2798 723 67 0 0 0
+Protoss_Dragoon 1 2821 669 180 0 0 0
+Protoss_Dragoon 1 2761 732 180 0 0 0
+Protoss_Dragoon 1 2672 532 180 0 0 0
+Protoss_Dragoon 1 2755 639 180 0 0 0
+Protoss_Dragoon 1 2496 496 180 0 0 0
+Protoss_Dragoon 1 2368 496 180 0 0 0
+Protoss_Probe 1 2027 75 40 0 0 0
+Protoss_Probe 1 2027 105 40 0 0 0
+Protoss_Probe 1 2100 75 40 0 0 0
+Protoss_Probe 1 1931 75 40 0 0 0
+Protoss_Probe 1 2027 107 40 0 0 0
+Protoss_Probe 1 2020 107 24 0 0 0
+Protoss_Probe 1 2100 75 40 0 0 0
+Protoss_Probe 1 1854 180 40 0 0 0
+Protoss_Probe 1 1991 166 40 0 0 0
+Protoss_Probe 1 2085 89 40 0 0 0
+Protoss_Probe 1 1867 125 40 0 0 0
+Protoss_Probe 1 1931 107 40 0 0 0
+Protoss_Probe 1 2148 107 40 0 0 0
+Protoss_Probe 1 2090 321 40 0 0 0
+Protoss_Probe 1 2016 240 40 0 0 0
+#Delayed Attackers
+Protoss_Zealot 0 3776 1232 64 429 0 0
+Protoss_Zealot 0 3776 1232 64 429 0 0
+#Delayed Defenders
+Protoss_Probe 1 2016 240 22 1611 0 0
+Protoss_Probe 1 2016 240 22 1309 0 0
+Protoss_Observer 1 2352 32 24 789 0 0
+Protoss_Dragoon 1 2368 496 90 36 0 0
+Protoss_Dragoon 1 2496 496 90 31 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 2112 256 600 0 0 0
+Protoss_Pylon 1 2400 416 600 0 0 0
+Protoss_Pylon 1 2176 32 600 0 0 0
+Protoss_Pylon 1 2112 192 600 0 0 0
+Protoss_Pylon 1 2176 256 600 0 0 0
+Protoss_Pylon 1 2176 192 600 0 0 0
+Protoss_Pylon 1 2720 480 600 0 0 0
+Protoss_Photon_Cannon 1 2784 512 200 0 0 0
+Protoss_Observatory 1 2352 96 50 0 0 0
+Protoss_Gateway 1 2496 496 1000 0 0 0
+Protoss_Gateway 1 2368 496 1000 0 0 0
+Protoss_Cybernetics_Core 1 2256 32 1000 0 0 0
+Protoss_Forge 1 2256 192 1100 0 0 0
+Protoss_Robotics_Facility 1 2352 32 1000 0 0 0
+Protoss_Gateway 1 2240 496 1000 0 0 0
+Protoss_Photon_Cannon 1 2048 320 20 0 0 0
+#Balanced base assault

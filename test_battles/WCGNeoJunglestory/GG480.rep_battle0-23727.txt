@@ -1,0 +1,47 @@
+#------------ ATTACKERS ----------------
+Protoss_Dragoon 0 1880 3079 180 0 0 -1 
+Protoss_Dragoon 0 1846 3182 180 0 0 -1 
+Protoss_Dragoon 0 1901 3145 180 0 0 -1 
+Protoss_Dragoon 0 1883 3046 110 0 0 -1 
+Protoss_Dragoon 0 1865 3226 180 0 0 -1 
+Protoss_Dragoon 0 1844 3063 180 0 0 -1 
+Protoss_Dragoon 0 1841 3031 180 0 0 -1 
+Protoss_Dragoon 0 1748 3008 180 0 0 -1 
+Protoss_Dragoon 0 1800 2899 180 0 0 -1 
+Protoss_Dragoon 0 1715 3042 180 0 0 -1 
+Protoss_Dragoon 0 1740 3078 180 0 0 -1 
+Protoss_Dragoon 0 1740 3191 180 0 0 -1 
+Protoss_Dragoon 0 1793 3039 180 0 0 -1 
+Protoss_Zealot 0 1779 3123 160 0 0 -1 
+Protoss_Dragoon 0 1813 2989 180 0 0 -1 
+Protoss_Dragoon 0 1735 3121 180 0 0 -1 
+Protoss_Zealot 0 1870 3109 160 0 0 -1 
+Protoss_Zealot 0 1316 2973 160 0 0 -1 
+Protoss_Zealot 0 1787 3082 160 0 0 -1 
+Protoss_Zealot 0 931 3646 160 0 0 -1 
+#------------ SHOT DEFENDERS -----------
+#------------ OTHER DEFENDERS ----------
+#------------ DEAD UNITS ----------------
+Protoss_Dragoon 1 2587 2574 173 0 0 -1 
+Protoss_Zealot 1 2398 2668 160 0 0 -1 
+Protoss_Zealot 1 2309 2842 123 0 0 -1 
+Protoss_Zealot 1 2361 2827 160 0 0 -1 
+Protoss_Zealot 1 2467 2786 115 0 0 -1 
+Protoss_Zealot 1 2277 2675 160 0 0 -1 
+Protoss_Zealot 1 2320 2605 160 0 0 -1 
+Protoss_Zealot 1 2361 2640 160 0 0 -1 
+Protoss_Zealot 1 2150 2707 160 0 0 -1 
+Protoss_Dragoon 1 2257 2768 180 0 0 -1 
+Protoss_Zealot 1 2202 2668 160 0 0 -1 
+Protoss_Zealot 1 2231 2868 160 0 0 -1 
+Protoss_Zealot 1 2216 2688 160 0 0 -1 
+Protoss_Zealot 1 2170 2836 160 0 0 -1 
+Protoss_Zealot 1 2257 2852 160 0 0 -1 
+Protoss_Zealot 1 2310 2656 160 0 0 -1 
+Protoss_Zealot 1 2185 2749 160 0 0 -1 
+Protoss_Zealot 1 2251 2676 160 0 0 -1 
+Protoss_Zealot 1 2549 2618 160 0 0 -1 
+Protoss_Zealot 1 2335 2654 160 0 0 -1 
+Protoss_Zealot 1 2132 2769 160 0 0 -1 
+Protoss_Zealot 1 2269 2655 160 0 0 -1 
+

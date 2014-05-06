@@ -1,0 +1,23 @@
+#------------ ATTACKERS ----------------
+Protoss_Zealot 0 544 368 160 0 0 -1 
+Protoss_Zealot 0 544 368 70 392 0 -1 
+Protoss_Zealot 0 544 368 70 994 0 -1 
+Protoss_Zealot 0 544 464 70 1304 0 -1 
+Protoss_Zealot 0 544 368 70 1596 0 -1 
+Protoss_Zealot 0 544 464 70 2004 0 -1 
+#------------ SHOT DEFENDERS -----------
+Protoss_Forge 1 3696 3840 110 460 0 -1 
+Protoss_Gateway 1 3680 3760 100 1426 0 -1 
+#------------ OTHER DEFENDERS ----------
+Protoss_Nexus 1 3808 3824 1500 0 1 -1 
+Protoss_Pylon 1 3776 3744 600 0 0 -1 
+Protoss_Cybernetics_Core 1 3920 3616 100 1632 0 -1 
+Protoss_Pylon 1 3808 4000 60 1896 0 -1 
+Protoss_Probe 1 3808 3824 22 2184 0 -1 
+Protoss_Probe 1 3808 3824 22 2538 0 -1 
+Protoss_Probe 1 3808 3824 22 2840 0 -1 
+Protoss_Citadel_of_Adun 1 3888 4000 90 2890 0 -1 
+#------------ DEAD UNITS ----------------
+Protoss_Probe 0 779 222 40 0 0 -1 
+Protoss_Probe 0 288 272 22 900 0 -1 
+

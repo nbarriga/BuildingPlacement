@@ -1,0 +1,51 @@
+#switched
+#------------ ATTACKERS ----------------
+Protoss_Zealot 0 1892 3372 106 0 0 -1 
+Protoss_Zealot 0 1879 3424 136 0 0 -1 
+Protoss_Zealot 0 1856 3407 160 0 0 -1 
+Protoss_Zealot 0 1855 3382 160 0 0 -1 
+Protoss_Dragoon 0 1885 3402 80 0 0 -1 
+Protoss_Dragoon 0 2007 3423 180 0 0 -1 
+Protoss_Dragoon 0 1906 3453 180 0 0 -1 
+Protoss_Dragoon 0 1984 3472 90 218 0 -1 
+#------------ SHOT DEFENDERS -----------
+Protoss_Probe 1 171 1995 40 0 0 -1 
+Protoss_Gateway 1 512 1808 1000 0 0 -1 
+Protoss_Zealot 1 1893 3030 160 0 0 -1 
+Protoss_Zealot 1 1916 2995 160 0 0 -1 
+Protoss_Zealot 1 1893 3011 160 0 0 -1 
+Protoss_Zealot 1 1916 3014 160 0 0 -1 
+Protoss_Dragoon 1 1603 3139 180 0 0 -1 
+Protoss_Dragoon 1 1655 3143 180 0 0 -1 
+Protoss_Dragoon 1 1553 3114 180 0 0 -1 
+Protoss_Dragoon 1 1612 3105 180 0 0 -1 
+Protoss_Pylon 1 416 2080 600 0 0 -1 
+Protoss_Dragoon 1 512 1904 90 78 0 -1 
+Protoss_Dragoon 1 512 1808 90 198 0 -1 
+#------------ OTHER DEFENDERS ----------
+Protoss_Nexus 1 320 2064 1500 0 1 -1 
+Protoss_Pylon 1 416 1888 600 0 0 -1 
+Protoss_Gateway 1 512 1904 1000 0 0 -1 
+Protoss_Pylon 1 416 1952 600 0 0 -1 
+Protoss_Pylon 1 32 2176 600 0 0 -1 
+Protoss_Cybernetics_Core 1 272 1792 1000 0 0 -1 
+Protoss_Pylon 1 416 2016 600 0 0 -1 
+Protoss_Robotics_Facility 1 208 1856 1000 0 0 -1 
+Protoss_Probe 1 320 2064 22 600 0 -1 
+Protoss_Observatory 1 368 1792 309 0 0 -1 
+#------------ DEAD UNITS ----------------
+Protoss_Probe 1 352 1939 40 0 0 -1 
+Protoss_Probe 1 376 2001 40 0 0 -1 
+Protoss_Probe 1 240 2196 40 0 0 -1 
+Protoss_Probe 1 152 2053 40 0 0 -1 
+Protoss_Probe 1 201 2038 40 0 0 -1 
+Protoss_Probe 1 139 2163 40 0 0 -1 
+Protoss_Probe 1 306 2115 40 0 0 -1 
+Protoss_Zealot 1 1870 3015 160 0 0 -1 
+Protoss_Probe 1 243 2110 40 0 0 -1 
+Protoss_Probe 1 231 2058 40 0 0 -1 
+Protoss_Dragoon 1 472 1968 180 0 0 -1 
+Protoss_Dragoon 1 576 1872 180 0 0 -1 
+Protoss_Probe 1 320 2064 40 0 0 -1 
+Protoss_Probe 1 320 2064 22 298 0 -1 
+

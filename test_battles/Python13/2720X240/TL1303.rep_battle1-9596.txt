@@ -1,0 +1,56 @@
+#switched
+#------------ ATTACKERS ----------------
+Protoss_Dragoon 0 1536 3888 90 17 0 -1 
+Protoss_Dragoon 0 1664 3888 90 79 0 -1 
+#------------ SHOT DEFENDERS -----------
+Protoss_Probe 1 2776 140 40 0 0 -1 
+Protoss_Probe 1 2900 276 40 0 0 -1 
+Protoss_Nexus 1 2720 240 1500 0 1 -1 
+Protoss_Probe 1 2900 212 40 0 0 -1 
+Protoss_Probe 1 2868 107 40 0 0 -1 
+Protoss_Probe 1 2900 168 40 0 0 -1 
+Protoss_Probe 1 2850 234 40 0 0 -1 
+Protoss_Probe 1 2868 148 40 0 0 -1 
+Protoss_Probe 1 2885 276 40 0 0 -1 
+Protoss_Probe 1 2868 139 40 0 0 -1 
+Protoss_Probe 1 2752 142 40 0 0 -1 
+Protoss_Probe 1 2752 100 40 0 0 -1 
+Protoss_Probe 1 2846 357 40 0 0 -1 
+Protoss_Probe 1 2868 340 40 0 0 -1 
+Protoss_Probe 1 2801 224 40 0 0 -1 
+Protoss_Probe 1 2868 288 40 0 0 -1 
+Protoss_Shuttle 1 2205 1872 140 0 0 -1 
+Protoss_Probe 1 2836 372 40 0 0 -1 
+Protoss_Reaver 1 2448 224 90 55 0 -1 
+Protoss_Dragoon 1 2432 144 90 1367 0 -1 
+#------------ OTHER DEFENDERS ----------
+Protoss_Pylon 1 2528 160 600 0 0 -1 
+Protoss_Gateway 1 2432 144 1000 0 0 -1 
+Protoss_Pylon 1 2816 256 600 0 0 -1 
+Protoss_Cybernetics_Core 1 2992 320 1000 0 0 -1 
+Protoss_Pylon 1 2784 704 600 0 0 -1 
+Protoss_Pylon 1 2272 736 600 0 0 -1 
+Protoss_Robotics_Facility 1 2448 224 1000 0 0 -1 
+Protoss_Robotics_Support_Bay 1 2768 384 900 0 0 -1 
+Protoss_Pylon 1 2656 448 600 0 0 -1 
+Protoss_Probe 1 2720 240 22 1833 0 -1 
+Protoss_Dragoon 1 2432 144 90 2119 0 -1 
+Protoss_Probe 1 2720 240 22 2135 0 -1 
+Protoss_Reaver 1 2448 224 90 2203 0 -1 
+Protoss_Probe 1 2720 240 22 2465 0 -1 
+Protoss_Probe 1 2720 240 22 2767 0 -1 
+Protoss_Pylon 1 2528 320 352 0 0 -1 
+#------------ DEAD UNITS ----------------
+Protoss_Probe 0 2356 3956 40 0 0 -1 
+Protoss_Probe 0 1336 3819 40 0 0 -1 
+Protoss_Probe 0 1259 3819 18 0 0 -1 
+Protoss_Probe 0 1259 3813 40 0 0 -1 
+Protoss_Probe 0 1227 3755 40 0 0 -1 
+Protoss_Probe 0 1259 3904 40 0 0 -1 
+Protoss_Probe 0 1227 3892 40 0 0 -1 
+Protoss_Reaver 1 2205 1872 180 0 0 -1 
+Protoss_Probe 0 1259 3883 16 0 0 -1 
+Protoss_Dragoon 1 2020 1171 180 0 0 -1 
+Protoss_Dragoon 1 2432 144 180 0 0 -1 
+Protoss_Dragoon 1 2432 144 90 439 0 -1 
+

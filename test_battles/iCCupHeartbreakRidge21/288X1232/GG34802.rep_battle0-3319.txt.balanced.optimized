@@ -1,0 +1,53 @@
+#Fixed buildings
+Protoss_Nexus 1 288 1232 1500 0 1 0
+#Attackers
+Protoss_Zealot 0 3680 1776 160 0 0 0
+Protoss_Zealot 0 3680 1776 160 0 0 0
+Protoss_Zealot 0 3680 1776 160 0 0 0
+#Defenders
+Protoss_Probe 1 139 1181 40 0 0 0
+Protoss_Probe 1 107 1268 40 0 0 0
+Protoss_Zealot 1 288 1424 100 0 0 0
+#Delayed Attackers
+#Delayed Defenders
+Protoss_Probe 1 288 1232 22 1228 0 0
+Protoss_Probe 1 288 1232 22 926 0 0
+Protoss_Zealot 1 288 1424 70 768 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 224 1344 600 0 0 0
+Protoss_Pylon 1 384 1504 600 0 0 0
+Protoss_Gateway 1 288 1424 1000 0 0 0
+Protoss_Cybernetics_Core 1 112 1088 100 0 0 0
+#Optimized against attackers from
+#test_battles/iCCupHeartbreakRidge21/288X1232_480X2160/GG34802.rep_battle1-9948.txt.balanced
+#20	# current generation
+#0.998542	# current convergence
+#200	# number of selections since initialization
+#186	# number of crossovers since initialization
+#39	# number of mutations since initialization
+#200	# number of replacements since initialization
+#199	# number of genome evaluations since initialization
+#11	# number of population evaluations since initialization
+#960000	# maximum score since initialization
+#458500	# minimum score since initialization
+#914229	# average of all scores ('on-line' performance)
+#959930	# average of maximum scores ('off-line' performance)
+#787445	# average of minimum scores ('off-line' performance)
+#
+#572610	# mean score in initial population
+#958600	# maximum score in initial population
+#458500	# minimum score in initial population
+#203604	# standard deviation of initial population
+#1	# diversity of initial population (0=identical,-1=unset)
+#
+#910940	# mean score in current population
+#960000	# maximum score in current population
+#474800	# minimum score in current population
+#153246	# standard deviation of current population
+#0.433333	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#

@@ -1,0 +1,64 @@
+#switched
+#------------ ATTACKERS ----------------
+Protoss_Zealot 0 3675 1461 156 0 0 -1 
+Protoss_Archon 0 1287 1994 261 0 0 -1 
+Protoss_Archon 0 1231 2113 360 0 0 -1 
+Protoss_Dragoon 0 1279 2064 180 0 0 -1 
+Protoss_Dragoon 0 1194 2148 180 0 0 -1 
+Protoss_High_Templar 0 1252 2055 80 0 0 -1 
+Protoss_Dragoon 0 1391 1749 180 0 0 -1 
+Protoss_Dragoon 0 1144 2086 180 0 0 -1 
+Protoss_Observer 0 1098 1327 60 0 0 -1 
+Protoss_Dragoon 0 1279 2032 180 0 0 -1 
+Protoss_Dragoon 0 1207 2286 180 0 0 -1 
+Protoss_Dragoon 0 1169 2611 180 0 0 -1 
+Protoss_Dragoon 0 1250 3308 180 0 0 -1 
+Protoss_Dragoon 0 1231 3083 180 0 0 -1 
+Protoss_Dragoon 0 972 3734 180 0 0 -1 
+Protoss_Dragoon 0 576 3568 180 0 0 -1 
+Protoss_Dragoon 0 480 3728 180 0 0 -1 
+Protoss_Dragoon 0 608 3728 180 0 0 -1 
+Protoss_Dragoon 0 480 3920 180 0 0 -1 
+Protoss_Dragoon 0 480 3824 90 50 0 -1 
+Protoss_Dragoon 0 480 3728 90 124 0 -1 
+Protoss_Dragoon 0 608 3824 90 424 0 -1 
+Protoss_Dragoon 0 608 3728 90 510 0 -1 
+#------------ SHOT DEFENDERS -----------
+#------------ OTHER DEFENDERS ----------
+#------------ DEAD UNITS ----------------
+Protoss_Probe 1 444 1252 40 0 0 -1 
+Protoss_Probe 1 516 1330 33 0 0 -1 
+Protoss_Shuttle 1 650 1784 140 0 0 -1 
+Protoss_Dragoon 1 973 1072 128 0 0 -1 
+Protoss_Forge 1 624 1344 914 0 0 -1 
+Protoss_Probe 1 427 1252 40 0 0 -1 
+Protoss_Archon 1 719 1249 184 0 0 -1 
+Protoss_Photon_Cannon 0 2400 3904 200 0 0 -1 
+Protoss_Probe 1 425 1388 40 0 0 -1 
+Protoss_Photon_Cannon 1 416 1280 200 0 0 -1 
+Protoss_Zealot 1 953 1101 121 0 0 -1 
+Protoss_Photon_Cannon 1 480 1344 200 0 0 -1 
+Protoss_Zealot 1 1006 1050 160 0 0 -1 
+Protoss_Archon 1 650 1784 360 0 0 -1 
+Protoss_Photon_Cannon 1 384 1376 200 0 0 -1 
+Protoss_Photon_Cannon 0 2560 3840 200 0 0 -1 
+Protoss_Dragoon 1 797 1165 72 0 0 -1 
+Protoss_Dragoon 1 935 1150 180 0 0 -1 
+Protoss_Dragoon 1 731 1151 180 0 0 -1 
+Protoss_Dragoon 1 830 1167 180 0 0 -1 
+Protoss_Dragoon 1 809 1128 180 0 0 -1 
+Protoss_Probe 1 347 1332 40 0 0 -1 
+Protoss_Probe 1 368 1261 40 0 0 -1 
+Protoss_High_Templar 1 288 656 80 0 0 -1 
+Protoss_Zealot 1 356 774 160 0 0 -1 
+Protoss_Zealot 1 476 750 112 0 0 -1 
+Protoss_Zealot 1 322 601 79 0 0 -1 
+Protoss_Pylon 1 800 1280 600 0 0 -1 
+Protoss_Zealot 1 384 560 70 4 0 -1 
+Protoss_Zealot 1 512 560 70 8 0 -1 
+Protoss_Zealot 1 384 464 70 14 0 -1 
+Protoss_Pylon 1 1248 1088 60 110 0 -1 
+Protoss_Photon_Cannon 1 832 1216 20 272 0 -1 
+Protoss_Photon_Cannon 1 864 1280 20 298 0 -1 
+Protoss_Probe 1 512 1264 22 814 0 -1 
+

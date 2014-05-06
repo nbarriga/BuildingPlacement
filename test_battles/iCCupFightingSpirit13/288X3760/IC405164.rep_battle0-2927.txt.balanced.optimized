@@ -1,0 +1,60 @@
+#Fixed buildings
+Protoss_Nexus 1 288 3760 1495 0 1 0
+#Attackers
+Protoss_Zealot 0 288 656 160 0 0 0
+Protoss_Zealot 0 288 656 160 0 0 0
+Protoss_Zealot 0 288 656 160 0 0 0
+#Defenders
+Protoss_Probe 1 139 3709 40 0 0 0
+Protoss_Probe 1 139 3691 40 0 0 0
+Protoss_Probe 1 209 3819 40 0 0 0
+Protoss_Probe 1 139 3892 40 0 0 0
+Protoss_Probe 1 220 3709 40 0 0 0
+Protoss_Probe 1 283 3841 40 0 0 0
+Protoss_Probe 1 107 3828 35 0 0 0
+Protoss_Probe 1 288 3760 40 0 0 0
+Protoss_Zealot 1 480 3728 60 0 0 0
+#Delayed Attackers
+#Delayed Defenders
+Protoss_Probe 1 288 3760 22 1486 0 0
+Protoss_Probe 1 288 3760 22 1004 0 0
+Protoss_Zealot 1 480 3728 70 758 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 576 3680 60 0 0 0
+Protoss_Pylon 1 608 3616 600 0 0 0
+Protoss_Pylon 1 384 3744 600 0 0 0
+Protoss_Gateway 1 416 3568 1000 0 0 0
+Protoss_Gateway 1 288 4016 307 0 0 0
+#Optimized against attackers from
+#test_battles/iCCupFightingSpirit13/2880X464/GG36519.rep_battle0-10913.txt.balanced
+#20	# current generation
+#0.999785	# current convergence
+#200	# number of selections since initialization
+#190	# number of crossovers since initialization
+#45	# number of mutations since initialization
+#200	# number of replacements since initialization
+#202	# number of genome evaluations since initialization
+#11	# number of population evaluations since initialization
+#930000	# maximum score since initialization
+#428950	# minimum score since initialization
+#905265	# average of all scores ('on-line' performance)
+#929940	# average of maximum scores ('off-line' performance)
+#734472	# average of minimum scores ('off-line' performance)
+#
+#738285	# mean score in initial population
+#929800	# maximum score in initial population
+#428950	# minimum score in initial population
+#243474	# standard deviation of initial population
+#1	# diversity of initial population (0=identical,-1=unset)
+#
+#880410	# mean score in current population
+#930000	# maximum score in current population
+#456800	# minimum score in current population
+#148850	# standard deviation of current population
+#0.453333	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#

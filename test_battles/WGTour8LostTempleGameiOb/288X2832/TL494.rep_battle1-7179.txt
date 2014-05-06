@@ -1,0 +1,63 @@
+#switched
+#------------ ATTACKERS ----------------
+Protoss_Dragoon 0 1472 3632 90 1634 0 -1 
+Protoss_Dragoon 0 1472 3728 90 1639 0 -1 
+Protoss_Dragoon 0 1472 3632 90 2386 0 -1 
+Protoss_Dragoon 0 1472 3728 90 2391 0 -1 
+#------------ SHOT DEFENDERS -----------
+Protoss_Probe 1 107 2772 40 0 0 -1 
+Protoss_Probe 1 176 2868 40 0 0 -1 
+Protoss_Probe 1 184 2882 40 0 0 -1 
+Protoss_Probe 1 107 2772 40 0 0 -1 
+Protoss_Pylon 1 256 3136 600 0 0 -1 
+Protoss_Probe 1 107 2827 40 0 0 -1 
+Protoss_Probe 1 121 2772 40 0 0 -1 
+Protoss_Dragoon 1 352 2512 90 1794 0 -1 
+Protoss_Gateway 1 480 2512 100 1889 0 -1 
+Protoss_Pylon 1 256 3040 60 2439 0 -1 
+Protoss_Dragoon 1 480 2512 90 3022 0 -1 
+#------------ OTHER DEFENDERS ----------
+Protoss_Probe 1 107 2868 40 0 0 -1 
+Protoss_Nexus 1 288 2832 1500 0 1 -1 
+Protoss_Pylon 1 416 2656 600 0 0 -1 
+Protoss_Gateway 1 352 2512 1000 0 0 -1 
+Protoss_Cybernetics_Core 1 240 2528 1000 0 0 -1 
+Protoss_Robotics_Facility 1 240 2592 1000 0 0 -1 
+Protoss_Pylon 1 992 3008 600 0 0 -1 
+Protoss_Robotics_Support_Bay 1 336 2592 900 0 0 -1 
+Protoss_Pylon 1 480 2656 60 2093 0 -1 
+Protoss_Probe 1 288 2832 22 3447 0 -1 
+Protoss_Reaver 1 240 2592 90 3522 0 -1 
+Protoss_Probe 1 288 2832 22 3807 0 -1 
+Protoss_Dragoon 1 352 2512 90 3967 0 -1 
+Protoss_Dragoon 1 480 2512 90 4297 0 -1 
+#------------ DEAD UNITS ----------------
+Protoss_Probe 1 139 2996 40 0 0 -1 
+Protoss_Probe 1 107 2923 40 0 0 -1 
+Protoss_Probe 1 121 2844 40 0 0 -1 
+Protoss_Probe 1 107 2772 40 0 0 -1 
+Protoss_Probe 1 209 2917 40 0 0 -1 
+Protoss_Pylon 1 480 2016 600 0 0 -1 
+Protoss_Probe 1 107 2827 40 0 0 -1 
+Protoss_Zealot 1 339 2106 160 0 0 -1 
+Protoss_Probe 1 139 2808 40 0 0 -1 
+Protoss_Dragoon 1 350 1936 180 0 0 -1 
+Protoss_Probe 1 139 2947 40 0 0 -1 
+Protoss_Probe 1 107 2756 40 0 0 -1 
+Protoss_Dragoon 1 539 2062 180 0 0 -1 
+Protoss_Probe 1 107 2837 40 0 0 -1 
+Protoss_Shuttle 1 240 2592 140 0 0 -1 
+Protoss_Probe 1 288 2832 40 0 0 -1 
+Protoss_Dragoon 1 352 2512 90 217 0 -1 
+Protoss_Probe 1 288 2832 22 549 0 -1 
+Protoss_Shield_Battery 1 496 2080 40 693 0 -1 
+Protoss_Reaver 1 240 2592 90 792 0 -1 
+Protoss_Probe 1 288 2832 22 867 0 -1 
+Protoss_Dragoon 1 352 2512 90 1042 0 -1 
+Protoss_Scarab 1 1025 3810 30 2412 0 -1 
+Protoss_Scarab 1 1047 3809 30 2349 0 -1 
+Protoss_Scarab 1 1066 3795 30 2477 0 -1 
+Protoss_Scarab 1 1058 3810 30 2542 0 -1 
+Protoss_Dragoon 1 352 2512 90 2737 0 -1 
+Protoss_Scarab 1 338 3158 30 3203 0 -1 
+

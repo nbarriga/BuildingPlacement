@@ -1,0 +1,53 @@
+#------------ ATTACKERS ----------------
+Protoss_Zealot 0 1792 3568 155 0 0 -1 
+Protoss_Zealot 0 1664 3632 160 0 0 -1 
+Protoss_Zealot 0 1792 3568 70 470 0 -1 
+Protoss_Zealot 0 1664 3632 70 475 0 -1 
+Protoss_Zealot 0 1792 3568 70 1180 0 -1 
+Protoss_Zealot 0 1664 3632 70 1185 0 -1 
+Protoss_Dragoon 0 1792 3568 90 2795 0 -1 
+Protoss_Dragoon 0 1664 3632 90 2800 0 -1 
+#------------ SHOT DEFENDERS -----------
+Protoss_Probe 1 3956 779 40 0 0 -1 
+Protoss_Probe 1 3988 811 40 0 0 -1 
+Protoss_Gateway 1 3712 1456 942 0 0 -1 
+Protoss_Probe 1 3847 996 40 0 0 -1 
+Protoss_Zealot 1 3712 1456 70 465 0 -1 
+Protoss_Zealot 1 3712 1456 70 2425 0 -1 
+#------------ OTHER DEFENDERS ----------
+Protoss_Nexus 1 3808 912 1500 0 1 -1 
+Protoss_Pylon 1 3648 1376 600 0 0 -1 
+Protoss_Pylon 1 3712 1376 600 0 0 -1 
+Protoss_Pylon 1 3648 928 600 0 0 -1 
+Protoss_Cybernetics_Core 1 3664 864 100 614 0 -1 
+Protoss_Pylon 1 4000 1120 60 1438 0 -1 
+Protoss_Zealot 1 3712 1456 70 3027 0 -1 
+Protoss_Gateway 1 3872 1104 100 3125 0 -1 
+Protoss_Probe 1 3808 912 22 3150 0 -1 
+Protoss_Probe 1 3808 912 22 3452 0 -1 
+Protoss_Gateway 1 3872 1200 100 3683 0 -1 
+Protoss_Dragoon 1 3712 1456 90 3710 0 -1 
+Protoss_Probe 1 3808 912 22 3754 0 -1 
+Protoss_Forge 1 3728 992 110 3945 0 -1 
+Protoss_Pylon 1 3520 1536 60 4225 0 -1 
+Protoss_Probe 1 3808 912 22 4225 0 -1 
+Protoss_Dragoon 1 3872 1104 90 4545 0 -1 
+Protoss_Dragoon 1 3712 1456 90 4585 0 -1 
+Protoss_Photon_Cannon 1 3552 1632 186 0 0 -1 
+Protoss_Robotics_Facility 1 3632 992 376 0 0 -1 
+#------------ DEAD UNITS ----------------
+Protoss_Probe 1 3956 779 35 0 0 -1 
+Protoss_Probe 0 3910 785 29 0 0 -1 
+Protoss_Zealot 1 3804 1242 160 0 0 -1 
+Protoss_Zealot 1 3708 1083 160 0 0 -1 
+Protoss_Gateway 1 3584 1456 1000 0 0 -1 
+Protoss_Zealot 1 3804 1182 129 0 0 -1 
+Protoss_Zealot 1 3712 1456 160 0 0 -1 
+Protoss_Zealot 1 3584 1456 160 0 0 -1 
+Protoss_Probe 1 3808 912 22 90 0 -1 
+Protoss_Zealot 1 3584 1456 70 455 0 -1 
+Protoss_Gateway 1 3584 1456 100 920 0 -1 
+Protoss_Zealot 1 3712 1456 70 1685 0 -1 
+Protoss_Zealot 1 3584 1456 70 1995 0 -1 
+Protoss_Zealot 1 3584 1456 70 2780 0 -1 
+

@@ -1,0 +1,62 @@
+#------------ ATTACKERS ----------------
+Protoss_Zealot 0 3373 3791 160 0 0 -1 
+Protoss_Zealot 0 1962 1889 160 0 0 -1 
+Protoss_Zealot 0 1650 1455 160 0 0 -1 
+Protoss_Zealot 0 902 356 155 0 0 -1 
+Protoss_Zealot 0 288 528 160 0 0 -1 
+Protoss_Zealot 0 448 368 155 0 0 -1 
+Protoss_Zealot 0 480 592 160 0 0 -1 
+Protoss_Zealot 0 288 528 70 112 0 -1 
+Protoss_Zealot 0 448 368 70 282 0 -1 
+Protoss_Zealot 0 480 592 70 604 0 -1 
+Protoss_Zealot 0 288 528 70 914 0 -1 
+Protoss_Zealot 0 448 368 70 1074 0 -1 
+Protoss_Zealot 0 480 592 70 1216 0 -1 
+Protoss_Zealot 0 288 528 70 1522 0 -1 
+Protoss_Zealot 0 480 592 70 2140 0 -1 
+Protoss_Zealot 0 288 528 70 2154 0 -1 
+#------------ SHOT DEFENDERS -----------
+#------------ OTHER DEFENDERS ----------
+#------------ DEAD UNITS ----------------
+Protoss_Probe 1 3956 3741 40 0 0 -1 
+Protoss_Probe 1 3956 3875 40 0 0 -1 
+Protoss_Nexus 1 3808 3856 1500 0 1 -1 
+Protoss_Probe 1 3956 3787 40 0 0 -1 
+Protoss_Probe 1 3988 3787 40 0 0 -1 
+Protoss_Probe 1 3885 3803 40 0 0 -1 
+Protoss_Probe 1 3988 3883 40 0 0 -1 
+Protoss_Probe 1 3840 3730 40 0 0 -1 
+Protoss_Pylon 1 3712 3968 600 0 0 -1 
+Protoss_Probe 1 3882 3886 40 0 0 -1 
+Protoss_Gateway 1 3648 3824 1000 0 0 -1 
+Protoss_Pylon 1 3904 3968 600 0 0 -1 
+Protoss_Probe 1 3841 3784 40 0 0 -1 
+Protoss_Probe 1 3953 4000 40 0 0 -1 
+Protoss_Cybernetics_Core 1 3600 3936 1000 0 0 -1 
+Protoss_Probe 1 3864 3716 40 0 0 -1 
+Protoss_Pylon 1 3680 3712 600 0 0 -1 
+Protoss_Probe 1 3956 3973 40 0 0 -1 
+Protoss_Robotics_Facility 1 3472 3904 1000 0 0 -1 
+Protoss_Probe 1 3897 3883 40 0 0 -1 
+Protoss_Probe 1 3988 3907 40 0 0 -1 
+Protoss_Probe 1 3956 3801 40 0 0 -1 
+Protoss_Probe 1 3988 3924 40 0 0 -1 
+Protoss_Zealot 1 3394 3812 160 0 0 -1 
+Protoss_Probe 1 3956 3944 40 0 0 -1 
+Protoss_Probe 1 3956 3787 40 0 0 -1 
+Protoss_Zealot 1 3648 3824 160 0 0 -1 
+Protoss_Probe 1 3808 3856 40 0 0 -1 
+Protoss_Probe 1 3808 3856 22 24 0 -1 
+Protoss_Zealot 1 3648 3824 70 282 0 -1 
+Protoss_Probe 1 3808 3856 22 412 0 -1 
+Protoss_Probe 1 3808 3856 22 816 0 -1 
+Protoss_Pylon 1 3328 3552 60 886 0 -1 
+Protoss_Zealot 1 3648 3824 70 992 0 -1 
+Protoss_Probe 1 3808 3856 22 1126 0 -1 
+Protoss_Probe 1 3808 3856 22 1436 0 -1 
+Protoss_Zealot 1 3648 3824 70 1600 0 -1 
+Protoss_Probe 1 3808 3856 22 1746 0 -1 
+Protoss_Probe 1 3808 3856 22 2056 0 -1 
+Protoss_Zealot 1 3648 3824 70 2208 0 -1 
+Protoss_Probe 1 3808 3856 22 2366 0 -1 
+

@@ -1,0 +1,117 @@
+#Fixed buildings
+Protoss_Nexus 1 1056 272 1500 0 1 0
+#Attackers
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1570 2664 160 0 0 0
+Protoss_Dragoon 0 1783 803 180 0 0 0
+Protoss_Dragoon 0 1984 3824 180 0 0 0
+Protoss_Dragoon 0 2048 3952 180 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+Protoss_Zealot 0 1457 324 160 0 0 0
+#Defenders
+Protoss_Probe 1 907 380 40 0 0 0
+Protoss_Probe 1 907 284 40 0 0 0
+Protoss_Probe 1 884 264 40 0 0 0
+Protoss_Probe 1 916 396 40 0 0 0
+Protoss_Probe 1 875 276 40 0 0 0
+Protoss_Probe 1 1056 272 40 0 0 0
+Protoss_Probe 1 954 318 40 0 0 0
+Protoss_Probe 1 983 321 40 0 0 0
+Protoss_Probe 1 875 276 40 0 0 0
+Protoss_Probe 1 875 235 40 0 0 0
+Protoss_Probe 1 907 348 40 0 0 0
+Protoss_Probe 1 1116 135 40 0 0 0
+Protoss_Probe 1 1090 221 40 0 0 0
+Protoss_Probe 1 1088 132 40 0 0 0
+Protoss_Probe 1 1052 132 40 0 0 0
+Protoss_Probe 1 943 284 40 0 0 0
+Protoss_Probe 1 922 192 40 0 0 0
+Protoss_Probe 1 875 235 40 0 0 0
+Protoss_Probe 1 991 221 40 0 0 0
+Protoss_Probe 1 875 276 40 0 0 0
+Protoss_Probe 1 986 284 40 0 0 0
+Protoss_Probe 1 907 340 40 0 0 0
+Protoss_Probe 1 875 276 40 0 0 0
+Protoss_Probe 1 878 270 40 0 0 0
+Protoss_Probe 1 875 276 40 0 0 0
+Protoss_Zealot 1 1239 421 160 0 0 0
+Protoss_Probe 1 907 180 40 0 0 0
+Protoss_Probe 1 908 139 40 0 0 0
+Protoss_Probe 1 907 139 40 0 0 0
+Protoss_Zealot 1 1214 486 160 0 0 0
+Protoss_Dragoon 1 1184 368 180 0 0 0
+Protoss_Dragoon 1 1184 272 180 0 0 0
+Protoss_Probe 1 946 377 40 0 0 0
+#Delayed Attackers
+Protoss_Dragoon 0 2048 3952 90 527 0 0
+Protoss_Dragoon 0 1984 3824 90 521 0 0
+#Delayed Defenders
+Protoss_Zealot 1 1184 368 70 1751 0 0
+Protoss_Dragoon 1 1184 272 90 1499 0 0
+Protoss_Dragoon 1 816 96 90 1307 0 0
+Protoss_Dragoon 1 816 96 90 1307 0 0
+Protoss_Probe 1 1056 272 22 549 0 0
+Protoss_Shuttle 1 816 96 68 389 0 0
+Protoss_Dragoon 1 1184 272 90 353 0 0
+Protoss_Dragoon 1 1184 368 90 279 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 768 256 600 0 0 0
+Protoss_Pylon 1 1120 672 600 0 0 0
+Protoss_Pylon 1 992 448 600 0 0 0
+Protoss_Pylon 1 768 608 600 0 0 0
+Protoss_Pylon 1 1376 512 600 0 0 0
+Protoss_Pylon 1 864 320 60 0 0 0
+Protoss_Gateway 1 1088 592 1000 0 0 0
+Protoss_Gateway 1 768 336 1000 0 0 0
+Protoss_Cybernetics_Core 1 1136 352 1000 0 0 0
+Protoss_Robotics_Support_Bay 1 1328 640 90 0 0 0
+Protoss_Forge 1 848 96 1100 0 0 0
+Protoss_Robotics_Facility 1 1424 256 1000 0 0 0
+Protoss_Photon_Cannon 1 1344 704 200 0 0 0
+Protoss_Photon_Cannon 1 544 160 200 0 0 0
+Protoss_Photon_Cannon 1 1120 512 138 0 0 0
+#Optimized against attackers from
+#test_battles/iCCupDestination11/1056X272/GG24144.rep_battle1-10558.txt.balanced
+#test_battles/iCCupDestination11/1056X272/GG36521.rep_battle0-3613.txt.balanced
+#test_battles/iCCupDestination11/2112X3824/GG17062.rep_battle0-3928.txt.balanced
+#20	# current generation
+#0.995472	# current convergence
+#200	# number of selections since initialization
+#172	# number of crossovers since initialization
+#140	# number of mutations since initialization
+#200	# number of replacements since initialization
+#190	# number of genome evaluations since initialization
+#11	# number of population evaluations since initialization
+#3.15825e+06	# maximum score since initialization
+#3.11102e+06	# minimum score since initialization
+#3.1363e+06	# average of all scores ('on-line' performance)
+#3.15238e+06	# average of maximum scores ('off-line' performance)
+#3.12491e+06	# average of minimum scores ('off-line' performance)
+#
+#3.13092e+06	# mean score in initial population
+#3.14395e+06	# maximum score in initial population
+#3.11545e+06	# minimum score in initial population
+#8744.24	# standard deviation of initial population
+#0.991111	# diversity of initial population (0=identical,-1=unset)
+#
+#3.13192e+06	# mean score in current population
+#3.15825e+06	# maximum score in current population
+#3.12252e+06	# minimum score in current population
+#10783.5	# standard deviation of current population
+#0.528889	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#

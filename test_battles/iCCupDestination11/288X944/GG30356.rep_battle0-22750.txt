@@ -1,0 +1,54 @@
+#switched
+#------------ ATTACKERS ----------------
+Protoss_Dragoon 0 1485 3672 180 0 0 -1 
+Protoss_Shuttle 0 1778 2442 140 0 0 -1 
+Protoss_Dragoon 0 1423 3199 153 0 0 -1 
+Protoss_Dragoon 0 1355 3687 180 0 0 -1 
+#------------ SHOT DEFENDERS -----------
+#------------ OTHER DEFENDERS ----------
+#------------ DEAD UNITS ----------------
+Protoss_Probe 1 160 811 40 0 0 -1 
+Protoss_Probe 1 180 779 40 0 0 -1 
+Protoss_Probe 1 363 794 33 0 0 -1 
+Protoss_Dragoon 1 1722 1701 180 0 0 -1 
+Protoss_Dragoon 1 1333 1818 53 0 0 -1 
+Protoss_Dragoon 1 1320 1775 180 0 0 -1 
+Protoss_Dragoon 1 1283 1751 156 0 0 -1 
+Protoss_Dragoon 1 1472 1849 180 0 0 -1 
+Protoss_Dragoon 1 1217 1592 70 0 0 -1 
+Protoss_Observer 1 1491 1764 53 0 0 -1 
+Protoss_Dragoon 1 1818 1754 180 0 0 -1 
+Protoss_Dragoon 1 1436 1861 180 0 0 -1 
+Protoss_Dragoon 1 1738 1816 180 0 0 -1 
+Protoss_Dragoon 1 1093 1885 137 0 0 -1 
+Protoss_Dragoon 1 1390 1814 117 0 0 -1 
+Protoss_Probe 1 277 851 40 0 0 -1 
+Protoss_Dragoon 1 1234 1625 165 0 0 -1 
+Protoss_High_Templar 1 1359 1729 58 0 0 -1 
+Protoss_Nexus 1 288 944 1500 0 1 -1 
+Protoss_Probe 1 276 893 40 0 0 -1 
+Protoss_Probe 1 276 811 33 0 0 -1 
+Protoss_Zealot 1 1896 540 152 0 0 -1 
+Protoss_Zealot 1 1773 410 124 0 0 -1 
+Protoss_Probe 1 267 786 17 0 0 -1 
+Protoss_High_Templar 1 1751 1689 63 0 0 -1 
+Protoss_High_Templar 1 1662 1676 80 0 0 -1 
+Protoss_High_Templar 1 1830 1610 80 0 0 -1 
+Protoss_Zealot 1 1754 1754 160 0 0 -1 
+Protoss_Zealot 1 1441 1831 160 0 0 -1 
+Protoss_Probe 1 220 811 40 0 0 -1 
+Protoss_High_Templar 1 1634 1627 34 0 0 -1 
+Protoss_Dragoon 1 1526 1840 180 0 0 -1 
+Protoss_Zealot 1 1833 1847 160 0 0 -1 
+Protoss_Zealot 1 1870 1866 160 0 0 -1 
+Protoss_Zealot 1 1423 1801 160 0 0 -1 
+Protoss_Dragoon 1 1785 1772 180 0 0 -1 
+Protoss_Zealot 1 1789 1730 160 0 0 -1 
+Protoss_Zealot 1 1768 1711 160 0 0 -1 
+Protoss_Zealot 1 1536 1733 160 0 0 -1 
+Protoss_Zealot 1 1899 591 160 0 0 -1 
+Protoss_Zealot 1 1897 567 160 0 0 -1 
+Protoss_High_Templar 1 1280 112 80 0 0 -1 
+Protoss_High_Templar 1 1312 336 80 0 0 -1 
+Protoss_High_Templar 1 1440 336 54 0 0 -1 
+

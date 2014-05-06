@@ -1,0 +1,24 @@
+#switched
+#------------ ATTACKERS ----------------
+Protoss_Dragoon 0 3154 2740 180 0 0 -1 
+Protoss_Dragoon 0 2520 3069 180 0 0 -1 
+Protoss_Dragoon 0 2434 3219 180 0 0 -1 
+Protoss_Dragoon 0 2565 3023 180 0 0 -1 
+Protoss_Dragoon 0 2624 2965 127 0 0 -1 
+#------------ SHOT DEFENDERS -----------
+Protoss_Nexus 1 2304 3376 1500 0 1 -1 
+Protoss_Pylon 1 2400 3392 600 0 0 -1 
+#------------ OTHER DEFENDERS ----------
+Protoss_Pylon 1 512 3200 600 0 0 -1 
+Protoss_Gateway 1 736 3184 1000 0 0 -1 
+Protoss_Cybernetics_Core 1 432 3328 376 0 0 -1 
+Protoss_Citadel_of_Adun 1 496 3264 900 0 0 -1 
+Protoss_Pylon 1 352 3072 600 0 0 -1 
+Protoss_Gateway 1 608 3184 1000 0 0 -1 
+Protoss_Templar_Archives 1 496 3136 1000 0 0 -1 
+Protoss_Pylon 1 416 3264 600 0 0 -1 
+Protoss_Pylon 1 928 3136 600 0 0 -1 
+Protoss_Dark_Templar 1 736 3184 48 416 0 -1 
+Protoss_Dark_Templar 1 608 3184 48 422 0 -1 
+#------------ DEAD UNITS ----------------
+

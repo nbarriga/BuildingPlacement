@@ -1,0 +1,64 @@
+#switched
+#------------ ATTACKERS ----------------
+Protoss_Zealot 0 3744 1136 70 704 0 -1 
+Protoss_Zealot 0 3872 1136 70 1737 0 -1 
+Protoss_Zealot 0 3744 1136 70 1908 0 -1 
+Protoss_Zealot 0 3872 1136 70 3645 0 -1 
+Protoss_Zealot 0 3744 1136 70 3850 0 -1 
+Protoss_Dragoon 0 3744 1136 90 4730 0 -1 
+Protoss_Dragoon 0 3872 1136 90 4735 0 -1 
+Protoss_Dragoon 0 3744 1136 90 5482 0 -1 
+#------------ SHOT DEFENDERS -----------
+Protoss_Zealot 1 3597 1066 160 0 0 -1 
+Protoss_Zealot 1 2739 730 160 0 0 -1 
+Protoss_Zealot 1 2624 464 70 455 0 -1 
+Protoss_Zealot 1 2496 464 70 460 0 -1 
+Protoss_Zealot 1 2624 464 70 1057 0 -1 
+Protoss_Pylon 1 3104 1472 60 1440 0 -1 
+Protoss_Zealot 1 2624 464 70 1659 0 -1 
+Protoss_Shield_Battery 1 3248 1536 40 2057 0 -1 
+Protoss_Shield_Battery 1 3248 1472 40 2117 0 -1 
+Protoss_Shield_Battery 1 3248 1408 40 2193 0 -1 
+Protoss_Photon_Cannon 1 3168 1472 20 2367 0 -1 
+Protoss_Pylon 1 3328 1280 60 3402 0 -1 
+Protoss_Photon_Cannon 1 3264 1344 20 3506 0 -1 
+Protoss_Pylon 1 3456 1216 60 4567 0 -1 
+Protoss_Zealot 1 2624 464 70 4720 0 -1 
+Protoss_Zealot 1 2496 464 70 4725 0 -1 
+Protoss_Photon_Cannon 1 3392 1216 20 5222 0 -1 
+Protoss_Photon_Cannon 1 3392 1152 20 5315 0 -1 
+#------------ OTHER DEFENDERS ----------
+Protoss_Probe 1 2100 104 40 0 0 -1 
+Protoss_Nexus 1 2016 240 1500 0 1 -1 
+Protoss_Pylon 1 2496 352 600 0 0 -1 
+Protoss_Gateway 1 2624 464 1000 0 0 -1 
+Protoss_Gateway 1 2496 464 1000 0 0 -1 
+Protoss_Pylon 1 2240 256 600 0 0 -1 
+Protoss_Pylon 1 2208 160 600 0 0 -1 
+Protoss_Pylon 1 2336 96 600 0 0 -1 
+Protoss_Forge 1 2416 96 110 616 0 -1 
+Protoss_Pylon 1 2400 224 60 1877 0 -1 
+Protoss_Zealot 1 2624 464 70 5530 0 -1 
+Protoss_Zealot 1 2496 464 70 5535 0 -1 
+Protoss_Probe 1 2016 240 22 5545 0 -1 
+Protoss_Photon_Cannon 1 3456 1152 20 6107 0 -1 
+Protoss_Photon_Cannon 1 3456 1088 20 6397 0 -1 
+Protoss_Photon_Cannon 1 3520 1152 20 6592 0 -1 
+Protoss_Photon_Cannon 1 3520 1088 20 6613 0 -1 
+#------------ DEAD UNITS ----------------
+Protoss_Probe 0 3875 963 40 0 0 -1 
+Protoss_Probe 0 3589 1049 40 0 0 -1 
+Protoss_Zealot 1 3566 1060 135 0 0 -1 
+Protoss_Probe 0 3612 1048 40 0 0 -1 
+Protoss_Probe 0 3988 1003 40 0 0 -1 
+Protoss_Zealot 1 3561 985 160 0 0 -1 
+Protoss_Zealot 1 3575 1006 160 0 0 -1 
+Protoss_Zealot 1 2496 464 70 1062 0 -1 
+Protoss_Zealot 1 2496 464 70 1664 0 -1 
+Protoss_Probe 0 3808 912 22 1977 0 -1 
+Protoss_Pylon 1 3392 1216 60 3066 0 -1 
+Protoss_Zealot 1 2624 464 70 3640 0 -1 
+Protoss_Zealot 1 2496 464 70 3645 0 -1 
+Protoss_Photon_Cannon 1 3520 1216 20 4255 0 -1 
+Protoss_Photon_Cannon 1 3392 1216 20 4507 0 -1 
+

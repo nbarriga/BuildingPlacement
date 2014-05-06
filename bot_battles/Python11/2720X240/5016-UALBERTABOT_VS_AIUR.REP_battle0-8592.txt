@@ -1,0 +1,57 @@
+#switched
+#------------ ATTACKERS ----------------
+Protoss_Zealot 0 2050 198 160 0 0 -1 
+Protoss_Zealot 0 1028 1668 160 0 0 -1 
+Protoss_Zealot 0 1075 1621 160 0 0 -1 
+Protoss_Zealot 0 395 2070 160 0 0 -1 
+Protoss_Zealot 0 361 2729 160 0 0 -1 
+Protoss_Zealot 0 448 2736 160 0 0 -1 
+Protoss_Zealot 0 256 3056 160 0 0 -1 
+Protoss_Zealot 0 448 2896 160 0 0 -1 
+Protoss_Zealot 0 448 2736 70 137 0 -1 
+Protoss_Zealot 0 256 3056 70 389 0 -1 
+Protoss_Zealot 0 448 2736 70 1633 0 -1 
+#------------ SHOT DEFENDERS -----------
+#------------ OTHER DEFENDERS ----------
+#------------ DEAD UNITS ----------------
+Protoss_Probe 1 2868 139 40 0 0 -1 
+Protoss_Nexus 1 2720 240 1500 0 1 -1 
+Protoss_Probe 1 2754 164 40 0 0 -1 
+Protoss_Probe 1 2840 165 40 0 0 -1 
+Protoss_Probe 1 2820 292 40 0 0 -1 
+Protoss_Pylon 1 2624 352 600 0 0 -1 
+Protoss_Probe 1 2772 296 40 0 0 -1 
+Protoss_Probe 1 2752 100 40 0 0 -1 
+Protoss_Gateway 1 2560 208 1000 0 0 -1 
+Protoss_Probe 1 2836 101 40 0 0 -1 
+Protoss_Probe 1 2756 137 40 0 0 -1 
+Protoss_Gateway 1 2528 464 1000 0 0 -1 
+Protoss_Pylon 1 2592 96 600 0 0 -1 
+Protoss_Probe 1 2800 267 40 0 0 -1 
+Protoss_Probe 1 2788 213 40 0 0 -1 
+Protoss_Pylon 1 2528 320 600 0 0 -1 
+Protoss_Probe 1 2868 276 40 0 0 -1 
+Protoss_Cybernetics_Core 1 2736 448 1000 0 0 -1 
+Protoss_Probe 1 2900 276 40 0 0 -1 
+Protoss_Pylon 1 2496 64 600 0 0 -1 
+Protoss_Probe 1 2868 267 40 0 0 -1 
+Protoss_Probe 1 2724 100 29 0 0 -1 
+Protoss_Probe 1 2868 372 40 0 0 -1 
+Protoss_Gateway 1 2400 176 1000 0 0 -1 
+Protoss_Probe 1 2813 212 40 0 0 -1 
+Protoss_Probe 1 2868 359 40 0 0 -1 
+Protoss_Probe 1 2849 128 40 0 0 -1 
+Protoss_Probe 1 2868 340 40 0 0 -1 
+Protoss_Zealot 1 2144 213 98 0 0 -1 
+Protoss_Dragoon 1 2165 242 180 0 0 -1 
+Protoss_Probe 1 2808 212 40 0 0 -1 
+Protoss_Probe 1 2900 171 40 0 0 -1 
+Protoss_Probe 1 2900 203 40 0 0 -1 
+Protoss_Pylon 1 2848 480 600 0 0 -1 
+Protoss_Zealot 1 2400 176 70 415 0 -1 
+Protoss_Zealot 1 2528 464 70 789 0 -1 
+Protoss_Probe 1 2720 240 22 1099 0 -1 
+Protoss_Probe 1 2720 240 22 1409 0 -1 
+Protoss_Probe 1 2720 240 22 1719 0 -1 
+Protoss_Probe 1 2720 240 22 2029 0 -1 
+

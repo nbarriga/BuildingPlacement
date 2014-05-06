@@ -1,0 +1,60 @@
+#------------ ATTACKERS ----------------
+Protoss_Dragoon 0 4036 428 166 0 0 -1 
+Protoss_Zealot 0 2988 563 103 0 0 -1 
+Protoss_Zealot 0 3011 568 160 0 0 -1 
+Protoss_Dragoon 0 3035 746 180 0 0 -1 
+Protoss_Zealot 0 3187 796 160 0 0 -1 
+Protoss_Zealot 0 3164 786 160 0 0 -1 
+Protoss_Dragoon 0 3214 793 180 0 0 -1 
+Protoss_Dark_Templar 0 1668 3662 120 0 0 -1 
+Protoss_Dark_Templar 0 3196 835 120 0 0 -1 
+Protoss_Dark_Templar 0 3032 672 120 0 0 -1 
+#------------ SHOT DEFENDERS -----------
+Protoss_Archon 1 2638 2450 360 0 0 -1 
+Protoss_Archon 1 2604 2484 360 0 0 -1 
+Protoss_Pylon 1 1184 3904 600 0 0 -1 
+Protoss_Dragoon 1 1359 3814 180 0 0 -1 
+#------------ OTHER DEFENDERS ----------
+Protoss_Nexus 1 384 3856 1500 0 1 -1 
+Protoss_Pylon 1 544 3680 600 0 0 -1 
+Protoss_Gateway 1 544 3600 1000 0 0 -1 
+Protoss_Cybernetics_Core 1 560 3744 1000 0 0 -1 
+Protoss_Pylon 1 992 3776 600 0 0 -1 
+Protoss_Citadel_of_Adun 1 560 3808 900 0 0 -1 
+Protoss_Robotics_Facility 1 624 3680 1000 0 0 -1 
+Protoss_Templar_Archives 1 656 3744 1000 0 0 -1 
+Protoss_Gateway 1 672 3600 1000 0 0 -1 
+Protoss_Pylon 1 288 3232 600 0 0 -1 
+Protoss_Observatory 1 752 3808 500 0 0 -1 
+Protoss_Pylon 1 128 3872 600 0 0 -1 
+Protoss_Pylon 1 384 4032 600 0 0 -1 
+Protoss_Pylon 1 448 4032 600 0 0 -1 
+Protoss_Pylon 1 512 4032 600 0 0 -1 
+Protoss_Gateway 1 576 3952 1000 0 0 -1 
+Protoss_Gateway 1 704 3952 1000 0 0 -1 
+Protoss_Pylon 1 576 4032 600 0 0 -1 
+Protoss_Gateway 1 1216 3824 1000 0 0 -1 
+Protoss_Pylon 1 1632 3936 600 0 0 -1 
+Protoss_High_Templar 1 544 3600 44 9 0 -1 
+Protoss_Zealot 1 704 3952 70 39 0 -1 
+Protoss_Zealot 1 576 3952 70 44 0 -1 
+Protoss_Observer 1 624 3680 24 189 0 -1 
+Protoss_Observer 1 624 3680 24 794 0 -1 
+Protoss_Dark_Templar 1 1216 3824 48 894 0 -1 
+Protoss_Forge 1 304 4032 445 0 0 -1 
+#------------ DEAD UNITS ----------------
+Protoss_Probe 1 1359 3814 40 0 0 -1 
+Protoss_Probe 1 1112 3849 40 0 0 -1 
+Protoss_Probe 1 1112 3849 40 0 0 -1 
+Protoss_Probe 1 1112 3849 40 0 0 -1 
+Protoss_Probe 1 1112 3849 40 0 0 -1 
+Protoss_Probe 1 1112 3849 40 0 0 -1 
+Protoss_Probe 1 1359 3814 40 0 0 -1 
+Protoss_Probe 1 1112 3849 40 0 0 -1 
+Protoss_Probe 1 1359 3814 40 0 0 -1 
+Protoss_Probe 1 1112 3849 40 0 0 -1 
+Protoss_Probe 1 1112 3849 40 0 0 -1 
+Protoss_Probe 1 1586 3907 40 0 0 -1 
+Protoss_Nexus 1 1600 3856 1500 0 1 -1 
+Protoss_Dark_Templar 1 1216 3824 120 0 0 -1 
+

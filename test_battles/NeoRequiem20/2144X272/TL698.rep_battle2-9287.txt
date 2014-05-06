@@ -1,0 +1,55 @@
+#switched
+#------------ ATTACKERS ----------------
+Protoss_Dragoon 0 2474 709 180 0 0 -1 
+Protoss_Dragoon 0 2437 682 180 0 0 -1 
+Protoss_Dragoon 0 2514 742 180 0 0 -1 
+Protoss_Dragoon 0 2623 2005 180 0 0 -1 
+Protoss_Dragoon 0 3616 2256 180 0 0 -1 
+Protoss_Dragoon 0 3616 2256 90 559 0 -1 
+#------------ SHOT DEFENDERS -----------
+Protoss_Probe 1 2172 221 40 0 0 -1 
+Protoss_Pylon 1 2080 512 600 0 0 -1 
+Protoss_Gateway 1 2176 592 1000 0 0 -1 
+Protoss_Probe 1 2172 163 40 0 0 -1 
+Protoss_Probe 1 2292 203 40 0 0 -1 
+Protoss_Probe 1 2251 133 40 0 0 -1 
+Protoss_Dragoon 1 2139 696 100 0 0 -1 
+Protoss_Dragoon 1 2145 821 130 0 0 -1 
+Protoss_Dragoon 1 2104 805 180 0 0 -1 
+Protoss_Dragoon 1 2280 599 180 0 0 -1 
+Protoss_Dragoon 1 1984 560 90 689 0 -1 
+Protoss_Dragoon 1 2176 592 90 694 0 -1 
+Protoss_Dragoon 1 2208 496 90 824 0 -1 
+#------------ OTHER DEFENDERS ----------
+Protoss_Probe 1 2257 133 40 0 0 -1 
+Protoss_Nexus 1 2144 272 1500 0 1 -1 
+Protoss_Gateway 1 2208 496 1000 0 0 -1 
+Protoss_Pylon 1 2240 288 600 0 0 -1 
+Protoss_Pylon 1 2144 192 600 0 0 -1 
+Protoss_Pylon 1 1984 192 600 0 0 -1 
+Protoss_Cybernetics_Core 1 2320 256 1000 0 0 -1 
+Protoss_Pylon 1 2016 480 600 0 0 -1 
+Protoss_Gateway 1 1984 560 1000 0 0 -1 
+Protoss_Robotics_Facility 1 2000 416 1000 0 0 -1 
+Protoss_Probe 1 2144 272 22 994 0 -1 
+Protoss_Robotics_Support_Bay 1 1904 192 90 1279 0 -1 
+Protoss_Probe 1 2144 272 22 1354 0 -1 
+Protoss_Dragoon 1 1984 560 90 1539 0 -1 
+Protoss_Dragoon 1 2208 496 90 1704 0 -1 
+Protoss_Probe 1 2144 272 22 1749 0 -1 
+Protoss_Probe 1 2144 272 22 2099 0 -1 
+Protoss_Reaver 1 2000 416 90 2134 0 -1 
+Protoss_Observatory 1 2032 352 50 2394 0 -1 
+Protoss_Probe 1 2144 272 22 2401 0 -1 
+Protoss_Pylon 1 2304 320 60 2505 0 -1 
+#------------ DEAD UNITS ----------------
+Protoss_Probe 1 2202 187 40 0 0 -1 
+Protoss_Probe 1 2116 221 40 0 0 -1 
+Protoss_Probe 1 2251 107 40 0 0 -1 
+Protoss_Probe 1 2254 132 40 0 0 -1 
+Protoss_Dragoon 1 2177 729 180 0 0 -1 
+Protoss_Dragoon 1 2177 789 180 0 0 -1 
+Protoss_Probe 1 2164 134 40 0 0 -1 
+Protoss_Zealot 1 2176 592 160 0 0 -1 
+Protoss_Zealot 1 2208 496 160 0 0 -1 
+
