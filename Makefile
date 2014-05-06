@@ -1,4 +1,4 @@
-CC=g++ -g -rdynamic -Wall
+CC=g++ -g -rdynamic -Wall  -O3
 #CC=g++ -O3
 SDL_LDFLAGS=`sdl-config --libs` 
 SDL_CFLAGS=`sdl-config --cflags` 
