@@ -111,18 +111,18 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 			        const boost::optional<const Unit&> & closestEnemyOpt = state.getClosestEnemyUnitOpt(_playerID, u);
 
 			        if (closestEnemyOpt.is_initialized()&&
-			                closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE&&
-			                !state.getAliveUnitsInCircleIDs(_playerID,closestEnemyOpt->currentPosition(state.getTime()),closestEnemyOpt->range()).empty()){
+			                //closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE&&
+			                !state.getAliveUnitsInCircleIDs(_playerID,closestEnemyOpt->currentPosition(state.getTime()),closestEnemyOpt->range()*2).empty()){
 			                dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
 			        }else{
 			            const boost::optional<const Unit&> & closestDamagedBuildingOpt=state.getClosestOurDamagedBuildingOpt(_playerID, u);
 			            if(closestDamagedBuildingOpt.is_initialized()){
 			                int d = state.getMap().getDistance(ourDest,closestDamagedBuildingOpt.get().pos());
-			                if(d<10*TILE_SIZE){
+			               // if(d<10*TILE_SIZE){
 			                    dist=d;
-			                }else{
-			                    dist = state.getMap().getDistance(ourDest,_goal);
-			                }
+			               // }else{
+			               //     dist = state.getMap().getDistance(ourDest,_goal);
+			               // }
 			            }else{
 			                dist = state.getMap().getDistance(ourDest,_goal);
 			            }
