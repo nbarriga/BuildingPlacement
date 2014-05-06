@@ -156,17 +156,17 @@ ScoreType GeneticOperators::evalBuildingPlacement(const GameState& state){
 
 
   if(state.playerDead(_assaultPlayer->ID())){//attacker defeated, count how many we have left
-      std::cerr<<"Attacker destroyed"<<std::endl;
+      std::cout<<"Attacker destroyed"<<std::endl;
       return defValue+3000000;
   }else if(goalReached(state)){//enemy reached goal,
-      std::cerr<<"Attacker reached goal"<<std::endl;
+      std::cout<<"Attacker reached goal"<<std::endl;
       return /*defValue*/-attValue+1000000;
   }else if(state.playerDead(_defendPlayer->ID())){//defender destroyed, count how many he has left
-      std::cerr<<"Defender destroyed"<<std::endl;
+      std::cout<<"Defender destroyed"<<std::endl;
       return defValue-attValue+500000;
   }else{//simulation time exhausted
 	  std::cerr<<"Simulation timeout, something wrong!!!!"<<std::endl;
-//      System::FatalError("Simulation timeout");
+      System::FatalError("Simulation timeout");
       return defValue-attValue+2000000;
   }
 }

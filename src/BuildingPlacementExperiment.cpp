@@ -167,8 +167,7 @@ void BuildingPlacementExperiment::runCross() {
                     std::merge(_delayedAttackers[otherState].begin(),_delayedAttackers[otherState].end(),
                             _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
                             delayedUnits.begin(), Comparison());
-                    Game game(gameState, playerOne, playerTwo, 8000,delayedUnits);
-
+                    Game game(gameState, playerOne, playerTwo, 20000,delayedUnits);
 #ifdef USING_VISUALIZATION_LIBRARIES
                     if (_display!=NULL)
                     {
@@ -297,8 +296,12 @@ void BuildingPlacementExperiment::runEvaluate() {
                         playerOne,
                         playerTwo,
                         getExpDescription(p1Player,p2Player,state));
+		try{
                 int score = GeneticOperators::evalBuildingPlacement(game.getState());
-                std::cout<<"score: "<<score<<std::endl;
+		std::cout<<"score: "<<score<<std::endl;
+                }catch(int e){
+			std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
+		}
 
 
             }
@@ -346,6 +349,7 @@ void BuildingPlacementExperiment::runBalance() {
 
 
 
+
                 GameState gameState;
                 gameState.checkCollisions=true;
                 gameState.setMap(*map);
@@ -377,6 +381,7 @@ void BuildingPlacementExperiment::runBalance() {
                         _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
                         delayedUnits.begin(), Comparison());
 
+		try{
                 Game game(gameState, playerOne, playerTwo, 20000,delayedUnits);
 #ifdef USING_VISUALIZATION_LIBRARIES
                 if (_display!=NULL)
@@ -467,6 +472,10 @@ void BuildingPlacementExperiment::runBalance() {
                 }
 
                 saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".balanced",boost::optional<const GAStatistics&>(boost::none));
+
+                }catch(int e){
+			std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
+		}
             }
         }
     }
@@ -481,8 +490,8 @@ svv BuildingPlacementExperiment::getExpDescription(const size_t& p1,
 }
 
 void BuildingPlacementExperiment::runOptimize(bool cross) {
-    int popsize  = 8;
-    int ngen     = 10;
+    int popsize  = 10;
+    int ngen     = 20;
     float pmut   = 0.05;
     float pcross = 0.9;
 //    gaDefDivFlag=gaTrue;
@@ -554,7 +563,9 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
                             delayedAttackers.push_back(_delayedAttackers[i]);
                         }
                     }
-
+			if(attackers.empty()){
+				continue;
+			}	
                     GeneticOperators::configure(_fixedBuildings[state],
                                                 _buildings[state],
                                                 _defenders[state],
@@ -590,6 +601,7 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
                 //				ga.selector(sel);
                 //				ga.elitist(gaTrue);
 
+		try{
                 ga.evolve();
 
                 // Now we print out the best genome that the GA found.
@@ -601,6 +613,10 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
 
 
                 saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".optimized",boost::optional<const GAStatistics&>(stats));
+		}catch(int e){
+                	std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
+                }
+
             }
         }
     }
