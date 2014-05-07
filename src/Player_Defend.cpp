@@ -5,6 +5,8 @@ namespace BuildingPlacement {
 const std::string Player_Defend::modelString = "Defend";
 
 Player_Defend::Player_Defend (const IDType & playerID, const Position& goal):Player_Goal(playerID,goal){
+    reset();
+
 }
 
 void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, std::vector<UnitAction> & moveVec)
@@ -29,7 +31,6 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 		int closestMoveDist		(std::numeric_limits<int>::max());
 		
 		const SparCraft::Unit & ourUnit				(state.getUnit(_playerID, u));
-		static Position lastEnemyPos(0,0);
 
 //		size_t mdist	= state.getMap().getDistanceToGoal(ourUnit.pos());
 //		std::cout<<"Unit: "<<ourUnit.name()<<" dist to goal: "<<mdist<<
@@ -50,7 +51,7 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 					actionHighestDPS = dpsHPValue;
 					actionMoveIndex = m;
 					foundUnitAction = true;
-					lastEnemyPos=Position(0,0);
+					_lastEnemyPos[ourUnit.ID()]=Position(0,0);
 				}
 
                 if (move._moveIndex >= state.numUnits(enemy))
@@ -116,9 +117,9 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 			        if (enemyExists&&enemyHasTargets&&
 			                closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE){
 			            dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
-			            lastEnemyPos=closestEnemyOpt->currentPosition(state.getTime());
-			        }else if(enemyExists&&enemyHasTargets&&!(lastEnemyPos==Position(0,0))){//he is moving
-			            dist = state.getMap().getDistance(ourDest,lastEnemyPos);
+			            _lastEnemyPos[ourUnit.ID()]=closestEnemyOpt->currentPosition(state.getTime());
+			        }else if(enemyExists&&enemyHasTargets&&!(_lastEnemyPos[ourUnit.ID()]==Position(0,0))){//he is moving
+			            dist = state.getMap().getDistance(ourDest,_lastEnemyPos[ourUnit.ID()]);
 			        }else{
 			            const boost::optional<const Unit&> & closestDamagedBuildingOpt=state.getClosestOurDamagedBuildingOpt(_playerID, u);
 			            if(closestDamagedBuildingOpt.is_initialized()&&closestDamagedBuildingOpt->getDistanceSqToUnit(ourUnit,state.getTime())>ourUnit.range()*ourUnit.range()*4){
