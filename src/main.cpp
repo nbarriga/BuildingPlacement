@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 		if(argc>=2){
 			std::string experimentArg, configArg, mapArg, imageDir;
 			std::vector<std::string> baseArg, stateArg;
-			int assault,defend;
+			int assault,defend,pop,gen;
 			boost::program_options::options_description desc("Allowed options");
 			desc.add_options()("help,h", "prints this help message")
                               ("test,t", "runs test function")
@@ -47,6 +47,8 @@ int main(int argc, char *argv[])
             		          ("images,i", boost::program_options::value<std::string>(&imageDir)->default_value("../sparcraft/starcraft_images/"), "starcraft images directory")
             		          ("assault,a", boost::program_options::value<int>(&assault)->default_value(0), "assault player id(default 0)")
             		          ("defend,f", boost::program_options::value<int>(&defend)->default_value(1), "defend player id(default 1)")
+            		          ("population,p", boost::program_options::value<int>(&pop), "population size")
+            		          ("generations,g", boost::program_options::value<int>(&gen), "# of generations")
             		          ;
 			boost::program_options::positional_options_description pd;
 			pd.add("base", -1);
@@ -79,6 +81,12 @@ int main(int argc, char *argv[])
 			exp.addPlayer(ss.str());
 			if(vm.count("nocollisions")>0){
 			    exp.checkCol(false);
+			}
+			if(vm.count("population")>0){
+			    exp.setPop(pop);
+			}
+			if(vm.count("generations")>0){
+			    exp.setGen(gen);
 			}
 			if(vm.count("display")>0){
 			    if(vm.count("images")>0){

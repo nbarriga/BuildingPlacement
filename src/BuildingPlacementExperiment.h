@@ -54,6 +54,7 @@ class BuildingPlacementExperiment:public SearchExperiment {
 	const Position& getGoal(const std::vector<Unit> &fixedBuildings) const;
 
 	IDType _assaultPlayer,_defendPlayer;
+    int _popSize, _genSize;
 public:
 	struct Comparison{
 	    bool operator() (const std::pair<Unit, TimeType>& lhs, const std::pair<Unit, TimeType>&rhs) const
@@ -74,6 +75,14 @@ public:
 	void runOptimize(bool cross=false);
 	void runCross();
 	void runDisplay();
+	void setPop(int popSize){
+	    _popSize=popSize;
+	}
+	void setGen(int genSize){
+	    _genSize=genSize;
+	}
+
+
 };
 
 }

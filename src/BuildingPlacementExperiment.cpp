@@ -9,19 +9,17 @@
 #include "Player_Defend.h"
 
 namespace BuildingPlacement {
-BuildingPlacementExperiment::BuildingPlacementExperiment(const std::string & configFile):
-                    SearchExperiment(),
-                    _display(NULL),
-                    _assaultPlayer(std::numeric_limits<IDType>::max()),
-                    _defendPlayer(std::numeric_limits<IDType>::max()){
+BuildingPlacementExperiment::BuildingPlacementExperiment(const std::string & configFile):BuildingPlacementExperiment(){
     init(configFile);
 }
 
 BuildingPlacementExperiment::BuildingPlacementExperiment():
-                    SearchExperiment(),
-                    _display(NULL),
-                    _assaultPlayer(std::numeric_limits<IDType>::max()),
-                    _defendPlayer(std::numeric_limits<IDType>::max()){
+        SearchExperiment(),
+        _display(NULL),
+        _assaultPlayer(std::numeric_limits<IDType>::max()),
+        _defendPlayer(std::numeric_limits<IDType>::max()),
+        _popSize(15),
+        _genSize(40){
 }
 
 BuildingPlacementExperiment::~BuildingPlacementExperiment(){
@@ -517,8 +515,6 @@ svv BuildingPlacementExperiment::getExpDescription(const size_t& p1,
 }
 
 void BuildingPlacementExperiment::runOptimize(bool cross) {
-    int popsize  = 15;
-    int ngen     = 40;
     float pmut   = 0.05;
     float pcross = 0.9;
 //    gaDefDivFlag=gaTrue;
@@ -689,8 +685,8 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
 
 
                 GASimpleGA ga(genome);
-                ga.populationSize(popsize);
-                ga.nGenerations(ngen);
+                ga.populationSize(_popSize);
+                ga.nGenerations(_genSize);
                 ga.pMutation(pmut);
                 ga.pCrossover(pcross);
                 ga.recordDiversity(gaTrue);
@@ -786,7 +782,9 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
                     comments<<"Final Score Attacker: "<<attackerScoreAfter<<std::endl;
                     comments<<"Optimized Score Defender: "<<defenderScoreAfterOptimize<<std::endl;
                     comments<<"Optimized Score Attacker: "<<attackerScoreAfterOptimize<<std::endl;
-                    saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".optimized",boost::optional<const GAStatistics&>(stats), comments.str());
+                    std::stringstream filename(stateFileNames[state]);
+                    filename<<".optimized."<<_popSize<<"x"<<_genSize;
+                    saveBaseAssaultStateDescriptionFile(state,filename.str(),boost::optional<const GAStatistics&>(stats), comments.str());
                     std::cout<<comments.str();
                 }catch(int e){
                     std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
