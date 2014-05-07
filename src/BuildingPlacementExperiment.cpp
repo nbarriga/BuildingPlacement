@@ -299,10 +299,26 @@ void BuildingPlacementExperiment::runEvaluate() {
                 try{
                     int score = GeneticOperators::evalBuildingPlacement(game.getState());
                     std::cout<<"score: "<<score<<std::endl;
+
+
+                    ScoreType defenderScoreAfter,attackerScoreAfter;
+                    attackerScoreAfter = GeneticOperators::unitScore(game.getState(),_assaultPlayer);
+                    defenderScoreAfter = GeneticOperators::unitScore(game.getState(),_defendPlayer);
+
+                    //========================FINISHED EVAL==========================================================
+
+
+
+
+                    std::stringstream comments;
+                    comments<<"Initial Score Defender: "<<_defenderScoreBefore[state]<<std::endl;
+                    comments<<"Initial Score Attacker: "<<_attackerScoreBefore[state]<<std::endl;
+                    comments<<"Final Score Defender: "<<defenderScoreAfter<<std::endl;
+                    comments<<"Final Score Attacker: "<<attackerScoreAfter<<std::endl;
+                    std::cout<<comments.str();
                 }catch(int e){
                     std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
                 }
-
 
             }
         }
@@ -600,6 +616,8 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
                 ScoreType attackerScoreAfter,defenderScoreAfter;
                 attackerScoreAfter = GeneticOperators::unitScore(game.getState(),_assaultPlayer);
                 defenderScoreAfter = GeneticOperators::unitScore(game.getState(),_defendPlayer);
+                std::cout<<"Final Score Defender: "<<defenderScoreAfter<<std::endl;
+                std::cout<<"Final Score Attacker: "<<attackerScoreAfter<<std::endl;
 
                 //========================FINISHED EVAL==========================================================
 
@@ -707,6 +725,7 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
                         Unit u=_buildings[state][i];
                         Unit unit(u.type(), g[i]->getCenterPos(), 0, u.player(), u.currentHP(),
                                 u.currentEnergy(), u.nextMoveActionTime(), u.nextAttackActionTime());
+                        assert(u.player()==_defendPlayer);
                         gameState.addUnit(unit);
                     }
 
@@ -768,7 +787,7 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
                     comments<<"Optimized Score Defender: "<<defenderScoreAfterOptimize<<std::endl;
                     comments<<"Optimized Score Attacker: "<<attackerScoreAfterOptimize<<std::endl;
                     saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".optimized",boost::optional<const GAStatistics&>(stats), comments.str());
-
+                    std::cout<<comments.str();
                 }catch(int e){
                     std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
                 }
