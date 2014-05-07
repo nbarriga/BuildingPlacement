@@ -1,0 +1,86 @@
+#Fixed buildings
+Protoss_Nexus 1 1056 272 1500 0 1 0
+#Attackers
+Protoss_Zealot 0 1346 3201 160 0 0 0
+Protoss_Zealot 0 1540 2580 160 0 0 0
+Protoss_Zealot 0 1291 3282 112 0 0 0
+Protoss_Zealot 0 1592 2614 160 0 0 0
+Protoss_Zealot 0 1325 3258 148 0 0 0
+Protoss_Zealot 0 2117 3706 160 0 0 0
+Protoss_Dragoon 0 1984 3824 180 0 0 0
+Protoss_Dragoon 0 2048 3952 180 0 0 0
+Protoss_Probe 0 2260 3892 40 0 0 0
+Protoss_Probe 0 2179 3771 40 0 0 0
+Protoss_Probe 0 2292 3883 40 0 0 0
+Protoss_Probe 0 2292 3787 40 0 0 0
+Protoss_Probe 0 2292 3883 40 0 0 0
+#Defenders
+Protoss_Zealot 1 2009 780 149 0 0 0
+Protoss_Zealot 1 1764 317 160 0 0 0
+Protoss_Zealot 1 2009 780 160 0 0 0
+Protoss_Zealot 1 2009 780 160 0 0 0
+Protoss_Zealot 1 2009 780 160 0 0 0
+Protoss_Zealot 1 2009 780 160 0 0 0
+#Delayed Attackers
+Protoss_Dragoon 0 1984 3824 90 1235 0 0
+Protoss_Dragoon 0 2048 3952 90 443 0 0
+Protoss_Dragoon 0 1984 3824 90 323 0 0
+#Delayed Defenders
+Protoss_Probe 1 1056 272 22 1549 0 0
+Protoss_Dragoon 1 1184 272 90 1507 0 0
+Protoss_Dragoon 1 1184 368 90 1371 0 0
+Protoss_Zealot 1 1184 272 70 905 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 768 320 60 0 0 0
+Protoss_Pylon 1 960 288 600 0 0 0
+Protoss_Pylon 1 1216 512 600 0 0 0
+Protoss_Pylon 1 1120 160 600 0 0 0
+Protoss_Pylon 1 832 32 60 0 0 0
+Protoss_Photon_Cannon 1 1376 192 200 0 0 0
+Protoss_Gateway 1 1344 272 1000 0 0 0
+Protoss_Forge 1 1360 544 1100 0 0 0
+Protoss_Photon_Cannon 1 1312 128 200 0 0 0
+Protoss_Gateway 1 1344 432 1000 0 0 0
+Protoss_Cybernetics_Core 1 752 384 1000 0 0 0
+Protoss_Robotics_Facility 1 912 192 100 0 0 0
+#Optimized against attackers from
+#test_battles/iCCupDestination11/1056X272/GG24144.rep_battle2-12464.txt.balancedattackers
+#test_battles/iCCupDestination11/1056X272/GG36521.rep_battle0-3613.txt.balancedattackers
+#40	# current generation
+#0.999772	# current convergence
+#640	# number of selections since initialization
+#550	# number of crossovers since initialization
+#369	# number of mutations since initialization
+#600	# number of replacements since initialization
+#590	# number of genome evaluations since initialization
+#21	# number of population evaluations since initialization
+#1.03124e+07	# maximum score since initialization
+#1.00634e+07	# minimum score since initialization
+#1.02138e+07	# average of all scores ('on-line' performance)
+#1.03043e+07	# average of maximum scores ('off-line' performance)
+#1.0108e+07	# average of minimum scores ('off-line' performance)
+#
+#1.00934e+07	# mean score in initial population
+#1.02898e+07	# maximum score in initial population
+#1.0064e+07	# minimum score in initial population
+#56579	# standard deviation of initial population
+#0.997619	# diversity of initial population (0=identical,-1=unset)
+#
+#1.02777e+07	# mean score in current population
+#1.03124e+07	# maximum score in current population
+#1.00634e+07	# minimum score in current population
+#84086.7	# standard deviation of current population
+#0.56508	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#
+#Initial Score Defender: 325100
+#Initial Score Attacker: 176200
+#Final Score Defender: 196400
+#Final Score Attacker: 72800
+#Optimized Score Defender: 190700
+#Optimized Score Attacker: 106900
+#

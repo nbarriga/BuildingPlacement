@@ -1,0 +1,102 @@
+#Fixed buildings
+Protoss_Nexus 1 2240 240 1495 0 1 0
+#Attackers
+Protoss_Zealot 0 3930 3714 160 0 0 0
+Protoss_Zealot 0 3648 3024 160 0 0 0
+Protoss_Zealot 0 3648 3248 160 0 0 0
+Protoss_Probe 0 3936 3307 33 0 0 0
+#Defenders
+Protoss_Probe 1 2059 148 35 0 0 0
+Protoss_Probe 1 2106 309 35 0 0 0
+Protoss_Probe 1 2091 198 40 0 0 0
+Protoss_Probe 1 2091 372 35 0 0 0
+Protoss_Probe 1 2091 355 40 0 0 0
+Protoss_Probe 1 2091 139 40 0 0 0
+Protoss_Probe 1 2563 233 35 0 0 0
+Protoss_Zealot 1 2059 148 160 0 0 0
+Protoss_Zealot 1 2059 148 160 0 0 0
+Protoss_Zealot 1 2059 148 160 0 0 0
+Protoss_Zealot 1 2059 148 160 0 0 0
+Protoss_Zealot 1 2059 148 160 0 0 0
+Protoss_Zealot 1 2059 148 160 0 0 0
+Protoss_Zealot 1 2059 148 160 0 0 0
+Protoss_Zealot 1 2059 148 160 0 0 0
+Protoss_Zealot 1 2059 148 160 0 0 0
+#Delayed Attackers
+Protoss_Zealot 0 3648 3440 70 5447 0 0
+Protoss_Zealot 0 3648 3248 70 5265 0 0
+Protoss_Zealot 0 3648 3024 70 5159 0 0
+Protoss_Zealot 0 3648 3440 70 4839 0 0
+Protoss_Zealot 0 3648 3248 70 4657 0 0
+Protoss_Zealot 0 3648 3024 70 4551 0 0
+Protoss_Zealot 0 3648 3024 70 3899 0 0
+Protoss_Zealot 0 3648 3440 70 3695 0 0
+Protoss_Zealot 0 3648 3248 70 3353 0 0
+Protoss_Zealot 0 3648 3024 70 3291 0 0
+Protoss_Zealot 0 3648 3440 70 2925 0 0
+Protoss_Zealot 0 3648 3248 70 2745 0 0
+Protoss_Zealot 0 3648 3024 70 2683 0 0
+Protoss_Zealot 0 3648 3440 70 2055 0 0
+Protoss_Zealot 0 3648 3248 70 2045 0 0
+Protoss_Zealot 0 3648 3024 70 2043 0 0
+Protoss_Zealot 0 3648 3024 70 743 0 0
+Protoss_Zealot 0 3648 3248 70 305 0 0
+Protoss_Zealot 0 3648 3024 70 55 0 0
+#Delayed Defenders
+Protoss_Probe 1 2240 240 22 5955 0 0
+Protoss_Probe 1 2240 240 22 4899 0 0
+Protoss_Probe 1 2240 240 22 4591 0 0
+Protoss_Probe 1 2240 240 22 4283 0 0
+Protoss_Probe 1 2240 240 22 3975 0 0
+Protoss_Probe 1 2240 240 22 3673 0 0
+Protoss_Probe 1 2240 240 22 3365 0 0
+Protoss_Probe 1 2240 240 22 3057 0 0
+Protoss_Probe 1 2240 240 22 2749 0 0
+Protoss_Probe 1 2240 240 22 2441 0 0
+Protoss_Probe 1 2240 240 22 1991 0 0
+Protoss_Probe 1 2240 240 22 123 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 2080 288 600 0 0 0
+Protoss_Forge 1 2224 128 1095 0 0 0
+#Optimized against attackers from
+#bot_battles/Aztec11/2240X240/2047-SKYNET_VS_AIUR.REP_battle1-4080.txt.balanceddefenders
+#bot_battles/Aztec11/2240X240/2047-SKYNET_VS_AIUR.REP_battle2-6890.txt.balanceddefenders
+#bot_battles/Aztec11/2240X240/2887-SKYNET_VS_AIUR.REP_battle0-3136.txt.balanceddefenders
+#40	# current generation
+#0.999808	# current convergence
+#640	# number of selections since initialization
+#520	# number of crossovers since initialization
+#57	# number of mutations since initialization
+#600	# number of replacements since initialization
+#542	# number of genome evaluations since initialization
+#21	# number of population evaluations since initialization
+#1.0253e+07	# maximum score since initialization
+#1.01653e+07	# minimum score since initialization
+#1.02484e+07	# average of all scores ('on-line' performance)
+#1.02511e+07	# average of maximum scores ('off-line' performance)
+#1.02389e+07	# average of minimum scores ('off-line' performance)
+#
+#1.02348e+07	# mean score in initial population
+#1.02488e+07	# maximum score in initial population
+#1.01653e+07	# minimum score in initial population
+#25842.4	# standard deviation of initial population
+#0.995238	# diversity of initial population (0=identical,-1=unset)
+#
+#1.02487e+07	# mean score in current population
+#1.0253e+07	# maximum score in current population
+#1.02179e+07	# minimum score in current population
+#8963.88	# standard deviation of current population
+#0.595238	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#
+#Initial Score Defender: 305250
+#Initial Score Attacker: 119900
+#Final Score Defender: 75650
+#Final Score Attacker: 44300
+#Optimized Score Defender: 83650
+#Optimized Score Attacker: 71500
+#

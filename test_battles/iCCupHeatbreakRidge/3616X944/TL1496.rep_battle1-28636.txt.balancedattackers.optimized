@@ -1,0 +1,108 @@
+#Fixed buildings
+Protoss_Nexus 1 3616 944 1408 0 1 0
+#Attackers
+Protoss_Dragoon 0 2967 1113 180 0 0 0
+Protoss_Dragoon 0 2840 1397 180 0 0 0
+Protoss_Dragoon 0 2931 1339 180 0 0 0
+Protoss_Dragoon 0 2978 1263 180 0 0 0
+Protoss_Dragoon 0 2857 1352 180 0 0 0
+Protoss_Zealot 0 3161 747 160 0 0 0
+Protoss_Zealot 0 2912 1270 160 0 0 0
+Protoss_Zealot 0 3093 734 160 0 0 0
+Protoss_Zealot 0 2894 1360 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+Protoss_Zealot 0 2967 1113 160 0 0 0
+#Defenders
+Protoss_Dragoon 1 3496 1133 180 0 0 0
+Protoss_Dragoon 1 3435 866 130 0 0 0
+Protoss_Dragoon 1 3545 1178 180 0 0 0
+Protoss_Dragoon 1 3537 1084 180 0 0 0
+Protoss_Dragoon 1 3501 900 180 0 0 0
+Protoss_Dragoon 1 3469 840 180 0 0 0
+Protoss_Dragoon 1 3453 1182 180 0 0 0
+Protoss_Dragoon 1 3437 818 180 0 0 0
+Protoss_Dragoon 1 3494 1075 143 0 0 0
+Protoss_Dragoon 1 3579 1044 180 0 0 0
+Protoss_Dragoon 1 3499 977 180 0 0 0
+Protoss_Dragoon 1 3577 1106 180 0 0 0
+Protoss_Dragoon 1 3457 900 134 0 0 0
+Protoss_Dragoon 1 3457 954 180 0 0 0
+Protoss_Probe 1 3721 893 40 0 0 0
+Protoss_Probe 1 3796 907 30 0 0 0
+Protoss_Probe 1 3764 832 40 0 0 0
+Protoss_Probe 1 3724 907 38 0 0 0
+Protoss_Probe 1 3764 1012 40 0 0 0
+Protoss_Dragoon 1 3425 898 180 0 0 0
+Protoss_Probe 1 3701 919 30 0 0 0
+Protoss_Dragoon 1 3393 960 106 0 0 0
+Protoss_Dragoon 1 3464 776 180 0 0 0
+Protoss_Dragoon 1 3425 952 180 0 0 0
+Protoss_Dragoon 1 3521 933 180 0 0 0
+Protoss_Dragoon 1 3415 774 180 0 0 0
+Protoss_Observer 1 3619 942 60 0 0 0
+Protoss_Dragoon 1 3006 2281 180 0 0 0
+Protoss_Dragoon 1 3006 2281 180 0 0 0
+Protoss_Dragoon 1 3544 900 180 0 0 0
+Protoss_Dragoon 1 3544 900 180 0 0 0
+#Delayed Attackers
+Protoss_Zealot 0 512 1552 64 317 0 0
+Protoss_Zealot 0 512 1552 64 317 0 0
+#Delayed Defenders
+#Non-fixed Buildings
+Protoss_Pylon 1 3296 960 600 0 0 0
+Protoss_Pylon 1 3360 1184 600 0 0 0
+Protoss_Pylon 1 3616 1152 600 0 0 0
+#Optimized against attackers from
+#test_battles/iCCupHeatbreakRidge/3616X944/TL1496.rep_battle0-28636.txt.balancedattackers
+#test_battles/iCCupHeatbreakRidge/3616X944/TL1496.rep_battle2-28636.txt.balancedattackers
+#40	# current generation
+#0.990719	# current convergence
+#640	# number of selections since initialization
+#548	# number of crossovers since initialization
+#87	# number of mutations since initialization
+#600	# number of replacements since initialization
+#570	# number of genome evaluations since initialization
+#21	# number of population evaluations since initialization
+#1.04563e+07	# maximum score since initialization
+#9.8488e+06	# minimum score since initialization
+#1.02662e+07	# average of all scores ('on-line' performance)
+#1.03521e+07	# average of maximum scores ('off-line' performance)
+#1.00576e+07	# average of minimum scores ('off-line' performance)
+#
+#9.96581e+06	# mean score in initial population
+#1.02466e+07	# maximum score in initial population
+#9.8921e+06	# minimum score in initial population
+#86430.8	# standard deviation of initial population
+#1	# diversity of initial population (0=identical,-1=unset)
+#
+#1.03498e+07	# mean score in current population
+#1.04563e+07	# maximum score in current population
+#9.9576e+06	# minimum score in current population
+#125461	# standard deviation of current population
+#0.35873	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#
+#Initial Score Defender: 652000
+#Initial Score Attacker: 298000
+#Final Score Defender: 140900
+#Final Score Attacker: 61800
+#Optimized Score Defender: 456300
+#Optimized Score Attacker: 0
+#

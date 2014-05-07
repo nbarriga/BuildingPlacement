@@ -1,0 +1,88 @@
+#Fixed buildings
+Protoss_Nexus 1 3040 3824 1495 0 1 0
+#Attackers
+Protoss_Zealot 0 2906 3738 160 0 0 0
+Protoss_Zealot 0 2264 2536 160 0 0 0
+Protoss_Zealot 0 2400 2429 160 0 0 0
+Protoss_Zealot 0 2483 2373 160 0 0 0
+Protoss_Zealot 0 2477 2401 155 0 0 0
+Protoss_Zealot 0 3303 1623 160 0 0 0
+Protoss_Zealot 0 3456 80 160 0 0 0
+#Defenders
+Protoss_Probe 1 3115 3825 40 0 0 0
+Protoss_Probe 1 2932 3744 40 0 0 0
+Protoss_Probe 1 2636 2151 40 0 0 0
+Protoss_Probe 1 2946 3851 40 0 0 0
+Protoss_Probe 1 3150 3798 40 0 0 0
+Protoss_Probe 1 3029 3624 35 0 0 0
+Protoss_Probe 1 3698 4052 40 0 0 0
+Protoss_Probe 1 2796 2060 40 0 0 0
+Protoss_Zealot 1 3115 3825 160 0 0 0
+Protoss_Zealot 1 3115 3825 160 0 0 0
+Protoss_Zealot 1 3115 3825 160 0 0 0
+Protoss_Zealot 1 3115 3825 160 0 0 0
+Protoss_Zealot 1 3115 3825 160 0 0 0
+#Delayed Attackers
+Protoss_Zealot 0 3648 272 70 2190 0 0
+Protoss_Zealot 0 3456 80 70 2088 0 0
+Protoss_Zealot 0 3552 624 70 1358 0 0
+Protoss_Zealot 0 3648 272 70 1286 0 0
+Protoss_Zealot 0 3456 80 70 1018 0 0
+Protoss_Zealot 0 3648 272 70 648 0 0
+Protoss_Zealot 0 3456 80 70 410 0 0
+Protoss_Zealot 0 3552 624 70 204 0 0
+Protoss_Zealot 0 3648 272 70 40 0 0
+#Delayed Defenders
+Protoss_Probe 1 3040 3824 22 2250 0 0
+Protoss_Probe 1 3040 3824 22 1948 0 0
+Protoss_Probe 1 3040 3824 22 1332 0 0
+Protoss_Probe 1 3040 3824 22 1024 0 0
+Protoss_Probe 1 3040 3824 22 716 0 0
+Protoss_Probe 1 3040 3824 22 408 0 0
+Protoss_Probe 1 3040 3824 22 100 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 3168 3808 600 0 0 0
+Protoss_Forge 1 3120 3680 1100 0 0 0
+#Optimized against attackers from
+#bot_battles/TauCross11/3040X3824/118-SKYNET_VS_AIUR.REP_battle0-8849.txt.balancedattackers
+#bot_battles/TauCross11/3040X3824/2358-SKYNET_VS_AIUR.REP_battle0-4281.txt.balancedattackers
+#bot_battles/TauCross11/3040X3824/3202-UALBERTABOT_VS_AIUR.REP_battle0-5911.txt.balancedattackers
+#bot_battles/TauCross11/3040X3824/962-UALBERTABOT_VS_AIUR.REP_battle0-4406.txt.balancedattackers
+#40	# current generation
+#0.999204	# current convergence
+#640	# number of selections since initialization
+#534	# number of crossovers since initialization
+#64	# number of mutations since initialization
+#600	# number of replacements since initialization
+#560	# number of genome evaluations since initialization
+#21	# number of population evaluations since initialization
+#1.00994e+07	# maximum score since initialization
+#1.00412e+07	# minimum score since initialization
+#1.00846e+07	# average of all scores ('on-line' performance)
+#1.00904e+07	# average of maximum scores ('off-line' performance)
+#1.00757e+07	# average of minimum scores ('off-line' performance)
+#
+#1.00744e+07	# mean score in initial population
+#1.00837e+07	# maximum score in initial population
+#1.00412e+07	# minimum score in initial population
+#12773.5	# standard deviation of initial population
+#1	# diversity of initial population (0=identical,-1=unset)
+#
+#1.00868e+07	# mean score in current population
+#1.00994e+07	# maximum score in current population
+#1.00785e+07	# minimum score in current population
+#5198.12	# standard deviation of current population
+#0.519048	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#
+#Initial Score Defender: 251800
+#Initial Score Attacker: 108300
+#Final Score Defender: 74850
+#Final Score Attacker: 50700
+#Optimized Score Defender: 84200
+#Optimized Score Attacker: 68100
+#

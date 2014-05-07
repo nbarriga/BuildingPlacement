@@ -1,0 +1,49 @@
+#Fixed buildings
+Protoss_Nexus 1 2016 240 1500 0 1 0
+#Attackers
+Protoss_Dragoon 0 2725 835 111 0 0 0
+Protoss_Dragoon 0 2707 930 88 0 0 0
+Protoss_Dragoon 0 2759 794 56 0 0 0
+Protoss_Dragoon 0 2782 1009 180 0 0 0
+Protoss_Dragoon 0 2747 893 180 0 0 0
+Protoss_Dragoon 0 3488 1424 180 0 0 0
+Protoss_Dragoon 0 3744 1424 180 0 0 0
+Protoss_Probe 0 3795 1002 40 0 0 0
+Protoss_Zealot 0 2725 835 160 0 0 0
+Protoss_Zealot 0 2725 835 160 0 0 0
+Protoss_Zealot 0 2725 835 160 0 0 0
+#Defenders
+Protoss_Dragoon 1 2689 537 180 0 0 0
+Protoss_Zealot 1 2678 580 160 0 0 0
+Protoss_Zealot 1 2674 601 160 0 0 0
+Protoss_Zealot 1 2668 492 160 0 0 0
+Protoss_Zealot 1 2514 375 160 0 0 0
+Protoss_Zealot 1 3248 1766 160 0 0 0
+Protoss_Zealot 1 3248 1766 160 0 0 0
+#Delayed Attackers
+#Delayed Defenders
+Protoss_Probe 1 2016 240 22 1049 0 0
+Protoss_Dragoon 1 2144 240 99 1029 0 0
+Protoss_Dragoon 1 2272 240 99 1029 0 0
+Protoss_Zealot 1 2336 144 70 729 0 0
+Protoss_Probe 1 2016 240 22 404 0 0
+Protoss_Zealot 1 2272 240 64 254 0 0
+Protoss_Zealot 1 2272 240 64 254 0 0
+Protoss_Zealot 1 2144 240 70 157 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 2624 480 550 0 0 0
+Protoss_Pylon 1 2176 160 600 0 0 0
+Protoss_Pylon 1 1920 128 600 0 0 0
+Protoss_Pylon 1 2240 160 600 0 0 0
+Protoss_Pylon 1 1920 320 600 0 0 0
+Protoss_Pylon 1 2400 416 600 0 0 0
+Protoss_Gateway 1 2144 240 1000 0 0 0
+Protoss_Gateway 1 2272 240 1000 0 0 0
+Protoss_Cybernetics_Core 1 1840 128 1000 0 0 0
+Protoss_Gateway 1 2336 144 1000 0 0 0
+Protoss_Citadel_of_Adun 1 1872 32 900 0 0 0
+Protoss_Templar_Archives 1 1712 160 1000 0 0 0
+Protoss_Forge 1 2480 416 110 0 0 0
+Protoss_Photon_Cannon 1 2784 512 61 0 0 0
+#Balanced base assault
+#

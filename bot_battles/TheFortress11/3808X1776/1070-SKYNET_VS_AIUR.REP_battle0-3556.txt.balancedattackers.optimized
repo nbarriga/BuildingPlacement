@@ -1,0 +1,57 @@
+#Fixed buildings
+Protoss_Nexus 1 3808 1776 1495 0 1 0
+#Attackers
+Protoss_Zealot 0 416 2544 160 0 0 0
+#Defenders
+Protoss_Probe 1 3956 1824 36 0 0 0
+Protoss_Probe 1 3956 1896 35 0 0 0
+#Delayed Attackers
+#Delayed Defenders
+Protoss_Probe 1 3808 1776 22 555 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 3520 1792 600 0 0 0
+Protoss_Forge 1 3632 1952 1100 0 0 0
+#Optimized against attackers from
+#bot_battles/TheFortress11/3808X1776/1070-SKYNET_VS_AIUR.REP_battle1-5334.txt.balancedattackers
+#bot_battles/TheFortress11/3808X1776/2470-SKYNET_VS_AIUR.REP_battle0-3462.txt.balancedattackers
+#bot_battles/TheFortress11/3808X1776/4714-UALBERTABOT_VS_AIUR.REP_battle0-3144.txt.balancedattackers
+#bot_battles/TheFortress11/3808X1776/4714-UALBERTABOT_VS_AIUR.REP_battle1-6459.txt.balancedattackers
+#bot_battles/TheFortress11/3808X1776/4994-UALBERTABOT_VS_AIUR.REP_battle0-8720.txt.balancedattackers
+#40	# current generation
+#0.999986	# current convergence
+#640	# number of selections since initialization
+#547	# number of crossovers since initialization
+#62	# number of mutations since initialization
+#600	# number of replacements since initialization
+#567	# number of genome evaluations since initialization
+#21	# number of population evaluations since initialization
+#9.90628e+06	# maximum score since initialization
+#9.90352e+06	# minimum score since initialization
+#9.90585e+06	# average of all scores ('on-line' performance)
+#9.90617e+06	# average of maximum scores ('off-line' performance)
+#9.90513e+06	# average of minimum scores ('off-line' performance)
+#
+#9.90497e+06	# mean score in initial population
+#9.9061e+06	# maximum score in initial population
+#9.90352e+06	# minimum score in initial population
+#778.815	# standard deviation of initial population
+#0.995238	# diversity of initial population (0=identical,-1=unset)
+#
+#9.90602e+06	# mean score in current population
+#9.90628e+06	# maximum score in current population
+#9.90572e+06	# minimum score in current population
+#195.842	# standard deviation of current population
+#0.466667	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#
+#Initial Score Defender: 107800
+#Initial Score Attacker: 10000
+#Final Score Defender: 84600
+#Final Score Attacker: 6000
+#Optimized Score Defender: 84150
+#Optimized Score Attacker: 5000
+#

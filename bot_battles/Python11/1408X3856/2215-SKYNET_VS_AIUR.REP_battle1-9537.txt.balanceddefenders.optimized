@@ -1,0 +1,151 @@
+#Fixed buildings
+Protoss_Nexus 1 1408 3856 1500 0 1 0
+#Attackers
+Protoss_Dragoon 0 2148 3729 180 0 0 0
+Protoss_Zealot 0 2776 512 155 0 0 0
+Protoss_Zealot 0 2592 240 160 0 0 0
+Protoss_Zealot 0 2656 464 160 0 0 0
+Protoss_Zealot 0 2159 3767 160 0 0 0
+Protoss_Zealot 0 2159 3767 160 0 0 0
+Protoss_Zealot 0 2194 3808 160 0 0 0
+Protoss_Zealot 0 2194 3808 160 0 0 0
+Protoss_Zealot 0 1998 3281 160 0 0 0
+Protoss_Zealot 0 1998 3281 160 0 0 0
+Protoss_Zealot 0 1998 3153 160 0 0 0
+Protoss_Zealot 0 1998 3153 160 0 0 0
+Protoss_Zealot 0 1988 613 160 0 0 0
+Protoss_Zealot 0 1988 613 160 0 0 0
+Protoss_Zealot 0 2528 464 160 0 0 0
+Protoss_Zealot 0 2528 464 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+Protoss_Zealot 0 2148 3729 160 0 0 0
+#Defenders
+Protoss_Probe 1 1259 3956 40 0 0 0
+Protoss_Probe 1 1266 3894 40 0 0 0
+Protoss_Probe 1 1291 3988 40 0 0 0
+Protoss_Probe 1 1259 3892 40 0 0 0
+Protoss_Probe 1 1227 3755 40 0 0 0
+Protoss_Probe 1 1259 3883 40 0 0 0
+Protoss_Probe 1 1259 3819 40 0 0 0
+Protoss_Probe 1 1259 3933 40 0 0 0
+Protoss_Probe 1 1323 3913 40 0 0 0
+Protoss_Probe 1 1259 3755 40 0 0 0
+Protoss_Zealot 1 1919 3868 152 0 0 0
+Protoss_Probe 1 1319 3816 40 0 0 0
+Protoss_Probe 1 1424 3716 40 0 0 0
+Protoss_Zealot 1 1896 3868 160 0 0 0
+Protoss_Probe 1 1334 3799 40 0 0 0
+Protoss_Zealot 1 1887 3906 160 0 0 0
+Protoss_Probe 1 1259 3956 40 0 0 0
+Protoss_Zealot 1 1942 3887 160 0 0 0
+Protoss_Probe 1 1259 3988 40 0 0 0
+Protoss_Probe 1 1424 3716 40 0 0 0
+Protoss_Zealot 1 1942 3868 125 0 0 0
+Protoss_Zealot 1 1875 3887 160 0 0 0
+Protoss_Probe 1 1448 3804 40 0 0 0
+Protoss_Probe 1 1259 3883 40 0 0 0
+Protoss_Zealot 1 1873 3868 160 0 0 0
+Protoss_Probe 1 1227 3892 40 0 0 0
+Protoss_Probe 1 1259 3755 40 0 0 0
+Protoss_Dragoon 1 1914 3935 180 0 0 0
+Protoss_Dragoon 1 1914 3897 180 0 0 0
+Protoss_Probe 1 1284 3723 40 0 0 0
+Protoss_Probe 1 1227 3755 40 0 0 0
+Protoss_Probe 1 1340 3883 40 0 0 0
+Protoss_Dragoon 1 1946 3916 180 0 0 0
+Protoss_Probe 1 1263 3758 40 0 0 0
+Protoss_Zealot 1 1885 3849 160 0 0 0
+Protoss_Probe 1 1259 3723 40 0 0 0
+Protoss_Zealot 1 1919 3849 160 0 0 0
+Protoss_Zealot 1 2125 3863 160 0 0 0
+Protoss_Zealot 1 1942 3849 160 0 0 0
+Protoss_Zealot 1 1664 3760 160 0 0 0
+Protoss_Zealot 1 1664 3984 160 0 0 0
+Protoss_Dragoon 1 1376 3984 180 0 0 0
+#Delayed Attackers
+Protoss_Dragoon 0 2592 240 90 1412 0 0
+Protoss_Dragoon 0 2528 464 90 1270 0 0
+Protoss_Dragoon 0 2656 464 90 1058 0 0
+Protoss_Dragoon 0 2816 464 90 910 0 0
+Protoss_Dragoon 0 2592 240 90 532 0 0
+Protoss_Dragoon 0 2528 464 90 364 0 0
+Protoss_Dragoon 0 2816 464 90 22 0 0
+#Delayed Defenders
+Protoss_Probe 1 1408 3856 22 1620 0 0
+Protoss_Probe 1 1408 3856 22 1310 0 0
+Protoss_Probe 1 1408 3856 22 1000 0 0
+Protoss_Zealot 1 1152 3504 70 820 0 0
+Protoss_Dragoon 1 1376 3984 90 770 0 0
+Protoss_Dragoon 1 1664 3984 90 470 0 0
+Protoss_Dragoon 1 1664 3760 90 244 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 1248 3936 600 0 0 0
+Protoss_Pylon 1 1760 3968 600 0 0 0
+Protoss_Pylon 1 1376 3328 600 0 0 0
+Protoss_Pylon 1 1408 4032 600 0 0 0
+Protoss_Pylon 1 1120 4000 600 0 0 0
+Protoss_Pylon 1 1504 3968 600 0 0 0
+Protoss_Pylon 1 1312 3424 600 0 0 0
+Protoss_Pylon 1 1632 3808 600 0 0 0
+Protoss_Pylon 1 1312 3968 60 0 0 0
+Protoss_Gateway 1 1408 3440 1000 0 0 0
+Protoss_Gateway 1 1536 3664 1000 0 0 0
+Protoss_Cybernetics_Core 1 1168 3712 1000 0 0 0
+Protoss_Gateway 1 1824 3856 1000 0 0 0
+Protoss_Photon_Cannon 1 1728 3904 200 0 0 0
+Protoss_Citadel_of_Adun 1 1360 3616 900 0 0 0
+Protoss_Forge 1 1552 3744 1100 0 0 0
+Protoss_Robotics_Facility 1 1584 3936 1000 0 0 0
+Protoss_Gateway 1 1696 3536 1000 0 0 0
+Protoss_Forge 1 1808 3744 1100 0 0 0
+#Optimized against attackers from
+#bot_battles/Python11/1408X3856/1935-SKYNET_VS_AIUR.REP_battle0-9250.txt.balanceddefenders
+#bot_battles/Python11/1408X3856/255-SKYNET_VS_AIUR.REP_battle0-8707.txt.balanceddefenders
+#bot_battles/Python11/1408X3856/4736-UALBERTABOT_VS_AIUR.REP_battle0-8508.txt.balanceddefenders
+#40	# current generation
+#0.99868	# current convergence
+#640	# number of selections since initialization
+#545	# number of crossovers since initialization
+#584	# number of mutations since initialization
+#600	# number of replacements since initialization
+#601	# number of genome evaluations since initialization
+#21	# number of population evaluations since initialization
+#1.08858e+07	# maximum score since initialization
+#1.07141e+07	# minimum score since initialization
+#1.0836e+07	# average of all scores ('on-line' performance)
+#1.08673e+07	# average of maximum scores ('off-line' performance)
+#1.07948e+07	# average of minimum scores ('off-line' performance)
+#
+#1.08048e+07	# mean score in initial population
+#1.08396e+07	# maximum score in initial population
+#1.07692e+07	# minimum score in initial population
+#24969.5	# standard deviation of initial population
+#0.998998	# diversity of initial population (0=identical,-1=unset)
+#
+#1.08423e+07	# mean score in current population
+#1.08858e+07	# maximum score in current population
+#1.07806e+07	# minimum score in current population
+#28793.2	# standard deviation of current population
+#0.6	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#
+#Initial Score Defender: 996100
+#Initial Score Attacker: 349600
+#Final Score Defender: 595800
+#Final Score Attacker: 0
+#Optimized Score Defender: 692000
+#Optimized Score Attacker: 0
+#

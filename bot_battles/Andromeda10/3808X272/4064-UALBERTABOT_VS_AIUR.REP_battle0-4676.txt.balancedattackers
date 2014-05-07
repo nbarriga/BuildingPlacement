@@ -1,0 +1,56 @@
+#Fixed buildings
+Protoss_Nexus 1 3808 272 1496 0 1 0
+#Attackers
+Protoss_Zealot 0 3218 3059 160 0 0 0
+Protoss_Zealot 0 3240 3040 160 0 0 0
+Protoss_Zealot 0 3217 3030 160 0 0 0
+Protoss_Zealot 0 3798 3451 160 0 0 0
+Protoss_Zealot 0 3648 3728 160 0 0 0
+Protoss_Zealot 0 3648 3984 160 0 0 0
+#Defenders
+Protoss_Probe 1 3882 297 40 0 0 0
+Protoss_Probe 1 3885 335 35 0 0 0
+Protoss_Probe 1 3966 237 35 0 0 0
+Protoss_Probe 1 3988 180 35 0 0 0
+Protoss_Probe 1 3956 404 40 0 0 0
+Protoss_Probe 1 3956 171 40 0 0 0
+Protoss_Probe 1 3156 1490 40 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+#Delayed Attackers
+Protoss_Zealot 0 3744 3536 70 3841 0 0
+Protoss_Zealot 0 3648 3728 70 3517 0 0
+Protoss_Zealot 0 3648 3984 70 3353 0 0
+Protoss_Zealot 0 3744 3536 70 3233 0 0
+Protoss_Zealot 0 3648 3728 70 2499 0 0
+Protoss_Zealot 0 3648 3984 70 2403 0 0
+Protoss_Zealot 0 3744 3536 70 2163 0 0
+Protoss_Zealot 0 3648 3728 70 1799 0 0
+Protoss_Zealot 0 3648 3984 70 1531 0 0
+Protoss_Zealot 0 3744 3536 70 1363 0 0
+Protoss_Zealot 0 3648 3728 70 1191 0 0
+Protoss_Zealot 0 3648 3984 70 919 0 0
+#Delayed Defenders
+Protoss_Probe 1 3808 272 22 3895 0 0
+Protoss_Probe 1 3808 272 22 3587 0 0
+Protoss_Probe 1 3808 272 22 3285 0 0
+Protoss_Probe 1 3808 272 22 2977 0 0
+Protoss_Probe 1 3808 272 22 2669 0 0
+Protoss_Probe 1 3808 272 22 2361 0 0
+Protoss_Probe 1 3808 272 22 2053 0 0
+Protoss_Probe 1 3808 272 22 1745 0 0
+Protoss_Probe 1 3808 272 22 1437 0 0
+Protoss_Probe 1 3808 272 22 1129 0 0
+Protoss_Probe 1 3808 272 22 821 0 0
+Protoss_Probe 1 3808 272 22 405 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 3616 128 600 0 0 0
+Protoss_Forge 1 3664 224 1100 0 0 0
+#Balanced base assault
+#

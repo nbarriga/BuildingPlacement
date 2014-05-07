@@ -1,0 +1,88 @@
+#Fixed buildings
+Protoss_Nexus 1 288 2416 1495 0 1 0
+#Attackers
+Protoss_Zealot 0 1331 2590 160 0 0 0
+Protoss_Zealot 0 1295 2543 160 0 0 0
+Protoss_Dragoon 0 1345 2686 180 0 0 0
+Protoss_Dragoon 0 1335 2647 180 0 0 0
+Protoss_Zealot 0 1460 3293 160 0 0 0
+Protoss_Zealot 0 1593 3672 160 0 0 0
+Protoss_Zealot 0 2400 3632 160 0 0 0
+Protoss_Zealot 0 2400 3632 160 0 0 0
+Protoss_Zealot 0 2400 3856 160 0 0 0
+Protoss_Zealot 0 2400 3856 160 0 0 0
+#Defenders
+Protoss_Probe 1 139 2484 35 0 0 0
+Protoss_Probe 1 1269 2526 40 0 0 0
+Protoss_Probe 1 162 2467 40 0 0 0
+Protoss_Probe 1 1212 2114 40 0 0 0
+Protoss_Probe 1 577 2119 35 0 0 0
+Protoss_Probe 1 214 2487 40 0 0 0
+Protoss_Probe 1 288 2416 35 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+Protoss_Zealot 1 139 2484 160 0 0 0
+#Delayed Attackers
+Protoss_Zealot 0 2400 3856 64 629 0 0
+Protoss_Zealot 0 2400 3856 64 629 0 0
+Protoss_Zealot 0 2400 3632 64 509 0 0
+Protoss_Zealot 0 2400 3632 64 509 0 0
+#Delayed Defenders
+Protoss_Probe 1 288 2416 22 423 0 0
+Protoss_Probe 1 288 2416 22 115 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 512 2560 600 0 0 0
+Protoss_Forge 1 528 2720 1100 0 0 0
+Protoss_Gateway 1 352 2768 100 0 0 0
+Protoss_Gateway 1 672 2512 100 0 0 0
+#Optimized against attackers from
+#bot_battles/TheFortress11/288X2416/2190-SKYNET_VS_AIUR.REP_battle0-3522.txt.balanceddefenders
+#bot_battles/TheFortress11/288X2416/230-SKYNET_VS_AIUR.REP_battle2-17661.txt.balanceddefenders
+#bot_battles/TheFortress11/288X2416/3314-UALBERTABOT_VS_AIUR.REP_battle1-7666.txt.balanceddefenders
+#bot_battles/TheFortress11/288X2416/3314-UALBERTABOT_VS_AIUR.REP_battle2-9825.txt.balanceddefenders
+#bot_battles/TheFortress11/288X2416/3874-UALBERTABOT_VS_AIUR.REP_battle0-6439.txt.balanceddefenders
+#40	# current generation
+#0.999625	# current convergence
+#640	# number of selections since initialization
+#541	# number of crossovers since initialization
+#132	# number of mutations since initialization
+#600	# number of replacements since initialization
+#566	# number of genome evaluations since initialization
+#21	# number of population evaluations since initialization
+#1.0083e+07	# maximum score since initialization
+#9.97497e+06	# minimum score since initialization
+#1.00523e+07	# average of all scores ('on-line' performance)
+#1.00727e+07	# average of maximum scores ('off-line' performance)
+#1.00398e+07	# average of minimum scores ('off-line' performance)
+#
+#1.0037e+07	# mean score in initial population
+#1.00569e+07	# maximum score in initial population
+#1.00328e+07	# minimum score in initial population
+#7045.69	# standard deviation of initial population
+#1	# diversity of initial population (0=identical,-1=unset)
+#
+#1.0083e+07	# mean score in current population
+#1.0083e+07	# maximum score in current population
+#1.0083e+07	# minimum score in current population
+#0	# standard deviation of current population
+#0.442857	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#
+#Initial Score Defender: 264700
+#Initial Score Attacker: 136000
+#Final Score Defender: 96600
+#Final Score Attacker: 0
+#Optimized Score Defender: 95500
+#Optimized Score Attacker: 0
+#

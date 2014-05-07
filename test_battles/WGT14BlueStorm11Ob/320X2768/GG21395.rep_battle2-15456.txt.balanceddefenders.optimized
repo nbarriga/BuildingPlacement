@@ -1,0 +1,72 @@
+#Fixed buildings
+Protoss_Nexus 1 320 2768 1496 0 1 0
+#Attackers
+Protoss_Zealot 0 440 1569 160 0 0 0
+Protoss_Zealot 0 463 1550 160 0 0 0
+Protoss_Zealot 0 463 1581 160 0 0 0
+Protoss_Zealot 0 440 1588 160 0 0 0
+Protoss_Zealot 0 3221 848 160 0 0 0
+Protoss_Zealot 0 3198 861 160 0 0 0
+Protoss_Zealot 0 3198 880 160 0 0 0
+Protoss_Zealot 0 3244 857 160 0 0 0
+Protoss_Probe 0 420 2725 40 0 0 0
+#Defenders
+Protoss_Zealot 1 594 2610 65 0 0 0
+Protoss_Zealot 1 1268 2277 119 0 0 0
+Protoss_Zealot 1 594 2610 160 0 0 0
+Protoss_Zealot 1 594 2610 160 0 0 0
+Protoss_Zealot 1 594 2610 160 0 0 0
+Protoss_Zealot 1 594 2610 160 0 0 0
+Protoss_Zealot 1 594 2610 160 0 0 0
+Protoss_Zealot 1 594 2610 160 0 0 0
+Protoss_Zealot 1 594 2610 160 0 0 0
+Protoss_Zealot 1 594 2610 160 0 0 0
+#Delayed Attackers
+#Delayed Defenders
+#Non-fixed Buildings
+Protoss_Pylon 1 672 2816 600 0 0 0
+Protoss_Pylon 1 32 2528 600 0 0 0
+Protoss_Pylon 1 448 2656 600 0 0 0
+Protoss_Gateway 1 544 2736 1000 0 0 0
+Protoss_Gateway 1 288 2544 1000 0 0 0
+#Optimized against attackers from
+#test_battles/WGT14BlueStorm11Ob/320X2768/GG21395.rep_battle1-15456.txt.balanceddefenders
+#test_battles/WGT14BlueStorm11Ob/320X2768/GG21395.rep_battle3-15456.txt.balanceddefenders
+#40	# current generation
+#1	# current convergence
+#640	# number of selections since initialization
+#546	# number of crossovers since initialization
+#145	# number of mutations since initialization
+#600	# number of replacements since initialization
+#570	# number of genome evaluations since initialization
+#21	# number of population evaluations since initialization
+#1.02162e+07	# maximum score since initialization
+#1.01048e+07	# minimum score since initialization
+#1.01941e+07	# average of all scores ('on-line' performance)
+#1.02138e+07	# average of maximum scores ('off-line' performance)
+#1.01766e+07	# average of minimum scores ('off-line' performance)
+#
+#1.01806e+07	# mean score in initial population
+#1.02042e+07	# maximum score in initial population
+#1.01048e+07	# minimum score in initial population
+#23630.2	# standard deviation of initial population
+#1	# diversity of initial population (0=identical,-1=unset)
+#
+#1.01855e+07	# mean score in current population
+#1.02162e+07	# maximum score in current population
+#1.01463e+07	# minimum score in current population
+#13961.5	# standard deviation of current population
+#0.478095	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#
+#Initial Score Defender: 251000
+#Initial Score Attacker: 90000
+#Final Score Defender: 104800
+#Final Score Attacker: 0
+#Optimized Score Defender: 216150
+#Optimized Score Attacker: 0
+#

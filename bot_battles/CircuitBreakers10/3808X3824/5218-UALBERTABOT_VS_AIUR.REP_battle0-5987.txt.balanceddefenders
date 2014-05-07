@@ -1,0 +1,69 @@
+#Fixed buildings
+Protoss_Nexus 1 3808 3824 1500 0 1 0
+#Attackers
+Protoss_Zealot 0 3097 1503 160 0 0 0
+Protoss_Zealot 0 3083 1446 160 0 0 0
+Protoss_Zealot 0 3060 1590 160 0 0 0
+Protoss_Zealot 0 3060 1686 160 0 0 0
+Protoss_Zealot 0 3616 272 160 0 0 0
+Protoss_Zealot 0 3744 592 160 0 0 0
+Protoss_Zealot 0 3097 1503 160 0 0 0
+#Defenders
+Protoss_Probe 1 3988 3892 40 0 0 0
+Protoss_Probe 1 3959 3792 40 0 0 0
+Protoss_Probe 1 3943 3770 40 0 0 0
+Protoss_Probe 1 3955 3803 39 0 0 0
+Protoss_Probe 1 3956 3881 40 0 0 0
+Protoss_Probe 1 3876 3856 40 0 0 0
+Protoss_Probe 1 3956 3930 40 0 0 0
+Protoss_Probe 1 3918 3916 40 0 0 0
+Protoss_Probe 1 3842 3748 40 0 0 0
+Protoss_Probe 1 3988 3796 40 0 0 0
+Protoss_Probe 1 3959 3731 40 0 0 0
+Protoss_Probe 1 3956 3956 40 0 0 0
+Protoss_Probe 1 3957 3796 40 0 0 0
+Protoss_Probe 1 3988 3883 40 0 0 0
+Protoss_Probe 1 3849 3588 40 0 0 0
+Protoss_Probe 1 3878 3869 40 0 0 0
+Protoss_Probe 1 3812 3684 40 0 0 0
+Protoss_Probe 1 3882 3872 40 0 0 0
+Protoss_Zealot 1 3778 3326 160 0 0 0
+Protoss_Probe 1 3956 3723 40 0 0 0
+Protoss_Probe 1 3840 3684 40 0 0 0
+Protoss_Zealot 1 3648 3792 160 0 0 0
+Protoss_Zealot 1 3584 3920 160 0 0 0
+Protoss_Probe 1 3808 3824 40 0 0 0
+#Delayed Attackers
+Protoss_Zealot 0 3424 80 70 2222 0 0
+Protoss_Zealot 0 3744 592 70 2060 0 0
+Protoss_Zealot 0 3424 80 70 1532 0 0
+Protoss_Zealot 0 3744 592 70 1422 0 0
+Protoss_Zealot 0 3616 272 70 1022 0 0
+Protoss_Zealot 0 3424 80 70 844 0 0
+Protoss_Zealot 0 3744 592 70 670 0 0
+Protoss_Zealot 0 3616 272 70 304 0 0
+Protoss_Zealot 0 3424 80 70 42 0 0
+#Delayed Defenders
+Protoss_Probe 1 3808 3824 22 1954 0 0
+Protoss_Probe 1 3808 3824 22 1644 0 0
+Protoss_Probe 1 3808 3824 22 1334 0 0
+Protoss_Probe 1 3808 3824 22 1018 0 0
+Protoss_Zealot 1 3840 3536 70 970 0 0
+Protoss_Zealot 1 3648 3792 70 770 0 0
+Protoss_Probe 1 3808 3824 22 708 0 0
+Protoss_Dragoon 1 3584 3920 90 494 0 0
+Protoss_Probe 1 3808 3824 22 398 0 0
+Protoss_Zealot 1 3648 3792 70 144 0 0
+Protoss_Probe 1 3808 3824 22 88 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 3712 3936 600 0 0 0
+Protoss_Pylon 1 3680 3680 600 0 0 0
+Protoss_Pylon 1 3968 3616 600 0 0 0
+Protoss_Pylon 1 3584 3680 600 0 0 0
+Protoss_Pylon 1 3552 3584 60 0 0 0
+Protoss_Gateway 1 3648 3792 1000 0 0 0
+Protoss_Gateway 1 3584 3920 1000 0 0 0
+Protoss_Cybernetics_Core 1 3664 3584 1000 0 0 0
+Protoss_Gateway 1 3840 3536 1000 0 0 0
+#Balanced base assault
+#

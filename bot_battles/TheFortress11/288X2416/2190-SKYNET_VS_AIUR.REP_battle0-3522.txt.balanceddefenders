@@ -1,0 +1,21 @@
+#Fixed buildings
+Protoss_Nexus 1 288 2416 1495 0 1 0
+#Attackers
+Protoss_Zealot 0 2068 3906 160 0 0 0
+#Defenders
+Protoss_Probe 1 139 2400 35 0 0 0
+Protoss_Probe 1 139 2548 35 0 0 0
+Protoss_Probe 1 217 2465 35 0 0 0
+Protoss_Probe 1 199 2548 35 0 0 0
+Protoss_Probe 1 107 2411 35 0 0 0
+Protoss_Zealot 1 139 2400 160 0 0 0
+Protoss_Zealot 1 139 2400 160 0 0 0
+#Delayed Attackers
+Protoss_Dragoon 0 2400 3856 90 1249 0 0
+Protoss_Zealot 0 2400 3856 70 641 0 0
+#Delayed Defenders
+#Non-fixed Buildings
+Protoss_Pylon 1 352 2592 600 0 0 0
+Protoss_Forge 1 432 2496 1100 0 0 0
+#Balanced base assault
+#

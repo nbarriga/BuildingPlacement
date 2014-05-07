@@ -1,0 +1,36 @@
+#Fixed buildings
+Protoss_Nexus 1 320 3536 1500 0 1 0
+#Attackers
+Protoss_Dragoon 0 995 2143 180 0 0 0
+Protoss_Dragoon 0 1040 2095 180 0 0 0
+Protoss_Dragoon 0 1931 2023 180 0 0 0
+Protoss_Dragoon 0 3552 752 180 0 0 0
+Protoss_Probe 0 3956 459 40 0 0 0
+Protoss_Zealot 0 995 2143 160 0 0 0
+Protoss_Zealot 0 995 2143 160 0 0 0
+Protoss_Zealot 0 995 2143 160 0 0 0
+Protoss_Zealot 0 995 2143 160 0 0 0
+#Defenders
+Protoss_Dragoon 1 74 3247 180 0 0 0
+Protoss_Dragoon 1 640 3248 180 0 0 0
+Protoss_Dragoon 1 640 3152 180 0 0 0
+#Delayed Attackers
+#Delayed Defenders
+Protoss_Dragoon 1 640 3152 90 1293 0 0
+Protoss_Probe 1 320 3536 22 1015 0 0
+Protoss_Dragoon 1 640 3248 90 877 0 0
+Protoss_Probe 1 320 3536 22 713 0 0
+Protoss_Dragoon 1 640 3152 90 541 0 0
+Protoss_Dragoon 1 640 3248 90 125 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 544 3264 600 0 0 0
+Protoss_Pylon 1 128 3392 600 0 0 0
+Protoss_Pylon 1 288 3712 600 0 0 0
+Protoss_Pylon 1 416 3552 60 0 0 0
+Protoss_Pylon 1 544 3200 600 0 0 0
+Protoss_Gateway 1 640 3152 1000 0 0 0
+Protoss_Cybernetics_Core 1 144 3328 1000 0 0 0
+Protoss_Gateway 1 640 3248 1000 0 0 0
+Protoss_Robotics_Facility 1 368 3648 100 0 0 0
+#Balanced base assault
+#

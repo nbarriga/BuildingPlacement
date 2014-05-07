@@ -1,0 +1,96 @@
+#Fixed buildings
+Protoss_Nexus 1 3808 272 1496 0 1 0
+#Attackers
+Protoss_Zealot 0 3218 3059 160 0 0 0
+Protoss_Zealot 0 3240 3040 160 0 0 0
+Protoss_Zealot 0 3217 3030 160 0 0 0
+Protoss_Zealot 0 3798 3451 160 0 0 0
+Protoss_Zealot 0 3648 3728 160 0 0 0
+Protoss_Zealot 0 3648 3984 160 0 0 0
+#Defenders
+Protoss_Probe 1 3882 297 40 0 0 0
+Protoss_Probe 1 3885 335 35 0 0 0
+Protoss_Probe 1 3966 237 35 0 0 0
+Protoss_Probe 1 3988 180 35 0 0 0
+Protoss_Probe 1 3956 404 40 0 0 0
+Protoss_Probe 1 3956 171 40 0 0 0
+Protoss_Probe 1 3156 1490 40 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+Protoss_Zealot 1 3882 297 160 0 0 0
+#Delayed Attackers
+Protoss_Zealot 0 3744 3536 70 3841 0 0
+Protoss_Zealot 0 3648 3728 70 3517 0 0
+Protoss_Zealot 0 3648 3984 70 3353 0 0
+Protoss_Zealot 0 3744 3536 70 3233 0 0
+Protoss_Zealot 0 3648 3728 70 2499 0 0
+Protoss_Zealot 0 3648 3984 70 2403 0 0
+Protoss_Zealot 0 3744 3536 70 2163 0 0
+Protoss_Zealot 0 3648 3728 70 1799 0 0
+Protoss_Zealot 0 3648 3984 70 1531 0 0
+Protoss_Zealot 0 3744 3536 70 1363 0 0
+Protoss_Zealot 0 3648 3728 70 1191 0 0
+Protoss_Zealot 0 3648 3984 70 919 0 0
+#Delayed Defenders
+Protoss_Probe 1 3808 272 22 3895 0 0
+Protoss_Probe 1 3808 272 22 3587 0 0
+Protoss_Probe 1 3808 272 22 3285 0 0
+Protoss_Probe 1 3808 272 22 2977 0 0
+Protoss_Probe 1 3808 272 22 2669 0 0
+Protoss_Probe 1 3808 272 22 2361 0 0
+Protoss_Probe 1 3808 272 22 2053 0 0
+Protoss_Probe 1 3808 272 22 1745 0 0
+Protoss_Probe 1 3808 272 22 1437 0 0
+Protoss_Probe 1 3808 272 22 1129 0 0
+Protoss_Probe 1 3808 272 22 821 0 0
+Protoss_Probe 1 3808 272 22 405 0 0
+#Non-fixed Buildings
+Protoss_Pylon 1 3712 352 600 0 0 0
+Protoss_Forge 1 3472 224 1100 0 0 0
+#Optimized against attackers from
+#bot_battles/Andromeda10/3808X272/143-SKYNET_VS_AIUR.REP_battle0-3800.txt.balanceddefenders
+#bot_battles/Andromeda10/3808X272/143-SKYNET_VS_AIUR.REP_battle1-6983.txt.balanceddefenders
+#40	# current generation
+#1	# current convergence
+#640	# number of selections since initialization
+#537	# number of crossovers since initialization
+#58	# number of mutations since initialization
+#600	# number of replacements since initialization
+#558	# number of genome evaluations since initialization
+#21	# number of population evaluations since initialization
+#1.02401e+07	# maximum score since initialization
+#1.01268e+07	# minimum score since initialization
+#1.02295e+07	# average of all scores ('on-line' performance)
+#1.02401e+07	# average of maximum scores ('off-line' performance)
+#1.0199e+07	# average of minimum scores ('off-line' performance)
+#
+#1.01658e+07	# mean score in initial population
+#1.02401e+07	# maximum score in initial population
+#1.01268e+07	# minimum score in initial population
+#42095	# standard deviation of initial population
+#0.995238	# diversity of initial population (0=identical,-1=unset)
+#
+#1.02375e+07	# mean score in current population
+#1.02401e+07	# maximum score in current population
+#1.02374e+07	# minimum score in current population
+#710.047	# standard deviation of current population
+#0.319048	# diversity of current population (0=identical,-1=unset)
+#
+#20	# how far back to look for convergence
+#1	# how often to record scores
+#0	# how often to write scores to file
+#generations.dat	# name of file to which scores are written
+#
+#Initial Score Defender: 306700
+#Initial Score Attacker: 111600
+#Final Score Defender: 190300
+#Final Score Attacker: 0
+#Optimized Score Defender: 155100
+#Optimized Score Attacker: 0
+#
