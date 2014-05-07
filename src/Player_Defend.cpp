@@ -26,9 +26,10 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 		size_t actionMoveIndex					(0);
 		double actionHighestDPS					(0);
 		size_t closestMoveIndex					(0);
-		unsigned long long closestMoveDist		(std::numeric_limits<unsigned long long>::max());
+		int closestMoveDist		(std::numeric_limits<int>::max());
 		
 		const SparCraft::Unit & ourUnit				(state.getUnit(_playerID, u));
+		static Position lastEnemyPos(0,0);
 
 //		size_t mdist	= state.getMap().getDistanceToGoal(ourUnit.pos());
 //		std::cout<<"Unit: "<<ourUnit.name()<<" dist to goal: "<<mdist<<
@@ -49,6 +50,7 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 					actionHighestDPS = dpsHPValue;
 					actionMoveIndex = m;
 					foundUnitAction = true;
+					lastEnemyPos=Position(0,0);
 				}
 
                 if (move._moveIndex >= state.numUnits(enemy))
@@ -109,29 +111,27 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 			        }
 			    }else{//not a medic
 			        const boost::optional<const Unit&> & closestEnemyOpt = state.getClosestEnemyUnitOpt(_playerID, u);
-
-			        if (closestEnemyOpt.is_initialized()&&
-			                //closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE&&
-			                !state.getAliveUnitsInCircleIDs(_playerID,closestEnemyOpt->currentPosition(state.getTime()),closestEnemyOpt->range()*2).empty()){
-			                dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
+			        const bool enemyExists=closestEnemyOpt.is_initialized();
+			        const bool enemyHasTargets=enemyExists?!state.getAliveUnitsInCircleIDs(_playerID,closestEnemyOpt->currentPosition(state.getTime()),closestEnemyOpt->range()+96).empty():false;
+			        if (enemyExists&&enemyHasTargets&&
+			                closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE){
+			            dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
+			            lastEnemyPos=closestEnemyOpt->currentPosition(state.getTime());
+			        }else if(enemyExists&&enemyHasTargets&&!(lastEnemyPos==Position(0,0))){//he is moving
+			            dist = state.getMap().getDistance(ourDest,lastEnemyPos);
 			        }else{
 			            const boost::optional<const Unit&> & closestDamagedBuildingOpt=state.getClosestOurDamagedBuildingOpt(_playerID, u);
-			            if(closestDamagedBuildingOpt.is_initialized()){
-			                int d = state.getMap().getDistance(ourDest,closestDamagedBuildingOpt.get().pos());
-			               // if(d<10*TILE_SIZE){
-			                    dist=d;
-			               // }else{
-			               //     dist = state.getMap().getDistance(ourDest,_goal);
-			               // }
-			            }else{
-			                dist = state.getMap().getDistance(ourDest,_goal);
+			            if(closestDamagedBuildingOpt.is_initialized()&&closestDamagedBuildingOpt->getDistanceSqToUnit(ourUnit,state.getTime())>ourUnit.range()*ourUnit.range()*4){
+			                dist = state.getMap().getDistance(ourDest,closestDamagedBuildingOpt.get().pos());
+			            }else{//stay put
+			                dist=std::numeric_limits<int>::max();
 			            }
 			        }
 			    }
-				if (dist < closestMoveDist)
-				{
-					closestMoveDist = dist;
-					closestMoveIndex = m;
+			    if (dist < closestMoveDist)
+			    {
+			        closestMoveDist = dist;
+			        closestMoveIndex = m;
 					foundUnitMove=true;
 				}
 
@@ -140,18 +140,18 @@ void Player_Defend::getMoves(const GameState & state, const MoveArray & moves, s
 
 
 
-		UnitAction theMove(moves.getMove(u, actionMoveIndex));
-		if (theMove.type() == UnitActionTypes::ATTACK)
-		{
-			hpRemaining[theMove.index()] -= state.getUnit(_playerID, theMove.unit()).damage();
-		}
-//		size_t bestMoveIndex(foundUnitAction ? actionMoveIndex : closestMoveIndex);
 		if(foundUnitAction){
-			moveVec.push_back(moves.getMove(u, actionMoveIndex));
+		    UnitAction theMove(moves.getMove(u, actionMoveIndex));
+		    if (theMove.type() == UnitActionTypes::ATTACK)
+		    {
+		        hpRemaining[theMove.index()] -= state.getUnit(_playerID, theMove.unit()).damage();
+		    }
+
+		    moveVec.push_back(moves.getMove(u, actionMoveIndex));
 		}else if(foundUnitMove){
-			moveVec.push_back(moves.getMove(u, closestMoveIndex));
-		}else{
-			moveVec.push_back(UnitAction(u, _playerID, UnitActionTypes::PASS, 0));
+		    moveVec.push_back(moves.getMove(u, closestMoveIndex));
+		}else{//pass
+		    moveVec.push_back(UnitAction(u,_playerID,UnitActionTypes::PASS,0));
 		}
 	}
 }
