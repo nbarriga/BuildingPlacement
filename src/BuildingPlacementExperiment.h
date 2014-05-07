@@ -42,10 +42,12 @@ class BuildingPlacementExperiment:public SearchExperiment {
 	std::vector<std::vector<Unit> > _fixedBuildings,_buildings,_attackers,_defenders;
 	std::vector<std::vector<std::pair<Unit, TimeType> > > _delayedAttackers, _delayedDefenders;
 
+	std::vector<ScoreType> _attackerScoreBefore, _defenderScoreBefore;
+
 	std::vector<std::string> stateFileNames;
 
 	void parseBaseAssaultStateDescriptionFile(const std::string & fileName);
-	void saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName, const boost::optional<const GAStatistics &> stats);
+	void saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName, const boost::optional<const GAStatistics &> stats, std::string comments="");
 	void unitsToString(std::stringstream &ss, const std::vector<Unit> &units, bool fixed=false);
 	void unitToString(std::stringstream &ss, const Unit &unit, bool fixed=false);
 	void setupPlayers(size_t p1Player, size_t p2Player, const Position& goal);

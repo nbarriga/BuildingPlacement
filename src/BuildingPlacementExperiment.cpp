@@ -296,12 +296,12 @@ void BuildingPlacementExperiment::runEvaluate() {
                         playerOne,
                         playerTwo,
                         getExpDescription(p1Player,p2Player,state));
-		try{
-                int score = GeneticOperators::evalBuildingPlacement(game.getState());
-		std::cout<<"score: "<<score<<std::endl;
+                try{
+                    int score = GeneticOperators::evalBuildingPlacement(game.getState());
+                    std::cout<<"score: "<<score<<std::endl;
                 }catch(int e){
-			std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
-		}
+                    std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
+                }
 
 
             }
@@ -381,59 +381,7 @@ void BuildingPlacementExperiment::runBalance() {
                         _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
                         delayedUnits.begin(), Comparison());
 
-		try{
-                Game game(gameState, playerOne, playerTwo, 20000,delayedUnits);
-#ifdef USING_VISUALIZATION_LIBRARIES
-                if (_display!=NULL)
-                {
-                    game.disp = _display;
-                    _display->SetExpDesc(getExpDescription(p1Player,p2Player,state));
-
-                }
-#endif
-
-                // play the game to the end
-                game.play();
-
-
-                GeneticOperators::configure(_fixedBuildings[state],
-                        _buildings[state],
-                        _defenders[state],
-                        _attackers[state],
-                        _delayedDefenders[state],
-                        _delayedAttackers[state],
-                        map,_display,
-                        playerOne,
-                        playerTwo,
-                        getExpDescription(p1Player,p2Player,state));
-                bool defWonFirst = GeneticOperators::defenderWon(game.getState());
-                if(defWonFirst){
-                    std::cout<<"Defender won"<<std::endl;
-                }else{
-                    std::cout<<"Attacker won"<<std::endl;
-                }
-                bool defWon=defWonFirst;
-                do{
-                    if(defWon){//add unit to attacker
-                        assert(!_attackers[state].empty());
-                        Unit unit(BWAPI::UnitTypes::Protoss_Zealot,  _attackers[state][0].pos(), 0,
-                                _attackers[state][0].player(),
-                                BWAPI::UnitTypes::Protoss_Zealot.maxHitPoints()+BWAPI::UnitTypes::Protoss_Zealot.maxShields(),
-                                0, 0, 0);
-                        _attackers[state].push_back(unit);
-                        gameState.addUnitClosestLegalPos(unit);
-                        std::cout<<"Added attacker"<<std::endl;
-                    }else{//add unit to defender
-                        assert(!_defenders[state].empty());
-                        Unit unit(BWAPI::UnitTypes::Protoss_Zealot,  _defenders[state][0].pos(), 0,
-                                _defenders[state][0].player(),
-                                BWAPI::UnitTypes::Protoss_Zealot.maxHitPoints()+BWAPI::UnitTypes::Protoss_Zealot.maxShields(),
-                                0, 0, 0);
-                        _defenders[state].push_back(unit);
-                        gameState.addUnitClosestLegalPos(unit);
-                        std::cout<<"Added defender"<<std::endl;
-                    }
-
+                try{
                     Game game(gameState, playerOne, playerTwo, 20000,delayedUnits);
 #ifdef USING_VISUALIZATION_LIBRARIES
                     if (_display!=NULL)
@@ -458,24 +406,87 @@ void BuildingPlacementExperiment::runBalance() {
                             playerOne,
                             playerTwo,
                             getExpDescription(p1Player,p2Player,state));
-
-                    defWon = GeneticOperators::defenderWon(game.getState());
-                    if(defWon){
+                    bool defWonFirst = GeneticOperators::defenderWon(game.getState());
+                    if(defWonFirst){
                         std::cout<<"Defender won"<<std::endl;
                     }else{
                         std::cout<<"Attacker won"<<std::endl;
                     }
-                }while(defWonFirst==defWon);
+                    bool defWon=defWonFirst;
+                    do{
+                        if(defWon){//add unit to attacker
+                            assert(!_attackers[state].empty());
+                            Unit unit(BWAPI::UnitTypes::Protoss_Zealot,  _attackers[state][0].pos(), 0,
+                                    _attackers[state][0].player(),
+                                    BWAPI::UnitTypes::Protoss_Zealot.maxHitPoints()+BWAPI::UnitTypes::Protoss_Zealot.maxShields(),
+                                    0, 0, 0);
+                            _attackers[state].push_back(unit);
+                            gameState.addUnitClosestLegalPos(unit);
+                            std::cout<<"Added attacker"<<std::endl;
+                        }else{//add unit to defender
+                            assert(!_defenders[state].empty());
+                            Unit unit(BWAPI::UnitTypes::Protoss_Zealot,  _defenders[state][0].pos(), 0,
+                                    _defenders[state][0].player(),
+                                    BWAPI::UnitTypes::Protoss_Zealot.maxHitPoints()+BWAPI::UnitTypes::Protoss_Zealot.maxShields(),
+                                    0, 0, 0);
+                            _defenders[state].push_back(unit);
+                            gameState.addUnitClosestLegalPos(unit);
+                            std::cout<<"Added defender"<<std::endl;
+                        }
 
-                if(!defWonFirst){
-                    _defenders[state].pop_back();//delete last added defender, so that the game is won by attackers
-                }
+                        Game game(gameState, playerOne, playerTwo, 20000,delayedUnits);
+#ifdef USING_VISUALIZATION_LIBRARIES
+                        if (_display!=NULL)
+                        {
+                            game.disp = _display;
+                            _display->SetExpDesc(getExpDescription(p1Player,p2Player,state));
 
-                saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".balanced",boost::optional<const GAStatistics&>(boost::none));
+                        }
+#endif
+
+                        // play the game to the end
+                        game.play();
+
+
+                        GeneticOperators::configure(_fixedBuildings[state],
+                                _buildings[state],
+                                _defenders[state],
+                                _attackers[state],
+                                _delayedDefenders[state],
+                                _delayedAttackers[state],
+                                map,_display,
+                                playerOne,
+                                playerTwo,
+                                getExpDescription(p1Player,p2Player,state));
+
+                        defWon = GeneticOperators::defenderWon(game.getState());
+                        if(defWon){
+                            std::cout<<"Defender won"<<std::endl;
+                        }else{
+                            std::cout<<"Attacker won"<<std::endl;
+                        }
+                    }while(defWonFirst==defWon);
+
+                    if(!defWonFirst){
+                        _defenders[state].pop_back();//delete last added defender, so that the game is won by attackers
+                    }
+
+                    saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".balancedattackers",boost::optional<const GAStatistics&>(boost::none));
+
+                    if(!defWonFirst){
+                        _defenders[state].push_back(Unit(BWAPI::UnitTypes::Protoss_Zealot,  _defenders[state][0].pos(), 0,
+                                _defenders[state][0].player(),
+                                BWAPI::UnitTypes::Protoss_Zealot.maxHitPoints()+BWAPI::UnitTypes::Protoss_Zealot.maxShields(),
+                                0, 0, 0));//add back last defender, so that the game is won by defenders
+                    }else{
+                        _attackers[state].pop_back();//delete last added attacker, so that the game is won by defenders
+                    }
+
+                    saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".balanceddefenders",boost::optional<const GAStatistics&>(boost::none));
 
                 }catch(int e){
-			std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
-		}
+                    std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
+                }
             }
         }
     }
@@ -490,8 +501,8 @@ svv BuildingPlacementExperiment::getExpDescription(const size_t& p1,
 }
 
 void BuildingPlacementExperiment::runOptimize(bool cross) {
-    int popsize  = 10;
-    int ngen     = 20;
+    int popsize  = 15;
+    int ngen     = 40;
     float pmut   = 0.05;
     float pcross = 0.9;
 //    gaDefDivFlag=gaTrue;
@@ -524,6 +535,74 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
                 PlayerPtr playerTwo(players[1][p2Player]);
 
                 setupPlayers(p1Player, p2Player, getGoal(_fixedBuildings[state]));
+
+
+
+
+                //==================================================================================
+                //====================RUN EVAL FIRST================================================
+
+                GameState gameState;
+                gameState.checkCollisions=true;
+                gameState.setMap(*map);
+                for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings[state].begin();
+                        it!=_fixedBuildings[state].end();it++){
+                    assert(it->player()==_defendPlayer);
+                    gameState.addUnit(*it);
+                }
+                for(std::vector<SparCraft::Unit>::const_iterator it=_buildings[state].begin();
+                        it!=_buildings[state].end();it++){
+                    assert(it->player()==_defendPlayer);
+                    gameState.addUnit(*it);
+                }
+
+                for(std::vector<SparCraft::Unit>::const_iterator it=_defenders[state].begin();
+                        it!=_defenders[state].end();it++){
+                    assert(it->player()==_defendPlayer);
+                    gameState.addUnitClosestLegalPos(*it);
+                }
+                for(std::vector<SparCraft::Unit>::const_iterator it=_attackers[state].begin();
+                        it!=_attackers[state].end();it++){
+                    assert(it->player()==_assaultPlayer);
+                    gameState.addUnitClosestLegalPos(*it);
+                }
+
+                std::vector<std::pair<Unit, TimeType> > delayedUnits(
+                        _delayedAttackers[state].size()+_delayedDefenders[state].size());
+                std::merge(_delayedAttackers[state].begin(),_delayedAttackers[state].end(),
+                        _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
+                        delayedUnits.begin(), Comparison());
+                Game game(gameState, playerOne, playerTwo, 20000,delayedUnits);
+#ifdef USING_VISUALIZATION_LIBRARIES
+                if (_display!=NULL)
+                {
+                    game.disp = _display;
+                    _display->SetExpDesc(getExpDescription(p1Player,p2Player,state));
+
+                }
+#endif
+
+                // play the game to the end
+                game.play();
+
+
+                GeneticOperators::configure(_fixedBuildings[state],
+                        _buildings[state],
+                        _defenders[state],
+                        _attackers[state],
+                        _delayedDefenders[state],
+                        _delayedAttackers[state],
+                        map,_display,
+                        playerOne,
+                        playerTwo,
+                        getExpDescription(p1Player,p2Player,state));
+
+                ScoreType attackerScoreAfter,defenderScoreAfter;
+                attackerScoreAfter = GeneticOperators::unitScore(game.getState(),_assaultPlayer);
+                defenderScoreAfter = GeneticOperators::unitScore(game.getState(),_defendPlayer);
+
+                //========================FINISHED EVAL==========================================================
+
 
                 // Now create the GA and run it.  First we create a genome of the type that
                 // we want to use in the GA.  The ga doesn't operate on this genome in the
@@ -563,11 +642,11 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
                             delayedAttackers.push_back(_delayedAttackers[i]);
                         }
                     }
-			if(attackers.empty()){
-				continue;
-			}	
+                    if(attackers.empty()){
+                        continue;
+                    }
                     GeneticOperators::configure(_fixedBuildings[state],
-                                                _buildings[state],
+                            _buildings[state],
                                                 _defenders[state],
                                                 attackers,
                                                 _delayedDefenders[state],
@@ -601,20 +680,97 @@ void BuildingPlacementExperiment::runOptimize(bool cross) {
                 //				ga.selector(sel);
                 //				ga.elitist(gaTrue);
 
-		try{
-                ga.evolve();
+                try{
+                    ga.evolve();
 
-                // Now we print out the best genome that the GA found.
-                GAStatistics stats=ga.statistics();
-                //				stats.recordDiversity(gaTrue);
-                std::cout << "The GA found: "<<stats.bestIndividual().evaluate()<<"\n" <<
-                        stats.bestIndividual() << "\n";
-                stats.write(std::cout);
+                    // Now we print out the best genome that the GA found.
+                    GAStatistics stats=ga.statistics();
+                    //				stats.recordDiversity(gaTrue);
+                    std::cout << "The GA found: "<<stats.bestIndividual().evaluate()<<"\n" <<
+                            stats.bestIndividual() << "\n";
+                    stats.write(std::cout);
 
 
-                saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".optimized",boost::optional<const GAStatistics&>(stats));
-		}catch(int e){
-                	std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
+                    //==================================================================================
+                    //====================RUN EVAL AFTER================================================
+
+                    GameState gameState;
+                    gameState.checkCollisions=true;
+                    gameState.setMap(*map);
+                    for(std::vector<SparCraft::Unit>::const_iterator it=_fixedBuildings[state].begin();
+                            it!=_fixedBuildings[state].end();it++){
+                        assert(it->player()==_defendPlayer);
+                        gameState.addUnit(*it);
+                    }
+                    GAListGenome<Gene>& g=(GAListGenome<Gene>&)stats.bestIndividual();
+                    for(int i=0;i<g.size();i++){
+                        Unit u=_buildings[state][i];
+                        Unit unit(u.type(), g[i]->getCenterPos(), 0, u.player(), u.currentHP(),
+                                u.currentEnergy(), u.nextMoveActionTime(), u.nextAttackActionTime());
+                        gameState.addUnit(unit);
+                    }
+
+                    for(std::vector<SparCraft::Unit>::const_iterator it=_defenders[state].begin();
+                            it!=_defenders[state].end();it++){
+                        assert(it->player()==_defendPlayer);
+                        gameState.addUnitClosestLegalPos(*it);
+                    }
+                    for(std::vector<SparCraft::Unit>::const_iterator it=_attackers[state].begin();
+                            it!=_attackers[state].end();it++){
+                        assert(it->player()==_assaultPlayer);
+                        gameState.addUnitClosestLegalPos(*it);
+                    }
+
+                    std::vector<std::pair<Unit, TimeType> > delayedUnits(
+                            _delayedAttackers[state].size()+_delayedDefenders[state].size());
+                    std::merge(_delayedAttackers[state].begin(),_delayedAttackers[state].end(),
+                            _delayedDefenders[state].begin(),_delayedDefenders[state].end(),
+                            delayedUnits.begin(), Comparison());
+                    Game game(gameState, playerOne, playerTwo, 20000,delayedUnits);
+#ifdef USING_VISUALIZATION_LIBRARIES
+                    if (_display!=NULL)
+                    {
+                        game.disp = _display;
+                        _display->SetExpDesc(getExpDescription(p1Player,p2Player,state));
+
+                    }
+#endif
+
+                    // play the game to the end
+                    game.play();
+
+
+                    GeneticOperators::configure(_fixedBuildings[state],
+                            _buildings[state],
+                            _defenders[state],
+                            _attackers[state],
+                            _delayedDefenders[state],
+                            _delayedAttackers[state],
+                            map,_display,
+                            playerOne,
+                            playerTwo,
+                            getExpDescription(p1Player,p2Player,state));
+
+                    ScoreType attackerScoreAfterOptimize,defenderScoreAfterOptimize;
+                    attackerScoreAfterOptimize = GeneticOperators::unitScore(game.getState(),_assaultPlayer);
+                    defenderScoreAfterOptimize = GeneticOperators::unitScore(game.getState(),_defendPlayer);
+
+                    //========================FINISHED EVAL==========================================================
+
+
+
+
+                    std::stringstream comments;
+                    comments<<"Initial Score Defender: "<<_defenderScoreBefore[state]<<std::endl;
+                    comments<<"Initial Score Attacker: "<<_attackerScoreBefore[state]<<std::endl;
+                    comments<<"Final Score Defender: "<<defenderScoreAfter<<std::endl;
+                    comments<<"Final Score Attacker: "<<attackerScoreAfter<<std::endl;
+                    comments<<"Optimized Score Defender: "<<defenderScoreAfterOptimize<<std::endl;
+                    comments<<"Optimized Score Attacker: "<<attackerScoreAfterOptimize<<std::endl;
+                    saveBaseAssaultStateDescriptionFile(state,stateFileNames[state]+".optimized",boost::optional<const GAStatistics&>(stats), comments.str());
+
+                }catch(int e){
+                    std::cerr<<"Timeout at file: "<<stateFileNames[state]<<std::endl;
                 }
 
             }
@@ -661,6 +817,7 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
     std::vector<std::pair<Unit, TimeType> > delayedAttackers,delayedDefenders;
 
     int skippedBuildings=0;
+    ScoreType attackerScoreBefore=0, defenderScoreBefore=0;
 
     for (size_t u(0); u<lines.size(); ++u)
     {
@@ -830,6 +987,7 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
             }else{
                 attackers.push_back(unit);
             }
+            attackerScoreBefore+=GeneticOperators::unitScore(unit);
         }else{//defend
             if(time>0){
                 if(type.isBuilding()){
@@ -861,6 +1019,7 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
                     defenders.push_back(unit);
                 }
             }
+            defenderScoreBefore+=GeneticOperators::unitScore(unit);
         }
     }
 
@@ -868,6 +1027,8 @@ void BuildingPlacementExperiment::parseBaseAssaultStateDescriptionFile(
         std::cerr<<"Skipped too many buildings, skipping battle"<<std::endl;
         return;
     }
+    _attackerScoreBefore.push_back(attackerScoreBefore);
+    _defenderScoreBefore.push_back(defenderScoreBefore);
 
     _fixedBuildings.push_back(fixedBuildings);
 
@@ -902,7 +1063,9 @@ void BuildingPlacementExperiment::unitsToString(std::stringstream &ss, const std
 
 }
 
-void BuildingPlacementExperiment::saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName, const boost::optional<const GAStatistics &> stats){
+void BuildingPlacementExperiment::saveBaseAssaultStateDescriptionFile(int state, const std::string & fileName,
+        const boost::optional<const GAStatistics &> stats,
+        std::string comments){
 
     std::stringstream ss;
     ss<<"#Fixed buildings"<<std::endl;
@@ -962,6 +1125,12 @@ void BuildingPlacementExperiment::saveBaseAssaultStateDescriptionFile(int state,
             statsStream.getline(buff,80);
             file<<"#"<<buff<<std::endl;
         }
+    }
+    std::stringstream comm(comments);
+    char buff[80];
+    while(!comm.eof()){
+        comm.getline(buff,80);
+        file<<"#"<<buff<<std::endl;
     }
     file.close();
 

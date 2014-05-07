@@ -32,9 +32,7 @@ class GeneticOperators {
     static bool isLegal(GAListGenome<Gene>& genome);
     //check if all buildings in genome are powered
 	static bool isPowered(GAListGenome<Gene>& genome);
-	static ScoreType unitScore(const GameState& state,
-	        const std::vector<IDType> &units,
-	        IDType player);
+
     static std::vector<SparCraft::Unit> _fixedBuildings;
     static std::vector<SparCraft::Unit> _buildings;
     static std::vector<SparCraft::Unit> _defenders;
@@ -86,6 +84,9 @@ public:
 	static ScoreType evalBuildingPlacement(const GameState& state);
 	static bool goalReached(const GameState& state);
 	static bool defenderWon(const GameState& state);
+    static ScoreType unitScore(const GameState& state,
+            IDType player);
+    static ScoreType unitScore(const Unit& unit);
 };
 
 } /* namespace SparCraft */

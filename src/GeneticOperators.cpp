@@ -127,54 +127,60 @@ bool GeneticOperators::goalReached(const GameState& state){
       }
   return false;
 }
+
+ScoreType GeneticOperators::unitScore(const Unit& unit){
+    ScoreType hpPercent=(unit.currentHP()*100)/(unit.maxHP());
+    ScoreType cost=unit.type().mineralPrice()+1.5f*unit.type().gasPrice();
+    ScoreType val=cost*hpPercent;
+    if(unit.type().isWorker()){
+        val*=2;
+    }else if(unit.type()==BWAPI::UnitTypes::Protoss_Pylon){
+        val*=3;
+    }
+    return val;
+}
 ScoreType GeneticOperators::unitScore(const GameState& state,
-        const std::vector<IDType> &units,
         IDType player){
 
+    std::vector<IDType> units=state.getAliveUnitIDs(player);
     ScoreType score=0;
     BOOST_FOREACH(const IDType &id,units){
         const Unit &u=state.getUnitByID(player,id);
-        ScoreType hpPercent=(u.maxHP()-u.currentHP())*100/(u.maxHP());
-        ScoreType cost=u.type().mineralPrice()+1.5f*u.type().gasPrice();
-        ScoreType val=cost*hpPercent;
-        if(u.type().isWorker()){
-            val*=2;
-        }else if(u.type()==BWAPI::UnitTypes::Protoss_Pylon){
-            val*=3;
-        }
-        score+=val;
+        score+=unitScore(u);
+//        std::cout<<hpPercent<<" "<<cost<<" "<<val<<std::endl;
     }
+
     return score;
 }
 ScoreType GeneticOperators::evalBuildingPlacement(const GameState& state){
 
-    const std::vector<IDType> &attackers=state.getAliveUnitIDs(_assaultPlayer->ID());
-    const std::vector<IDType> &defenders=state.getAliveUnitIDs(_defendPlayer->ID());
+//    std::cout<<"att"<<std::endl;
+    ScoreType attValue=unitScore(state,_assaultPlayer->ID());
+//    std::cout<<"def"<<std::endl;
+    ScoreType defValue=unitScore(state,_defendPlayer->ID());
 
-    ScoreType attValue=unitScore(state,attackers,_assaultPlayer->ID());
-    ScoreType defValue=unitScore(state,defenders,_defendPlayer->ID());
-
+    const ScoreType constant = 10000000;
 
   if(state.playerDead(_assaultPlayer->ID())){//attacker defeated, count how many we have left
       std::cout<<"Attacker destroyed"<<std::endl;
-      return defValue+3000000;
-  }else if(goalReached(state)){//enemy reached goal,
-      std::cout<<"Attacker reached goal"<<std::endl;
-      return /*defValue*/-attValue+1000000;
+      return defValue+constant;
+//  }else if(goalReached(state)){//enemy reached goal,
+//      std::cout<<"Attacker reached goal"<<std::endl;
+//      return /*defValue*/-attValue+1000000;
   }else if(state.playerDead(_defendPlayer->ID())){//defender destroyed, count how many he has left
       std::cout<<"Defender destroyed"<<std::endl;
-      return defValue-attValue+500000;
+      return constant-attValue;
   }else{//simulation time exhausted
 	  std::cerr<<"Simulation timeout, something wrong!!!!"<<std::endl;
       System::FatalError("Simulation timeout");
-      return defValue-attValue+2000000;
+//      return defValue-attValue+2000000;
   }
 }
 bool GeneticOperators::defenderWon(const GameState& state){
     if(state.playerDead(_assaultPlayer->ID())){
         return true;
-    }else if(goalReached(state)){
-        return false;
+//    }else if(goalReached(state)){
+//        return false;
     }else if(state.playerDead(_defendPlayer->ID())){
         return false;
     }else{//simulation time exhausted
