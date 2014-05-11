@@ -15,10 +15,17 @@ namespace BuildingPlacement {
  `----------------------------------------------------------------------*/
 class Player_Assault : public Player_Goal
 {
+//    static const int N=10;
+//    Position _lastMyPos[N][Constants::Max_Units];
 public:
     static const std::string modelString;
 	Player_Assault (const IDType & playerID, const Position& goal);
 	void getMoves(const GameState & state, const MoveArray & moves, std::vector<UnitAction> & moveVec);
 	IDType getType() { return PlayerModels::Assault; }
+//	void reset(){
+//	    for(int i=0;i<N;i++){
+//	        std::fill(_lastMyPos[i], _lastMyPos[i]+Constants::Max_Units, Position(0,0));
+//	    }
+//	}
 };
 }

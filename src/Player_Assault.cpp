@@ -97,65 +97,76 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 
 			    Position ourDest=move.pos();
 			    int dist(std::numeric_limits<int>::max());
-			    if(ourUnit.canHeal()){//medic
-			        const boost::optional<const Unit&> & closestWoundedOpt  =state.getClosestOurWoundedUnitOpt(_playerID, u);
-			        if(closestWoundedOpt.is_initialized()&&
-			                state.getMap().canWalkStraight(ourDest,closestWoundedOpt.get().pos(), ourUnit.range()))
-			        {
-			            dist = sqrt(closestWoundedOpt.get().getDistanceSqToPosition(ourDest, state.getTime()));
-			        }
-			        else if(closestWoundedOpt.is_initialized()&&
-			                closestWoundedOpt.get().previousAction().type()!=UnitActionTypes::MOVE)
-			        {
-			            //this slows down things considerably
-			            dist = state.getMap().getDistance(ourDest,closestWoundedOpt.get().pos());
-			        }
-			        else
-			        {
-			            //dist = state.getMap().getDistanceToGoal(ourDest);//walk towards goal?
-			            dist = state.getMap().getDistance(ourDest,_goal);
-			        }
-			    }else{//not a medic
-			        const boost::optional<const Unit&> & closestEnemyOpt=state.getClosestEnemyThreatOpt(_playerID, u);
-			        if(closestEnemyOpt.is_initialized()){
-			            dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
-			        }else {
-			            std::vector<IDType> ids=state.getAliveUnitIDs(_playerID);
-			            int ourDist=state.getMap().getDistance(ourUnit.currentPosition(state.getTime()),_goal);
-			            int max=std::numeric_limits<int>::min(),min=std::numeric_limits<int>::max();
-			            BOOST_FOREACH(const IDType &id,ids){
-			                int dd=state.getMap().getDistance(state.getUnitByID(_playerID,id).currentPosition(state.getTime()),_goal);
-			                if(dd>max){
-			                    max=dd;
-			                }
-			                if(dd<min){
-			                    min=dd;
-			                }
-			            }
-//			            std::cout<<min<<" "<<max<<" "<<ourDist<<std::endl;
-			            if((max-min)> 16 && (ourDist-min)< 4){
-			                dist=std::numeric_limits<int>::max();
-			            }else{
-			                const boost::optional<const Unit&> & closestEnemyOpt=state.getClosestEnemyUnitOpt(_playerID, u);
-			                if(closestEnemyOpt.is_initialized()&&
-			                        closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE){//move towards unit that can hurt us
-			                    //			                if(state.getMap().canWalkStraight(ourDest,closestEnemyOpt->pos(), ourUnit.range())){
-			                    //			                    dist = sqrt(closestEnemyOpt.get().getDistanceSqToPosition(ourDest, state.getTime()));
-			                    //			                }else{
-			                    dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
+//			    bool repeat=false;
+//			    for(int i=0;i<N;i++){
+//			        if(ourDest==_lastMyPos[i][u]){
+//			            repeat=true;
+//			        }
+//			    }
+//			    if(repeat){
+//			        dist=std::numeric_limits<int>::max();
+//			    }else{
 
-			                    //			                }
+			        if(ourUnit.canHeal()){//medic
+			            const boost::optional<const Unit&> & closestWoundedOpt  =state.getClosestOurWoundedUnitOpt(_playerID, u);
+			            if(closestWoundedOpt.is_initialized()&&
+			                    state.getMap().canWalkStraight(ourDest,closestWoundedOpt.get().pos(), ourUnit.range()))
+			            {
+			                dist = sqrt(closestWoundedOpt.get().getDistanceSqToPosition(ourDest, state.getTime()));
+			            }
+			            else if(closestWoundedOpt.is_initialized()&&
+			                    closestWoundedOpt.get().previousAction().type()!=UnitActionTypes::MOVE)
+			            {
+			                //this slows down things considerably
+			                dist = state.getMap().getDistance(ourDest,closestWoundedOpt.get().pos());
+			            }
+			            else
+			            {
+			                //dist = state.getMap().getDistanceToGoal(ourDest);//walk towards goal?
+			                dist = state.getMap().getDistance(ourDest,_goal);
+			            }
+			        }else{//not a medic
+			            const boost::optional<const Unit&> & closestEnemyOpt=state.getClosestEnemyThreatOpt(_playerID, u);
+			            if(closestEnemyOpt.is_initialized()){
+			                dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
+			            }else {
+//			                std::vector<IDType> ids=state.getAliveUnitIDs(_playerID);
+//			                int ourDist=state.getMap().getDistance(ourUnit.currentPosition(state.getTime()),_goal);
+//			                int max=std::numeric_limits<int>::min(),min=std::numeric_limits<int>::max();
+//			                BOOST_FOREACH(const IDType &id,ids){
+//			                    int dd=state.getMap().getDistance(state.getUnitByID(_playerID,id).currentPosition(state.getTime()),_goal);
+//			                    if(dd>max){
+//			                        max=dd;
+//			                    }
+//			                    if(dd<min){
+//			                        min=dd;
+//			                    }
+//			                }
+			                //			            std::cout<<min<<" "<<max<<" "<<ourDist<<std::endl;
+//			                if((max-min)> 16 && (ourDist-min)< 4){
+//			                    dist=std::numeric_limits<int>::max();
+//			                }else{
+			                    const boost::optional<const Unit&> & closestEnemyOpt=state.getClosestEnemyUnitOpt(_playerID, u);
+			                    if(closestEnemyOpt.is_initialized()&&
+			                            closestEnemyOpt->previousAction().type()!=UnitActionTypes::MOVE){//move towards unit that can hurt us
+			                        //			                if(state.getMap().canWalkStraight(ourDest,closestEnemyOpt->pos(), ourUnit.range())){
+			                        //			                    dist = sqrt(closestEnemyOpt.get().getDistanceSqToPosition(ourDest, state.getTime()));
+			                        //			                }else{
+			                        dist = state.getMap().getDistance(ourDest,closestEnemyOpt->currentPosition(state.getTime()));
 
-			                }else{//closest enemy can't hurt us, move towards goal
-			                    //			                if(state.getMap().canWalkStraight(ourDest,_goal,0)){
-			                    //			                    dist = ourDest.getDistance(_goal);
-			                    //			                }else{
-			                    dist = state.getMap().getDistance(ourDest,_goal);
-			                    //			                }
-			                }
+			                        //			                }
+
+			                    }else{//closest enemy can't hurt us, move towards goal
+			                        //			                if(state.getMap().canWalkStraight(ourDest,_goal,0)){
+			                        //			                    dist = ourDest.getDistance(_goal);
+			                        //			                }else{
+			                        dist = state.getMap().getDistance(ourDest,_goal);
+			                        //			                }
+			                    }
+//			                }
 			            }
 			        }
-			    }
+//			    }
 				if (dist < closestMoveDist)
 				{
 					closestMoveDist = dist;
@@ -169,6 +180,7 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 		    UnitAction theMove(moves.getMove(u, actionMoveIndex));
 		    if (theMove.type() == UnitActionTypes::ATTACK)
 		    {
+//		        reset();
 		        hpRemaining[theMove.index()] -= state.getUnit(_playerID, theMove.unit()).damage();
 		    }
 
@@ -178,6 +190,10 @@ void Player_Assault::getMoves(const GameState & state, const MoveArray & moves, 
 		}else{//pass
 		    moveVec.push_back(UnitAction(u,_playerID,UnitActionTypes::PASS,0));
 		}
+//		for(int i=N-1;i>0;i--){
+//		    _lastMyPos[i][u]=_lastMyPos[i-1][u];
+//		}
+//		_lastMyPos[0][u]=ourUnit.currentPosition(state.getTime());
 	}
 }
 }

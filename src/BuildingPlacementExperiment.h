@@ -52,6 +52,24 @@ class BuildingPlacementExperiment:public SearchExperiment {
 	void unitToString(std::stringstream &ss, const Unit &unit, bool fixed=false);
 	void setupPlayers(size_t p1Player, size_t p2Player, const Position& goal);
 	const Position& getGoal(const std::vector<Unit> &fixedBuildings) const;
+//	GameState runGame(const Map &map
+//	        , const std::vector<Unit> &fixedBuildings
+//	        , const std::vector<Unit> &buildings
+//	        , const std::vector<Unit> &defenders
+//	        , const std::vector<std::vector<Unit> > &attackers
+//	        , const std::vector<Unit> &delayedDefenders
+//	        , const std::vector<std::vector<Unit> > &delayedAttackers
+//	        );
+	GameState runGame(Map *map
+	        , const std::vector<Unit> &fixedBuildings
+	        , const std::vector<Unit> &buildings
+	        , const std::vector<Unit> &defenders
+	        , const std::vector<Unit> &attackers
+	        , const std::vector<std::pair<Unit, TimeType> > &delayedDefenders
+	        , const std::vector<std::pair<Unit, TimeType> > &delayedAttackers
+	        , PlayerPtr playerOne
+	        , PlayerPtr playerTwo
+	);
 
 	IDType _assaultPlayer,_defendPlayer;
     int _popSize, _genSize;
@@ -70,6 +88,7 @@ public:
 	virtual void addPlayer(const std::string & line);//override
 	virtual void addState(const std::string & line);//override
 	virtual svv getExpDescription(const size_t & p1, const size_t & p2, const size_t & state);
+	svv getExpDescription();
 	void runEvaluate();
 	void runBalance();
 	void runOptimize(bool cross=false);

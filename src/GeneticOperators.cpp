@@ -40,6 +40,7 @@ float GeneticOperators::Objective(GAGenome &g) {
 	GAListGenome<Gene>& genome=(GAListGenome<Gene>&)g;
 	std::cout<<"genome: "<<genome<<std::endl;
 	int total_score=0;
+	std::vector<int> scores;
 	for(int wave=0;wave<_attackers.size();wave++){
 	    GameState state;
 	    state.checkCollisions=true;
@@ -112,10 +113,11 @@ float GeneticOperators::Objective(GAGenome &g) {
 	    int score = evalBuildingPlacement(game.getState());
 	    std::cout<<"score: "<<score<<std::endl;
 	    total_score+=score;
+	    scores.push_back(score);
 	}
 	std::cout<<"total score: "<<total_score<<std::endl;
-	return total_score/_attackers.size();
-
+//	return total_score/_attackers.size();
+	return *std::min_element(scores.begin(),scores.end());
 }
 
 bool GeneticOperators::goalReached(const GameState& state){
